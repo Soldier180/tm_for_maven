@@ -10,7 +10,7 @@
     <properties>
         <project.build.sourceEncoding>UTF8</project.build.sourceEncoding>
     </properties>
-    
+
     <dependencies>
         <dependency>
             <groupId>org.apache.logging.log4j</groupId>
