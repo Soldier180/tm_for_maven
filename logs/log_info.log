@@ -1,0 +1,286 @@
+2017-01-17 14:34:33 ERROR MainApp - Catching
+java.io.FileNotFoundException: resources\tasks (Системе не удается найти указанный путь)
+	at java.io.FileInputStream.open0(Native Method) ~[?:1.8.0_102]
+	at java.io.FileInputStream.open(FileInputStream.java:195) ~[?:1.8.0_102]
+	at java.io.FileInputStream.<init>(FileInputStream.java:138) ~[?:1.8.0_102]
+	at ua.sumdu.j2se.zaretsky.tasks.Model.TaskIO.readBinary(TaskIO.java:89) ~[classes/:?]
+	at ua.sumdu.j2se.zaretsky.tasks.MainApp.<init>(MainApp.java:93) ~[classes/:?]
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method) ~[?:1.8.0_102]
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62) ~[?:1.8.0_102]
+	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45) ~[?:1.8.0_102]
+	at java.lang.reflect.Constructor.newInstance(Constructor.java:423) ~[?:1.8.0_102]
+	at com.sun.javafx.application.LauncherImpl.lambda$launchApplication1$161(LauncherImpl.java:819) ~[jfxrt.jar:?]
+	at com.sun.javafx.application.PlatformImpl.lambda$runAndWait$175(PlatformImpl.java:326) ~[jfxrt.jar:?]
+	at com.sun.javafx.application.PlatformImpl.lambda$null$173(PlatformImpl.java:295) ~[jfxrt.jar:?]
+	at java.security.AccessController.doPrivileged(Native Method) ~[?:1.8.0_102]
+	at com.sun.javafx.application.PlatformImpl.lambda$runLater$174(PlatformImpl.java:294) ~[jfxrt.jar:?]
+	at com.sun.glass.ui.InvokeLaterDispatcher$Future.run(InvokeLaterDispatcher.java:95) ~[jfxrt.jar:?]
+	at com.sun.glass.ui.win.WinApplication._runLoop(Native Method) ~[jfxrt.jar:?]
+	at com.sun.glass.ui.win.WinApplication.lambda$null$148(WinApplication.java:191) ~[jfxrt.jar:?]
+	at java.lang.Thread.run(Thread.java:745) [?:1.8.0_102]
+2017-01-17 14:34:33 INFO  MainApp - Open program
+2017-01-17 14:36:28 ERROR MainApp - Catching
+java.io.FileNotFoundException: tasks (Не удается найти указанный файл)
+	at java.io.FileInputStream.open0(Native Method) ~[?:1.8.0_102]
+	at java.io.FileInputStream.open(FileInputStream.java:195) ~[?:1.8.0_102]
+	at java.io.FileInputStream.<init>(FileInputStream.java:138) ~[?:1.8.0_102]
+	at ua.sumdu.j2se.zaretsky.tasks.Model.TaskIO.readBinary(TaskIO.java:89) ~[classes/:?]
+	at ua.sumdu.j2se.zaretsky.tasks.MainApp.<init>(MainApp.java:93) ~[classes/:?]
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method) ~[?:1.8.0_102]
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62) ~[?:1.8.0_102]
+	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45) ~[?:1.8.0_102]
+	at java.lang.reflect.Constructor.newInstance(Constructor.java:423) ~[?:1.8.0_102]
+	at com.sun.javafx.application.LauncherImpl.lambda$launchApplication1$161(LauncherImpl.java:819) ~[jfxrt.jar:?]
+	at com.sun.javafx.application.PlatformImpl.lambda$runAndWait$175(PlatformImpl.java:326) ~[jfxrt.jar:?]
+	at com.sun.javafx.application.PlatformImpl.lambda$null$173(PlatformImpl.java:295) ~[jfxrt.jar:?]
+	at java.security.AccessController.doPrivileged(Native Method) ~[?:1.8.0_102]
+	at com.sun.javafx.application.PlatformImpl.lambda$runLater$174(PlatformImpl.java:294) ~[jfxrt.jar:?]
+	at com.sun.glass.ui.InvokeLaterDispatcher$Future.run(InvokeLaterDispatcher.java:95) ~[jfxrt.jar:?]
+	at com.sun.glass.ui.win.WinApplication._runLoop(Native Method) ~[jfxrt.jar:?]
+	at com.sun.glass.ui.win.WinApplication.lambda$null$148(WinApplication.java:191) ~[jfxrt.jar:?]
+	at java.lang.Thread.run(Thread.java:745) [?:1.8.0_102]
+2017-01-17 14:36:28 INFO  MainApp - Open program
+2017-01-17 14:40:34 ERROR MainApp - Catching
+java.io.FileNotFoundException: tasks (Не удается найти указанный файл)
+	at java.io.FileInputStream.open0(Native Method) ~[?:1.8.0_102]
+	at java.io.FileInputStream.open(FileInputStream.java:195) ~[?:1.8.0_102]
+	at java.io.FileInputStream.<init>(FileInputStream.java:138) ~[?:1.8.0_102]
+	at ua.sumdu.j2se.zaretsky.tasks.Model.TaskIO.readBinary(TaskIO.java:89) ~[classes/:?]
+	at ua.sumdu.j2se.zaretsky.tasks.MainApp.<init>(MainApp.java:93) ~[classes/:?]
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method) ~[?:1.8.0_102]
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62) ~[?:1.8.0_102]
+	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45) ~[?:1.8.0_102]
+	at java.lang.reflect.Constructor.newInstance(Constructor.java:423) ~[?:1.8.0_102]
+	at com.sun.javafx.application.LauncherImpl.lambda$launchApplication1$161(LauncherImpl.java:819) ~[jfxrt.jar:?]
+	at com.sun.javafx.application.PlatformImpl.lambda$runAndWait$175(PlatformImpl.java:326) ~[jfxrt.jar:?]
+	at com.sun.javafx.application.PlatformImpl.lambda$null$173(PlatformImpl.java:295) ~[jfxrt.jar:?]
+	at java.security.AccessController.doPrivileged(Native Method) ~[?:1.8.0_102]
+	at com.sun.javafx.application.PlatformImpl.lambda$runLater$174(PlatformImpl.java:294) ~[jfxrt.jar:?]
+	at com.sun.glass.ui.InvokeLaterDispatcher$Future.run(InvokeLaterDispatcher.java:95) ~[jfxrt.jar:?]
+	at com.sun.glass.ui.win.WinApplication._runLoop(Native Method) ~[jfxrt.jar:?]
+	at com.sun.glass.ui.win.WinApplication.lambda$null$148(WinApplication.java:191) ~[jfxrt.jar:?]
+	at java.lang.Thread.run(Thread.java:745) [?:1.8.0_102]
+2017-01-17 14:40:34 INFO  MainApp - Open program
+2017-01-17 14:42:35 ERROR MainApp - Catching
+java.io.FileNotFoundException: ..\resources\tasks (Системе не удается найти указанный путь)
+	at java.io.FileInputStream.open0(Native Method) ~[?:1.8.0_102]
+	at java.io.FileInputStream.open(FileInputStream.java:195) ~[?:1.8.0_102]
+	at java.io.FileInputStream.<init>(FileInputStream.java:138) ~[?:1.8.0_102]
+	at ua.sumdu.j2se.zaretsky.tasks.Model.TaskIO.readBinary(TaskIO.java:89) ~[classes/:?]
+	at ua.sumdu.j2se.zaretsky.tasks.MainApp.<init>(MainApp.java:93) ~[classes/:?]
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method) ~[?:1.8.0_102]
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62) ~[?:1.8.0_102]
+	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45) ~[?:1.8.0_102]
+	at java.lang.reflect.Constructor.newInstance(Constructor.java:423) ~[?:1.8.0_102]
+	at com.sun.javafx.application.LauncherImpl.lambda$launchApplication1$161(LauncherImpl.java:819) ~[jfxrt.jar:?]
+	at com.sun.javafx.application.PlatformImpl.lambda$runAndWait$175(PlatformImpl.java:326) ~[jfxrt.jar:?]
+	at com.sun.javafx.application.PlatformImpl.lambda$null$173(PlatformImpl.java:295) ~[jfxrt.jar:?]
+	at java.security.AccessController.doPrivileged(Native Method) ~[?:1.8.0_102]
+	at com.sun.javafx.application.PlatformImpl.lambda$runLater$174(PlatformImpl.java:294) ~[jfxrt.jar:?]
+	at com.sun.glass.ui.InvokeLaterDispatcher$Future.run(InvokeLaterDispatcher.java:95) ~[jfxrt.jar:?]
+	at com.sun.glass.ui.win.WinApplication._runLoop(Native Method) ~[jfxrt.jar:?]
+	at com.sun.glass.ui.win.WinApplication.lambda$null$148(WinApplication.java:191) ~[jfxrt.jar:?]
+	at java.lang.Thread.run(Thread.java:745) [?:1.8.0_102]
+2017-01-17 14:44:59 ERROR MainApp - Catching
+java.io.FileNotFoundException: ..\resources\tasks (Системе не удается найти указанный путь)
+	at java.io.FileInputStream.open0(Native Method) ~[?:1.8.0_102]
+	at java.io.FileInputStream.open(FileInputStream.java:195) ~[?:1.8.0_102]
+	at java.io.FileInputStream.<init>(FileInputStream.java:138) ~[?:1.8.0_102]
+	at ua.sumdu.j2se.zaretsky.tasks.Model.TaskIO.readBinary(TaskIO.java:89) ~[classes/:?]
+	at ua.sumdu.j2se.zaretsky.tasks.MainApp.<init>(MainApp.java:93) ~[classes/:?]
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method) ~[?:1.8.0_102]
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62) ~[?:1.8.0_102]
+	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45) ~[?:1.8.0_102]
+	at java.lang.reflect.Constructor.newInstance(Constructor.java:423) ~[?:1.8.0_102]
+	at com.sun.javafx.application.LauncherImpl.lambda$launchApplication1$161(LauncherImpl.java:819) ~[jfxrt.jar:?]
+	at com.sun.javafx.application.PlatformImpl.lambda$runAndWait$175(PlatformImpl.java:326) ~[jfxrt.jar:?]
+	at com.sun.javafx.application.PlatformImpl.lambda$null$173(PlatformImpl.java:295) ~[jfxrt.jar:?]
+	at java.security.AccessController.doPrivileged(Native Method) ~[?:1.8.0_102]
+	at com.sun.javafx.application.PlatformImpl.lambda$runLater$174(PlatformImpl.java:294) ~[jfxrt.jar:?]
+	at com.sun.glass.ui.InvokeLaterDispatcher$Future.run(InvokeLaterDispatcher.java:95) ~[jfxrt.jar:?]
+	at com.sun.glass.ui.win.WinApplication._runLoop(Native Method) ~[jfxrt.jar:?]
+	at com.sun.glass.ui.win.WinApplication.lambda$null$148(WinApplication.java:191) ~[jfxrt.jar:?]
+	at java.lang.Thread.run(Thread.java:745) [?:1.8.0_102]
+2017-01-17 14:44:59 INFO  MainApp - Open program
+2017-01-17 14:47:15 INFO  MainApp - Open program
+2017-01-17 14:49:31 INFO  MainApp - Open program
+2017-01-17 14:51:09 INFO  MainApp - Open program
+2017-01-17 14:52:08 INFO  MainApp - Open program
+2017-01-17 14:52:18 INFO  MainApp - Open program
+2017-01-17 14:55:24 INFO  MainApp - Open program
+2017-01-17 14:55:34 INFO  MainApp - Open program
+2017-01-17 14:57:30 INFO  MainApp - Open program
+2017-01-17 14:57:30 ERROR MainApp - Catching
+java.io.FileNotFoundException: scr\main\java\ua\sumdu\j2se\zaretsky\tasks\view\lalalala (Системе не удается найти указанный путь)
+	at java.io.FileOutputStream.open0(Native Method) ~[?:1.8.0_102]
+	at java.io.FileOutputStream.open(FileOutputStream.java:270) ~[?:1.8.0_102]
+	at java.io.FileOutputStream.<init>(FileOutputStream.java:213) ~[?:1.8.0_102]
+	at java.io.FileOutputStream.<init>(FileOutputStream.java:162) ~[?:1.8.0_102]
+	at java.io.FileWriter.<init>(FileWriter.java:90) ~[?:1.8.0_102]
+	at ua.sumdu.j2se.zaretsky.tasks.MainApp.initRootLayout(MainApp.java:123) ~[classes/:?]
+	at ua.sumdu.j2se.zaretsky.tasks.MainApp.start(MainApp.java:76) ~[classes/:?]
+	at com.sun.javafx.application.LauncherImpl.lambda$launchApplication1$162(LauncherImpl.java:863) ~[jfxrt.jar:?]
+	at com.sun.javafx.application.PlatformImpl.lambda$runAndWait$175(PlatformImpl.java:326) ~[jfxrt.jar:?]
+	at com.sun.javafx.application.PlatformImpl.lambda$null$173(PlatformImpl.java:295) ~[jfxrt.jar:?]
+	at java.security.AccessController.doPrivileged(Native Method) ~[?:1.8.0_102]
+	at com.sun.javafx.application.PlatformImpl.lambda$runLater$174(PlatformImpl.java:294) ~[jfxrt.jar:?]
+	at com.sun.glass.ui.InvokeLaterDispatcher$Future.run(InvokeLaterDispatcher.java:95) ~[jfxrt.jar:?]
+	at com.sun.glass.ui.win.WinApplication._runLoop(Native Method) ~[jfxrt.jar:?]
+	at com.sun.glass.ui.win.WinApplication.lambda$null$148(WinApplication.java:191) ~[jfxrt.jar:?]
+	at java.lang.Thread.run(Thread.java:745) [?:1.8.0_102]
+2017-01-17 14:58:05 INFO  MainApp - Open program
+2017-01-17 14:58:05 ERROR MainApp - Catching
+java.io.FileNotFoundException: scr\main\java\lalalala (Системе не удается найти указанный путь)
+	at java.io.FileOutputStream.open0(Native Method) ~[?:1.8.0_102]
+	at java.io.FileOutputStream.open(FileOutputStream.java:270) ~[?:1.8.0_102]
+	at java.io.FileOutputStream.<init>(FileOutputStream.java:213) ~[?:1.8.0_102]
+	at java.io.FileOutputStream.<init>(FileOutputStream.java:162) ~[?:1.8.0_102]
+	at java.io.FileWriter.<init>(FileWriter.java:90) ~[?:1.8.0_102]
+	at ua.sumdu.j2se.zaretsky.tasks.MainApp.initRootLayout(MainApp.java:122) ~[classes/:?]
+	at ua.sumdu.j2se.zaretsky.tasks.MainApp.start(MainApp.java:76) ~[classes/:?]
+	at com.sun.javafx.application.LauncherImpl.lambda$launchApplication1$162(LauncherImpl.java:863) ~[jfxrt.jar:?]
+	at com.sun.javafx.application.PlatformImpl.lambda$runAndWait$175(PlatformImpl.java:326) ~[jfxrt.jar:?]
+	at com.sun.javafx.application.PlatformImpl.lambda$null$173(PlatformImpl.java:295) ~[jfxrt.jar:?]
+	at java.security.AccessController.doPrivileged(Native Method) ~[?:1.8.0_102]
+	at com.sun.javafx.application.PlatformImpl.lambda$runLater$174(PlatformImpl.java:294) ~[jfxrt.jar:?]
+	at com.sun.glass.ui.InvokeLaterDispatcher$Future.run(InvokeLaterDispatcher.java:95) ~[jfxrt.jar:?]
+	at com.sun.glass.ui.win.WinApplication._runLoop(Native Method) ~[jfxrt.jar:?]
+	at com.sun.glass.ui.win.WinApplication.lambda$null$148(WinApplication.java:191) ~[jfxrt.jar:?]
+	at java.lang.Thread.run(Thread.java:745) [?:1.8.0_102]
+2017-01-17 14:59:17 INFO  MainApp - Open program
+2017-01-17 14:59:17 ERROR MainApp - Catching
+java.io.FileNotFoundException: scr\main\lalalala.txt (Системе не удается найти указанный путь)
+	at java.io.FileOutputStream.open0(Native Method) ~[?:1.8.0_102]
+	at java.io.FileOutputStream.open(FileOutputStream.java:270) ~[?:1.8.0_102]
+	at java.io.FileOutputStream.<init>(FileOutputStream.java:213) ~[?:1.8.0_102]
+	at java.io.FileOutputStream.<init>(FileOutputStream.java:162) ~[?:1.8.0_102]
+	at java.io.FileWriter.<init>(FileWriter.java:90) ~[?:1.8.0_102]
+	at ua.sumdu.j2se.zaretsky.tasks.MainApp.initRootLayout(MainApp.java:122) ~[classes/:?]
+	at ua.sumdu.j2se.zaretsky.tasks.MainApp.start(MainApp.java:76) ~[classes/:?]
+	at com.sun.javafx.application.LauncherImpl.lambda$launchApplication1$162(LauncherImpl.java:863) ~[jfxrt.jar:?]
+	at com.sun.javafx.application.PlatformImpl.lambda$runAndWait$175(PlatformImpl.java:326) ~[jfxrt.jar:?]
+	at com.sun.javafx.application.PlatformImpl.lambda$null$173(PlatformImpl.java:295) ~[jfxrt.jar:?]
+	at java.security.AccessController.doPrivileged(Native Method) ~[?:1.8.0_102]
+	at com.sun.javafx.application.PlatformImpl.lambda$runLater$174(PlatformImpl.java:294) ~[jfxrt.jar:?]
+	at com.sun.glass.ui.InvokeLaterDispatcher$Future.run(InvokeLaterDispatcher.java:95) ~[jfxrt.jar:?]
+	at com.sun.glass.ui.win.WinApplication._runLoop(Native Method) ~[jfxrt.jar:?]
+	at com.sun.glass.ui.win.WinApplication.lambda$null$148(WinApplication.java:191) ~[jfxrt.jar:?]
+	at java.lang.Thread.run(Thread.java:745) [?:1.8.0_102]
+2017-01-17 15:00:33 INFO  MainApp - Open program
+2017-01-17 15:01:54 INFO  MainApp - Open program
+2017-01-17 15:03:38 INFO  MainApp - Open program
+2017-01-17 15:04:23 INFO  MainApp - Open program
+2017-01-17 15:04:33 INFO  MainApp - Open program
+2017-01-17 15:04:56 INFO  MainApp - Open program
+2017-01-17 15:05:34 INFO  MainApp - Open program
+2017-01-17 15:05:55 INFO  MainApp - Open program
+2017-01-17 15:07:38 INFO  MainApp - Open program
+2017-01-17 15:09:04 INFO  MainApp - Open program
+2017-01-17 15:09:48 INFO  MainApp - Open program
+2017-01-17 15:11:25 INFO  MainApp - Open program
+2017-01-17 15:15:13 INFO  MainApp - Open program
+2017-01-17 15:17:36 INFO  MainApp - Open program
+2017-01-17 15:23:14 INFO  MainApp - Open program
+2017-01-17 15:23:37 INFO  MainApp - Open program
+2017-01-17 15:23:48 INFO  MainApp - Open program
+2017-01-17 16:09:04 ERROR MainApp - Catching
+java.io.FileNotFoundException: resources\tasks (Системе не удается найти указанный путь)
+	at java.io.FileInputStream.open0(Native Method) ~[?:1.8.0_102]
+	at java.io.FileInputStream.open(FileInputStream.java:195) ~[?:1.8.0_102]
+	at java.io.FileInputStream.<init>(FileInputStream.java:138) ~[?:1.8.0_102]
+	at ua.sumdu.j2se.zaretsky.tasks.model.TaskIO.readBinary(TaskIO.java:98) ~[classes/:?]
+	at ua.sumdu.j2se.zaretsky.tasks.MainApp.<init>(MainApp.java:94) ~[classes/:?]
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method) ~[?:1.8.0_102]
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62) ~[?:1.8.0_102]
+	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45) ~[?:1.8.0_102]
+	at java.lang.reflect.Constructor.newInstance(Constructor.java:423) ~[?:1.8.0_102]
+	at com.sun.javafx.application.LauncherImpl.lambda$launchApplication1$161(LauncherImpl.java:819) ~[jfxrt.jar:?]
+	at com.sun.javafx.application.PlatformImpl.lambda$runAndWait$175(PlatformImpl.java:326) ~[jfxrt.jar:?]
+	at com.sun.javafx.application.PlatformImpl.lambda$null$173(PlatformImpl.java:295) ~[jfxrt.jar:?]
+	at java.security.AccessController.doPrivileged(Native Method) ~[?:1.8.0_102]
+	at com.sun.javafx.application.PlatformImpl.lambda$runLater$174(PlatformImpl.java:294) ~[jfxrt.jar:?]
+	at com.sun.glass.ui.InvokeLaterDispatcher$Future.run(InvokeLaterDispatcher.java:95) ~[jfxrt.jar:?]
+	at com.sun.glass.ui.win.WinApplication._runLoop(Native Method) ~[jfxrt.jar:?]
+	at com.sun.glass.ui.win.WinApplication.lambda$null$148(WinApplication.java:191) ~[jfxrt.jar:?]
+	at java.lang.Thread.run(Thread.java:745) [?:1.8.0_102]
+2017-01-17 16:09:04 INFO  MainApp - Open program
+2017-01-17 16:09:50 INFO  MainApp - Open program
+2017-01-17 16:10:49 INFO  MainApp - Open program
+2017-01-17 16:11:20 INFO  MainApp - Open program
+2017-01-17 16:15:34 INFO  MainApp - Open program
+2017-01-17 16:15:49 INFO  MainApp - Open program
+2017-01-17 16:17:34 INFO  MainApp - Open program
+2017-01-17 16:20:44 ERROR MainApp - Catching
+java.io.FileNotFoundException: tasks (Не удается найти указанный файл)
+	at java.io.FileInputStream.open0(Native Method) ~[?:1.8.0_102]
+	at java.io.FileInputStream.open(FileInputStream.java:195) ~[?:1.8.0_102]
+	at java.io.FileInputStream.<init>(FileInputStream.java:138) ~[?:1.8.0_102]
+	at ua.sumdu.j2se.zaretsky.tasks.model.TaskIO.readBinary(TaskIO.java:98) ~[classes/:?]
+	at ua.sumdu.j2se.zaretsky.tasks.MainApp.<init>(MainApp.java:88) ~[classes/:?]
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method) ~[?:1.8.0_102]
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62) ~[?:1.8.0_102]
+	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45) ~[?:1.8.0_102]
+	at java.lang.reflect.Constructor.newInstance(Constructor.java:423) ~[?:1.8.0_102]
+	at com.sun.javafx.application.LauncherImpl.lambda$launchApplication1$161(LauncherImpl.java:819) ~[jfxrt.jar:?]
+	at com.sun.javafx.application.PlatformImpl.lambda$runAndWait$175(PlatformImpl.java:326) ~[jfxrt.jar:?]
+	at com.sun.javafx.application.PlatformImpl.lambda$null$173(PlatformImpl.java:295) ~[jfxrt.jar:?]
+	at java.security.AccessController.doPrivileged(Native Method) ~[?:1.8.0_102]
+	at com.sun.javafx.application.PlatformImpl.lambda$runLater$174(PlatformImpl.java:294) ~[jfxrt.jar:?]
+	at com.sun.glass.ui.InvokeLaterDispatcher$Future.run(InvokeLaterDispatcher.java:95) ~[jfxrt.jar:?]
+	at com.sun.glass.ui.win.WinApplication._runLoop(Native Method) ~[jfxrt.jar:?]
+	at com.sun.glass.ui.win.WinApplication.lambda$null$148(WinApplication.java:191) ~[jfxrt.jar:?]
+	at java.lang.Thread.run(Thread.java:745) [?:1.8.0_102]
+2017-01-17 16:20:44 INFO  MainApp - Open program
+2017-01-17 16:21:27 INFO  MainApp - Open program
+2017-01-17 16:23:00 ERROR MainApp - Catching
+java.io.FileNotFoundException: resources\tasks (Системе не удается найти указанный путь)
+	at java.io.FileInputStream.open0(Native Method) ~[?:1.8.0_102]
+	at java.io.FileInputStream.open(FileInputStream.java:195) ~[?:1.8.0_102]
+	at java.io.FileInputStream.<init>(FileInputStream.java:138) ~[?:1.8.0_102]
+	at ua.sumdu.j2se.zaretsky.tasks.Model.TaskIO.readBinary(TaskIO.java:89) ~[classes/:?]
+	at ua.sumdu.j2se.zaretsky.tasks.MainApp.<init>(MainApp.java:93) ~[classes/:?]
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method) ~[?:1.8.0_102]
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62) ~[?:1.8.0_102]
+	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45) ~[?:1.8.0_102]
+	at java.lang.reflect.Constructor.newInstance(Constructor.java:423) ~[?:1.8.0_102]
+	at com.sun.javafx.application.LauncherImpl.lambda$launchApplication1$161(LauncherImpl.java:819) ~[jfxrt.jar:?]
+	at com.sun.javafx.application.PlatformImpl.lambda$runAndWait$175(PlatformImpl.java:326) ~[jfxrt.jar:?]
+	at com.sun.javafx.application.PlatformImpl.lambda$null$173(PlatformImpl.java:295) ~[jfxrt.jar:?]
+	at java.security.AccessController.doPrivileged(Native Method) ~[?:1.8.0_102]
+	at com.sun.javafx.application.PlatformImpl.lambda$runLater$174(PlatformImpl.java:294) ~[jfxrt.jar:?]
+	at com.sun.glass.ui.InvokeLaterDispatcher$Future.run(InvokeLaterDispatcher.java:95) ~[jfxrt.jar:?]
+	at com.sun.glass.ui.win.WinApplication._runLoop(Native Method) ~[jfxrt.jar:?]
+	at com.sun.glass.ui.win.WinApplication.lambda$null$148(WinApplication.java:191) ~[jfxrt.jar:?]
+	at java.lang.Thread.run(Thread.java:745) [?:1.8.0_102]
+2017-01-17 16:23:00 INFO  MainApp - Open program
+2017-01-17 16:23:36 INFO  MainApp - Open program
+2017-01-17 16:25:23 INFO  MainApp - Open program
+2017-01-17 16:26:03 INFO  MainApp - Open program
+2017-01-17 16:26:41 INFO  MainApp - Open program
+2017-01-17 16:28:33 INFO  MainApp - Open program
+2017-01-17 16:30:29 INFO  MainApp - Open program
+2017-01-17 16:31:36 INFO  MainApp - Open program
+2017-01-17 16:38:05 INFO  MainApp - Open program
+2017-01-17 16:39:00 INFO  MainApp - Program close
+2017-01-17 16:41:07 INFO  MainApp - Open program
+2017-01-17 16:41:12 INFO  MainApp - Program close
+2017-01-17 17:20:54 INFO  MainApp - Open program
+2017-01-17 17:21:10 INFO  MainApp - Program close
+2017-01-17 17:22:09 INFO  MainApp - Open program
+2017-01-17 17:22:20 INFO  TasksOverviewController - EDIT task: "Task for every day" from [2017-01-16 15:00:00.000] to [2017-01-20 17:00:00.000] every [1 day] TO "Task for every day" from [2017-01-16 15:00:00.000] to [2017-01-20 19:00:00.000] every [1 day]
+2017-01-17 17:22:44 INFO  MainApp - Program close
+2017-01-18 01:09:28 INFO  MainApp - Open program
+2017-01-18 01:09:48 INFO  MainApp - Program close
+2017-01-18 01:31:31 INFO  MainApp - Open program
+2017-01-18 01:31:46 INFO  TasksOverviewController - EDIT task: "Задача 2" from [2017-01-13 13:11:00.000] to [2017-01-15 20:00:00.000] every [10 minutes] is inactive TO "Задача 2" from [2017-01-13 17:11:00.000] to [2017-01-15 20:00:00.000] every [10 minutes] is inactive
+2017-01-18 01:31:48 INFO  MainApp - Program close
+2017-01-18 01:32:27 INFO  MainApp - Open program
+2017-01-18 01:32:31 INFO  MainApp - Program close
+2017-01-18 01:44:50 INFO  MainApp - Open program
+2017-01-18 01:44:57 INFO  TasksOverviewController - EDIT task: "New Task" from [2017-01-16 15:00:00.000] to [2017-01-26 00:00:00.000] every [10 minutes] TO "New Task" from [2017-01-16 15:00:00.000] to [2017-01-26 00:00:00.000] every [10 minutes] is inactive
+2017-01-18 01:44:59 INFO  MainApp - Program close
+2017-01-19 00:44:40 INFO  MainApp - Open program
+2017-01-19 00:44:53 INFO  MainApp - Program close
+2017-01-19 01:00:16 INFO  MainApp - Open program
+2017-01-19 01:00:32 INFO  MainApp - Program close
+2017-01-19 01:07:51 INFO  MainApp - Open program
