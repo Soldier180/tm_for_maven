@@ -301,6 +301,16 @@ public class TasksOverviewController {
 
         alert.showAndWait();
     }
+    @FXML
+    private void handleAbout() {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("TASK MANAGER");
+
+        alert.setHeaderText("About: simple task manager");
+        alert.setContentText("\tAuthor: Nikolay Zaretsky");
+
+        alert.showAndWait();
+    }
 }
 
 
