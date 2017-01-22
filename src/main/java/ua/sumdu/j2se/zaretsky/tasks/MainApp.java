@@ -3,16 +3,11 @@ package ua.sumdu.j2se.zaretsky.tasks;/**
  */
 
 import javafx.application.Application;
-import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.concurrent.*;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ProgressBar;
 import javafx.scene.image.Image;
 
 import javafx.scene.layout.*;
@@ -20,9 +15,9 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
-import javafx.util.Duration;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.core.appender.FileAppender;
 import ua.sumdu.j2se.zaretsky.tasks.Controller.AllTasksInPeriodController;
 import ua.sumdu.j2se.zaretsky.tasks.Controller.TaskEditDialogController;
 import ua.sumdu.j2se.zaretsky.tasks.Controller.TasksOverviewController;
@@ -31,24 +26,23 @@ import ua.sumdu.j2se.zaretsky.tasks.Model.Task;
 
 import java.io.File;
 import java.io.IOException;
-import java.net.URL;
 import java.util.Date;
+import java.util.Enumeration;
+import java.util.HashSet;
+import java.util.Set;
 
 //import static ua.sumdu.j2se.zaretsky.tasks.Model.Detector.PAUSE;
 
 public class MainApp extends Application {
     private final Logger log = LogManager.getLogger(MainApp.class.getSimpleName());
     private static TaskList tasks = new LinkedTaskList();
-    public static final File FILE = new File("src/main/resources/tasks");
-    Detector detector;
-    private boolean exit = false;
+    public static final File FILE = new File(MainApp.class.getResource("/Data/tasks.bin")
+            .getFile());
+    // public static final File FILE = new File("src/main/resources/tasks");
+    private Detector detector;
     private ObservableList<Task> tasksData = FXCollections
             .observableArrayList();
 
-
-    public boolean isExit() {
-        return exit;
-    }
 
     public static TaskList getTasks() {
         return tasks;
@@ -66,24 +60,22 @@ public class MainApp extends Application {
     public void start(Stage primaryStage) {
         this.primaryStage = primaryStage;
         primaryStage.getIcons().add(new Image
-                ("file:src/main/resources/image/task_manager1.png"));
+                ("file:" + MainApp.class.getResource("/image/task_manager1.png").getFile()));
         this.primaryStage.setMinWidth(730);
         this.primaryStage.setMinHeight(500);
         this.primaryStage.setTitle("TASK MANAGER");
+
         log.info("Open program");
 
         initRootLayout();
 
-        detector = new Detector(tasks,600000,this);
+        detector = new Detector(tasks, 600000, this);
         detector.start();
-        //при закрытии программы записиваем все задачи в файл
         this.primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
             public void handle(WindowEvent we) {
                 writeInFile();
-                exit = true;
-                // System.out.println("Stage is closing");
-                log.info("Program close");
-                detector.stop();//close thread with notify
+                log.traceExit();
+                LogManager.shutdown();
 
             }
         });
@@ -115,12 +107,8 @@ public class MainApp extends Application {
      */
     public void initRootLayout() {
         try {
-            // Загружаем корневой макет из fxml файла.
             FXMLLoader loader = new FXMLLoader();
-            URL tasksOverview = new File
-                    ("src/main/java/ua/sumdu/j2se/zaretsky/tasks/View" +
-                            "/TasksOverview.fxml").toURI().toURL();
-            loader.setLocation(tasksOverview);
+            loader.setLocation(MainApp.class.getResource("/View/TasksOverview.fxml"));
             rootLayout = loader.load();
 
 
@@ -150,14 +138,12 @@ public class MainApp extends Application {
     public boolean showTaskEditDialog(Task task, boolean newTask) {
         try {
             FXMLLoader loader = new FXMLLoader();
-
-            URL taskEditDialog = new File
-                    ("src/main/java/ua/sumdu/j2se/zaretsky/tasks/View/TaskEditDialog.fxml").toURI().toURL();
-            //loader.setLocation(MainApp.class.getResource("View/TaskEditDialog.fxml"));
-            loader.setLocation(taskEditDialog);
+            loader.setLocation(MainApp.class.getResource("/View/TaskEditDialog.fxml"));
             GridPane page = (GridPane) loader.load();
 
             Stage dialogStage = new Stage();
+            dialogStage.getIcons().add(new Image
+                    ("file:" + MainApp.class.getResource("/image/task_manager1.png").getFile()));
             if (newTask) {
                 dialogStage.setTitle("Create Task");
             } else {
@@ -189,29 +175,33 @@ public class MainApp extends Application {
         }
     }
 
+    public void refreshTasks() {
+        tasksData.clear();
+        for (Task t : tasks) {
+            tasksData.add(t);
+        }
+    }
 
     public void showAllTasksInPeriod(Date startPeriod, Date endPeriod) {
         try {
             FXMLLoader loader = new FXMLLoader();
-            URL allTasksInPeriod = new File("src/main/java/ua/sumdu/j2se/zaretsky/tasks/View/AllTasksInPeriod.fxml").toURI().toURL();
-            loader.setLocation(allTasksInPeriod);
+            loader.setLocation(MainApp.class.getResource("/View/AllTasksInPeriod.fxml"));
             HBox page = (HBox) loader.load();
 
             Stage dialogStage = new Stage();
+            dialogStage.getIcons().add(new Image
+                    ("file:" + MainApp.class.getResource("/image/task_manager1.png").getFile()));
 
             dialogStage.setTitle("All task in period");
             dialogStage.initOwner(primaryStage);
             Scene scene = new Scene(page);
             dialogStage.setScene(scene);
 
-            // Передаём задачу в контроллер.
+
             AllTasksInPeriodController controller = loader.getController();
             controller.setDialogStage(dialogStage);
-            controller.setDates(startPeriod,endPeriod);
-            //controller.setData(startPeriod, endPeriod);
+            controller.setDates(startPeriod, endPeriod);
 
-
-            // Отображаем диалоговое окно и ждём, пока пользователь его не закроет
             dialogStage.showAndWait();
 
         } catch (IOException e) {
@@ -245,131 +235,7 @@ public class MainApp extends Application {
 
 
     }
+
+
 }
 
-
-
-/*javafx.concurrent.Task task = new javafx.concurrent.Task<Void>() {
-            @Override public Void call() {
-                final int max = 1000000;
-                for (int i=1; i<=max; i++) {
-                    if (isCancelled()) {
-                        break;
-                    }
-                    updateProgress(i, max);
-                    try {
-                        Thread.sleep(5);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                }
-                return null;
-            }
-        };
-        ProgressBar bar = new ProgressBar();
-        bar.progressProperty().bind(task.progressProperty());
-        Scene barr = new Scene(bar);
-        primaryStage.setScene(barr);
-
-        new Thread(task).start();*/
-
-        /*final Task<Void> task = new Task<Void>() {
-            ..
-        };
-        scene.cursorProperty().bind(Bindings.when(task.runningProperty())
-                .then(CURSOR_WAIT).otherwise(CURSOR_DEFAULT));
-        new Thread(task).start();
-
-        final javafx.concurrent.Task task = new javafx.concurrent.Task<Alert>() {
-            @Override protected Alert call() throws InterruptedException {
-                //updateMessage("Finding friends . . .");
-                Alert a = new Alert(Alert.AlertType.INFORMATION);
-                for (int i = 0; i < 10; i++) {
-                    Thread.sleep(200);
-                    updateProgress(i+1, 10);
-
-
-                a.setTitle("gchjcg");}
-                //updateMessage("Finished.");
-                return a;
-            }
-        };
-
-        new Thread(task).start();*/
-
-
-        /*while (!isExit()) {
-            long currentTime = new Date().getTime();
-            TaskList schedule = (ArrayTaskList) Tasks.incoming(tasks, new Date(currentTime), new Date
-                    (currentTime + 300000));
-            showMessage(schedule);
-            try {
-                Thread.sleep(1000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
-        Alert alert = new Alert(Alert.AlertType.WARNING);
-        alert.initOwner(getPrimaryStage());
-        alert.setTitle("No Selection");
-        alert.setHeaderText("No TASK Selected");
-        alert.setContentText("Please select a TASK in the table.");
-
-        alert.show();*/
-
-// showTaskOverview();
-
-//detector = new Detector(tasks,300000, 5000, this);
-
-  /*  public void startTask() {
-        Runnable task = new Runnable() {
-            public void run() {
-                runTask();
-            }
-        };
-
-
-        // Run the task in a background thread
-
-        Thread backgroundThread = new Thread(task);
-
-        // Terminate the running thread if the application exits
-
-        backgroundThread.setDaemon(true);
-
-        // Start the thread
-
-        backgroundThread.start();
-    }
-*/
-
-   /* public void runTask() {
-
-        for (int i = 1; i <= 10; i++)
-
-        {
-            try {
-                String status = "Processing " + i + " of " + 10;
-
-                System.out.println(status);
-
-                Alert alert = new Alert(Alert.AlertType.WARNING);
-                alert.initOwner(getPrimaryStage());
-                alert.setTitle("Attention");
-                alert.setHeaderText("Task will start in the short run");
-
-                alert.showAndWait();
-                //textArea.appendText(status + "\n");
-
-                Thread.sleep(1000);
-
-            } catch (InterruptedException e)
-
-            {
-                e.printStackTrace();
-
-            }
-
-        }
-
-    }*/

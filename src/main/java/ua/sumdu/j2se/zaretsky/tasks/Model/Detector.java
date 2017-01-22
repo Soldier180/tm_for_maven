@@ -25,11 +25,12 @@ public class Detector extends Thread {
         this.tasks = tasks;
         this.notifyPeriodInMillis = notifyPeriodInMillis;
         this.mainApp = mainApp;
+        setDaemon(true);
     }
 
     @Override
     public void run() {
-        while (!mainApp.isExit()) {
+        while (true) {
 
             Date currentTime = new Date();
             TaskList incomingTasks = (TaskList) Tasks.incoming(tasks, currentTime, new
@@ -44,7 +45,7 @@ public class Detector extends Thread {
             try {
                 Thread.sleep(PAUSE);
             } catch (InterruptedException e) {
-                e.printStackTrace();
+                System.out.println("Ok");//e.printStackTrace();
             }
         }
     }
