@@ -504,3 +504,9 @@ java.io.FileNotFoundException: E:\SumDU\VI%20%d0%ba%d1%83%d1%80%d1%81\JAVA\task_
 2017-01-22 23:29:15 TRACE MainApp - Exit
 2017-01-22 23:29:33 INFO  MainApp - Open program
 2017-01-22 23:30:25 TRACE MainApp - Exit
+2017-01-23 23:23:36 INFO  MainApp - Open program
+2017-01-23 23:24:08 TRACE MainApp - Exit
+2017-01-24 12:51:17 INFO  MainApp - Open program
+2017-01-24 12:51:36 TRACE MainApp - Exit
+2017-01-24 13:09:16 INFO  MainApp - Open program
+2017-01-24 13:09:21 INFO  TasksOverviewController - DELETE task: "Meet with friends" from [2017-01-13 20:20:00.000] to [2017-02-11 00:00:00.000] every [2 days]

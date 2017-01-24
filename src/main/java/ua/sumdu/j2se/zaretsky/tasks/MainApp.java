@@ -9,29 +9,21 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
-
 import javafx.scene.layout.*;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.apache.logging.log4j.core.appender.FileAppender;
 import ua.sumdu.j2se.zaretsky.tasks.Controller.AllTasksInPeriodController;
 import ua.sumdu.j2se.zaretsky.tasks.Controller.TaskEditDialogController;
 import ua.sumdu.j2se.zaretsky.tasks.Controller.TasksOverviewController;
 import ua.sumdu.j2se.zaretsky.tasks.Model.*;
 import ua.sumdu.j2se.zaretsky.tasks.Model.Task;
-
 import java.io.File;
 import java.io.IOException;
 import java.util.Date;
-import java.util.Enumeration;
-import java.util.HashSet;
-import java.util.Set;
 
-//import static ua.sumdu.j2se.zaretsky.tasks.Model.Detector.PAUSE;
 
 public class MainApp extends Application {
     private final Logger log = LogManager.getLogger(MainApp.class.getSimpleName());
@@ -65,9 +57,8 @@ public class MainApp extends Application {
         this.primaryStage.setMinHeight(500);
         this.primaryStage.setTitle("TASK MANAGER");
 
-        log.info("Open program");
-
         initRootLayout();
+        log.info("Open program");
 
         detector = new Detector(tasks, 600000, this);
         detector.start();
@@ -97,7 +88,6 @@ public class MainApp extends Application {
             e.printStackTrace();
             log.catching(e);
         }
-
 
     }
 

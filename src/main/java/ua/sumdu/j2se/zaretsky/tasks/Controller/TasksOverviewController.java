@@ -1,12 +1,5 @@
 package ua.sumdu.j2se.zaretsky.tasks.Controller;
 
-/**
- * Created by Nikolion on 07.01.2017.
- */
-
-
-import javafx.event.ActionEvent;
-
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -25,6 +18,9 @@ import java.util.Date;
 import java.util.Locale;
 import java.util.Optional;
 
+/**
+ * Class controller for main window.
+ */
 
 public class TasksOverviewController {
     @FXML
@@ -51,30 +47,16 @@ public class TasksOverviewController {
 
     @FXML
     Button showBtn;
-
-
     @FXML
     DatePicker allTaskStartDatePiker;
-
     @FXML
     DatePicker allTaskEndDatePiker;
 
     private MainApp mainApp;
-    //private Service<Void> backgroundThread;
-
-    /**
-     * Конструктор.
-     * Конструктор вызывается раньше метода initialize().
-     */
-    public TasksOverviewController() {
-
-    }
-
     private final Logger log = LogManager.getLogger(TasksOverviewController.class.getSimpleName());
 
     /**
-     * Инициализация класса-контроллера. Этот метод вызывается автоматически
-     * после того, как fxml-файл будет загружен.
+     * Initialization controller-class. This method call automatically after fxml file load.
      */
     @FXML
     private void initialize() {
@@ -82,7 +64,6 @@ public class TasksOverviewController {
         allTaskStartDatePiker.setValue(LocalDate.now());
         allTaskEndDatePiker.setValue(allTaskStartDatePiker.getValue()
                 .plusDays(7));
-        // Инициализация таблицы адресатов с двумя столбцами.
         titleColumn.setCellValueFactory(new PropertyValueFactory<Task, String>
                 ("title"));
         startTimeColumn.setCellValueFactory(new PropertyValueFactory<Task, LocalDate>
@@ -97,7 +78,7 @@ public class TasksOverviewController {
     }
 
     /**
-     * Вызывается главным приложением, которое даёт на себя ссылку.
+     * Set reference for main application, and TaskList with tasks.
      *
      * @param mainApp
      */
@@ -107,31 +88,26 @@ public class TasksOverviewController {
     }
 
     /**
-     * Заполняет все текстовые поля.
-     * Если задача = null, то все текстовые поля очищаются.
+     * Feel all text fields. If task = null - clear all fields.
      *
-     * @param task — задача типа Task или null
+     * @param task — task type Task or null
      */
     private void showTaskDetails(Task task) {
         if (task != null) {
-            // Заполняем метки информацией из объекта task.
             titleLabel.setText(task.getTitle());
             startTimeLabel.setText(DateUtil.format(task.getStartTime()));
-
-            repeatLabel.setText(DateUtil.secondsToStringTime(task.getRepeatInterval
-                    ()));
+            repeatLabel.setText(DateUtil.secondsToStringTime(task.getRepeatInterval()));
             if (task.getRepeatInterval() != 0) {
                 endTimeLabel.setText(DateUtil.format(task.getEndTime()));
             } else {
                 endTimeLabel.setText("");
             }
 
-
             activityLabel.setText(Boolean.toString(task.isActive()));
 
 
         } else {
-            // Если task = null, то убираем весь текст.
+            // If task = null, remove all text.
             titleLabel.setText("");
             startTimeLabel.setText("");
             endTimeLabel.setText("");
@@ -140,8 +116,12 @@ public class TasksOverviewController {
         }
     }
 
+    /**
+     * Method which delete selected task, with confirmation.
+     * Called on clicked Delete button.
+     */
     @FXML
-    public void deleteTask(ActionEvent actionEvent) {
+    public void deleteTask() {
         int selectedIndex = tasksTable.getSelectionModel().getSelectedIndex();
         if (selectedIndex >= 0) {
 
@@ -162,7 +142,7 @@ public class TasksOverviewController {
             }
 
         } else {
-            // Ничего не выбрано.
+            //No selected task
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.initOwner(mainApp.getPrimaryStage());
             alert.setTitle("No Selection");
@@ -174,7 +154,8 @@ public class TasksOverviewController {
     }
 
     /**
-     * Вызывается, когда пользователь кликает по кнопке New...
+     * Method which create new task and show task edit dialog
+     * Called on clicked button New...
      */
     @FXML
     private void handleNewTask() {
@@ -188,28 +169,12 @@ public class TasksOverviewController {
         }
     }
 
-    @FXML
-    private void handleShowAllTasksInPeriod() {
-
-        Date startPeriod = DateUtil.localDateToDate(allTaskStartDatePiker
-                .getValue().atTime(0, 0, 0));
-        Date endPeriod = DateUtil.localDateToDate(allTaskEndDatePiker
-                .getValue().atTime(23, 59, 59));
-        if (startPeriod != null && endPeriod != null && endPeriod.compareTo
-                (startPeriod) > 0) {
-
-
-           mainApp.showAllTasksInPeriod(startPeriod, endPeriod);
-        }
-
-    }
-
     /**
-     * Вызывается, когда пользователь кликает по кнопка Edit...
-     * Открывает диалоговое окно для изменения выбранной задачи.
+     * Method which edit current task and show task edit dialog
+     * Called on clicked button Edit...
      */
     @FXML
-    private void handleEditTask()  {
+    private void handleEditTask() {
         Task selectedTask = tasksTable.getSelectionModel().getSelectedItem();
 
         if (selectedTask != null) {
@@ -226,7 +191,6 @@ public class TasksOverviewController {
             }
 
         } else {
-            // Ничего не выбрано.
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.initOwner(mainApp.getPrimaryStage());
             alert.setTitle("No Selection");
@@ -237,16 +201,40 @@ public class TasksOverviewController {
         }
     }
 
+    /**
+     * Method checks correctly dates and show all task in chosen period
+     * Called on clicked button Show
+     */
+    @FXML
+    private void handleShowAllTasksInPeriod() {
+
+        Date startPeriod = DateUtil.localDateToDate(allTaskStartDatePiker
+                .getValue().atTime(0, 0, 0));
+        Date endPeriod = DateUtil.localDateToDate(allTaskEndDatePiker
+                .getValue().atTime(23, 59, 59));
+        if (startPeriod != null && endPeriod != null && endPeriod.compareTo
+                (startPeriod) > 0) {
+
+
+            mainApp.showAllTasksInPeriod(startPeriod, endPeriod);
+        }
+
+    }
+
+    /**
+     * Method which save current TaskList in text file.
+     * Called on clicked menu Save as...
+     */
     @FXML
     private void handleSaveAs() {
         FileChooser fileChooser = new FileChooser();
 
-        // Задаём фильтр расширений
+        // Extension filter
         FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter(
                 "TXT files (*.txt)", "*.txt");
         fileChooser.getExtensionFilters().add(extFilter);
 
-        // Показываем диалог сохранения файла
+        // Show saving file dialog
         File file = fileChooser.showSaveDialog(mainApp.getPrimaryStage());
 
         if (file != null) {
@@ -263,16 +251,19 @@ public class TasksOverviewController {
         }
     }
 
+    /**
+     * Method which add tasks from text file to current TaskList.
+     * Called on clicked menu Load from text...
+     */
     @FXML
     private void loadTasksFromTxtFile() {
         FileChooser fileChooser = new FileChooser();
 
-        // Задаём фильтр расширений
+        // Extension filter
         FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter(
                 "TXT files (*.txt)", "*.txt");
         fileChooser.getExtensionFilters().add(extFilter);
 
-        // Показываем диалог загрузки файла
         File file = fileChooser.showOpenDialog(mainApp.getPrimaryStage());
 
         if (file != null) {
@@ -280,11 +271,9 @@ public class TasksOverviewController {
                 TaskIO.readText(MainApp.getTasks(), file);
                 mainApp.refreshTasks();
             } catch (IOException e) {
-                //e.printStackTrace();
                 log.catching(e);
                 showError();
             } catch (ParseException e) {
-                //e.printStackTrace();
                 log.catching(e);
                 showError();
             }
@@ -292,15 +281,22 @@ public class TasksOverviewController {
         }
 
     }
+
+    /**
+     * Method show error if load task from file not successful.
+     */
     private void showError() {
         Alert alert = new Alert(Alert.AlertType.WARNING);
         alert.initOwner(mainApp.getPrimaryStage());
         alert.setTitle("Error");
-        alert.setHeaderText("Attention - some error");
-        //alert.setContentText("Please select a task in the table.");
-
+        alert.setHeaderText("Attention - some error with load from file");
         alert.showAndWait();
     }
+
+    /**
+     * Method show information about application.
+     * Called on clicked menu About.
+     */
     @FXML
     private void handleAbout() {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);

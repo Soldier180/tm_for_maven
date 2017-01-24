@@ -1,6 +1,5 @@
 package ua.sumdu.j2se.zaretsky.tasks.Controller;
 
-
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -15,9 +14,8 @@ import ua.sumdu.j2se.zaretsky.tasks.Model.Task;
 import ua.sumdu.j2se.zaretsky.tasks.Model.Tasks;
 import java.util.*;
 
-
 /**
- * Created by Nikolion on 12.01.2017.
+ * Class controller for All task in period window.
  */
 public class AllTasksInPeriodController {
 
