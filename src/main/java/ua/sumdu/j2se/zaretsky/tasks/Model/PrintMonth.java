@@ -1,4 +1,4 @@
-package ua.sumdu.j2se.zaretsky.tasks.Model;
+package ua.sumdu.j2se.zaretsky.tasks.model;
 
 /**
  * Created by Nikolion on 31.12.2016.

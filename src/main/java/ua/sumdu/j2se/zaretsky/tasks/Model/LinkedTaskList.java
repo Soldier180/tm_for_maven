@@ -1,4 +1,4 @@
-package ua.sumdu.j2se.zaretsky.tasks.Model;
+package ua.sumdu.j2se.zaretsky.tasks.model;
 
 import java.io.Serializable;
 import java.util.Iterator;
@@ -17,14 +17,14 @@ public class LinkedTaskList extends TaskList implements Serializable {
     /**
      * Class for work with Nodes of LinkedTaskList
      */
-    private class Node  implements Serializable{
+    private class Node implements Serializable {
         Node next = null;
         Node previous = null;
         Task taskNode;
 
         private Node(Task task) {
             if (task == null) {
-                throw new NullPointerException();
+                throw new NullPointerException("Task is null");
             }
             this.taskNode = task;
         }
@@ -44,20 +44,20 @@ public class LinkedTaskList extends TaskList implements Serializable {
      * @param task - current task for adding
      */
     public void add(Task task) {
-        if (task != null) {
-            Node node = new Node(task);
-            if (count == 0) {
-                first = node;
-            } else {
-                last.setNext(node);
-                node.setPrevious(last);
-            }
-
-            last = node;
-            count++;
-        } else {
+        if (task == null) {
             throw new IllegalArgumentException("Incorrect task");
         }
+        Node node = new Node(task);
+        if (count == 0) {
+            first = node;
+        } else {
+            last.setNext(node);
+            node.setPrevious(last);
+        }
+
+        last = node;
+        count++;
+
     }
 
     /**
@@ -68,46 +68,41 @@ public class LinkedTaskList extends TaskList implements Serializable {
      * @throws IllegalArgumentException if task = null
      */
     public boolean remove(Task task) throws IllegalArgumentException {
-        if (task != null) {
-            Node previous = null;
-            Node current = first;
-
-            while (current != null) {
-                if (current.taskNode.equals(task)) {
-
-                    if (previous != null) {                 // Node in the middle or at the end.
-                        previous.setNext(current.next);
-
-                        if (current.next == null) {         //If at the end, then we change the last.
-                            last = previous;
-                        } else {
-                            current.next.setPrevious(previous);
-                        }
-                        count--;
-                    } else {
-                        if (count != 0) {                   // Node - at the beginning
-                            first = first.next;
-                            count--;
-
-                            if (count == 0) {
-                                last = null;
-                            } else {
-                                first.previous = null;
-                            }
-                        }
-                    }
-
-                    return true;
-                }
-
-                previous = current;
-                current = current.next;
-            }
-
-            return false;
-        } else {
+        if (task == null) {
             throw new IllegalArgumentException("Incorrect task");
         }
+        Node previous = null;
+        Node current = first;
+
+        while (current != null) {
+            if (current.taskNode.equals(task)) {
+                if (previous != null) {                 // Node in the middle or at the end.
+                    previous.setNext(current.next);
+                    if (current.next == null) {         //If at the end, then we change the last.
+                        last = previous;
+                    } else {
+                        current.next.setPrevious(previous);
+                    }
+                    count--;
+                } else {
+                    if (count != 0) {                   // Node - at the beginning
+                        first = first.next;
+                        count--;
+                        if (count == 0) {
+                            last = null;
+                        } else {
+                            first.previous = null;
+                        }
+                    }
+                }
+                return true;
+            }
+            previous = current;
+            current = current.next;
+        }
+
+        return false;
+
     }
 
     /**
@@ -119,11 +114,11 @@ public class LinkedTaskList extends TaskList implements Serializable {
     public Task getTask(int index) throws IllegalArgumentException {
 
         if (index >= 0 && index < size()) {
-            Node k = first;
+            Node node = first;
             for (int i = 0; i < index; i++) {
-                k = k.next;
+                node = node.next;
             }
-            return k.taskNode;
+            return node.taskNode;
         } else {
             throw new IllegalArgumentException("Incorrect index for array");
         }
@@ -156,13 +151,12 @@ public class LinkedTaskList extends TaskList implements Serializable {
 
         @Override
         public void remove() throws IllegalStateException {
-
-            if (index != 0) {
-                LinkedTaskList.this.remove(current.previous.taskNode);
-                index--;
-            } else {
+            if (index == 0) {
                 throw new IllegalStateException();
             }
+            LinkedTaskList.this.remove(current.previous.taskNode);
+            index--;
+
         }
     }
 
@@ -172,7 +166,7 @@ public class LinkedTaskList extends TaskList implements Serializable {
         int active = 0;
         int nonActive = 0;
 
-        for (Task task :  this) {
+        for (Task task : this) {
             if (task.isActive()) {
                 active++;
             } else {

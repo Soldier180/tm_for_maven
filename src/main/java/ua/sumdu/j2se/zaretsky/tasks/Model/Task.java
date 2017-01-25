@@ -1,10 +1,8 @@
-package ua.sumdu.j2se.zaretsky.tasks.Model;
+package ua.sumdu.j2se.zaretsky.tasks.model;
 
 import java.io.Serializable;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.lang.*;
-import java.util.Locale;
 
 /**
  * Class for creating and editing tasks

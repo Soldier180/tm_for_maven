@@ -1,11 +1,7 @@
-package ua.sumdu.j2se.zaretsky.tasks.Model;
+package ua.sumdu.j2se.zaretsky.tasks.model;
 
-import java.util.Date;
-import java.util.Iterator;
-import java.util.Set;
 import java.util.*;
-
-import static ua.sumdu.j2se.zaretsky.tasks.Model.Task.BEGIN;
+import static ua.sumdu.j2se.zaretsky.tasks.model.Task.BEGIN;
 
 
 /**
@@ -17,21 +13,21 @@ public class Tasks {
     /**
      * Method to receive all the tasks what will be executed at least once in some period
      *
-     * @param from
-     * @param to
+     * @param startDate
+     * @param endDate
      * @return ArrayTaskList with tasks
      */
-    public static Iterable<Task> incoming(Iterable<Task> tasks, Date from,
-                                          Date to) throws IllegalArgumentException {
+    public static Iterable<Task> incoming(Iterable<Task> tasks, Date startDate,
+                                          Date endDate) throws IllegalArgumentException {
 
-        if (from.before(BEGIN) || to.before(BEGIN) || from.after(to)) {
-            throw new IllegalArgumentException("Incorrect param from:" + from +
-                    " or to:" + to);
+        if (startDate.before(BEGIN) || endDate.before(BEGIN) || startDate.after(endDate)) {
+            throw new IllegalArgumentException("Incorrect param from:" + startDate +
+                    " or to:" + endDate);
         } else {
             TaskList list = new ArrayTaskList();
             for (Task task : tasks) {
 
-                if (task.nextTimeAfter(from) != null && task.nextTimeAfter(from).compareTo(to) != 1) {
+                if (task.nextTimeAfter(startDate) != null && task.nextTimeAfter(startDate).compareTo(endDate) != 1) {
                     list.add(task);
                 }
             }
@@ -39,7 +35,14 @@ public class Tasks {
         }
     }
 
-
+    /**
+     * Method to find all task execution time for a predetermined period
+     *
+     * @param tasks - list with tasks
+     * @param start - start date of period
+     * @param end - end date of period
+     * @return SortedMap with key date and value set of tasks
+     */
     public static SortedMap<Date, Set<Task>> calendar(Iterable<Task> tasks, Date
             start, Date end) {
         SortedMap<Date, Set<Task>> dateSetSortedMap = new TreeMap<>(new

@@ -1,7 +1,8 @@
-package ua.sumdu.j2se.zaretsky.tasks.Model;
+package ua.sumdu.j2se.zaretsky.tasks.model;
 
 import java.io.Serializable;
 import java.util.Iterator;
+
 /**
  * Class for creating and editing ArrayTaskList
  *
@@ -10,7 +11,7 @@ import java.util.Iterator;
  */
 public class ArrayTaskList extends TaskList implements Cloneable, Serializable {
 
-    private Task[] arrayTaskList = new Task[10];
+    private Task[] arrayList = new Task[10];
 
     /**
      * Method to add task into ArrayTaskList
@@ -19,18 +20,17 @@ public class ArrayTaskList extends TaskList implements Cloneable, Serializable {
      */
     public void add(Task task) throws IllegalArgumentException {
 
-        if (task != null) {
-
-            if (count < arrayTaskList.length) {
-                arrayTaskList[count] = task;
-            } else {
-                arrayTaskList = increaseArray(arrayTaskList);
-                arrayTaskList[count] = task;
-            }
-            count++;
-        } else {
+        if (task == null) {
             throw new IllegalArgumentException("Incorrect task");
         }
+
+        if (count < arrayList.length) {
+            arrayList[count] = task;
+        } else {
+            arrayList = increaseArray(arrayList);
+            arrayList[count] = task;
+        }
+        count++;
 
 
     }
@@ -44,11 +44,11 @@ public class ArrayTaskList extends TaskList implements Cloneable, Serializable {
     public boolean remove(Task task) {
         if (task != null) {
             for (int i = 0; i < count; i++) {
-                if (task.equals(arrayTaskList[i])) {
+                if (task.equals(arrayList[i])) {
                     for (int a = i; a < count - 1; a++) {
-                        arrayTaskList[a] = arrayTaskList[a + 1];
+                        arrayList[a] = arrayList[a + 1];
                     }
-                    arrayTaskList[count-1]=null;
+                    arrayList[count - 1] = null;
                     count--;
                     return true;
 
@@ -68,7 +68,7 @@ public class ArrayTaskList extends TaskList implements Cloneable, Serializable {
      */
     public Task getTask(int index) throws IllegalArgumentException {
         if (index >= 0 && index < count) {
-            return arrayTaskList[index];
+            return arrayList[index];
         } else {
             throw new IllegalArgumentException("Incorrect index for array");
         }
@@ -87,17 +87,17 @@ public class ArrayTaskList extends TaskList implements Cloneable, Serializable {
 
 
     /**
-     * Method to increase  ArrayTaskList
+     * Method to increase  ArrayList
      *
-     * @param arrayTaskList
-     * @return newArrayTaskList - new biggest array
+     * @param arrayList
+     * @return newArrayList - new biggest array
      */
-    private Task[] increaseArray(Task[] arrayTaskList) {
-        int newSize = arrayTaskList.length * 30 / 100;
-        Task[] newArrayTaskList = new Task[newSize + arrayTaskList.length];
-        System.arraycopy(arrayTaskList, 0, newArrayTaskList, 0, arrayTaskList.length);
+    private Task[] increaseArray(Task[] arrayList) {
+        int newSize = arrayList.length * 30 / 100;
+        Task[] newArrayList = new Task[newSize + arrayList.length];
+        System.arraycopy(arrayList, 0, newArrayList, 0, arrayList.length);
 
-        return newArrayTaskList;
+        return newArrayList;
     }
 
     @Override
@@ -120,7 +120,7 @@ public class ArrayTaskList extends TaskList implements Cloneable, Serializable {
             if (!hasNext()) {
                 throw new IllegalStateException();
             }
-            Task currentIteratorTask = arrayTaskList[index];
+            Task currentIteratorTask = arrayList[index];
             index++;
             return currentIteratorTask;
         }
@@ -128,12 +128,12 @@ public class ArrayTaskList extends TaskList implements Cloneable, Serializable {
         @Override
         public void remove() throws IllegalStateException {
 
-            if (index != 0) {
-                ArrayTaskList.this.remove(arrayTaskList[index - 1]);
-                index--;
-            } else {
+            if (index == 0) {
                 throw new IllegalStateException();
             }
+            ArrayTaskList.this.remove(arrayList[index - 1]);
+            index--;
+
         }
     }
 
@@ -157,10 +157,11 @@ public class ArrayTaskList extends TaskList implements Cloneable, Serializable {
                 "\nActive tasks: " + active;
 
     }
+
     @Override
     public ArrayTaskList clone() throws CloneNotSupportedException {
-        ArrayTaskList res = (ArrayTaskList)super.clone();
-        res.arrayTaskList = this.arrayTaskList.clone();
+        ArrayTaskList res = (ArrayTaskList) super.clone();
+        res.arrayList = this.arrayList.clone();
         return res;
     }
 }

@@ -1,4 +1,4 @@
-package ua.sumdu.j2se.zaretsky.tasks.Controller;
+package ua.sumdu.j2se.zaretsky.tasks.controller;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -7,8 +7,8 @@ import javafx.stage.FileChooser;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import ua.sumdu.j2se.zaretsky.tasks.MainApp;
-import ua.sumdu.j2se.zaretsky.tasks.Model.*;
-import ua.sumdu.j2se.zaretsky.tasks.Util.DateUtil;
+import ua.sumdu.j2se.zaretsky.tasks.model.*;
+import ua.sumdu.j2se.zaretsky.tasks.util.DateUtil;
 
 import java.io.File;
 import java.io.IOException;
@@ -57,6 +57,7 @@ public class TasksOverviewController {
 
     /**
      * Initialization controller-class. This method call automatically after fxml file load.
+     * Set values of start and end period to view all tasks in it.
      */
     @FXML
     private void initialize() {
@@ -176,21 +177,7 @@ public class TasksOverviewController {
     @FXML
     private void handleEditTask() {
         Task selectedTask = tasksTable.getSelectionModel().getSelectedItem();
-
-        if (selectedTask != null) {
-            String oldTask = TaskIO.writeTask(selectedTask);
-            boolean okClicked = mainApp.showTaskEditDialog(selectedTask, false);
-            if (okClicked) {
-                tasksTable.getColumns().get(0).setVisible(false);
-                tasksTable.getColumns().get(0).setVisible(true);
-                showTaskDetails(selectedTask);
-                String newTask = TaskIO.writeTask(selectedTask);
-                if (!oldTask.equals(newTask)) {
-                    log.info("EDIT task: " + oldTask + " TO " + newTask);
-                }
-            }
-
-        } else {
+        if (selectedTask == null) {
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.initOwner(mainApp.getPrimaryStage());
             alert.setTitle("No Selection");
@@ -199,6 +186,19 @@ public class TasksOverviewController {
 
             alert.showAndWait();
         }
+
+        String oldTask = TaskIO.writeTask(selectedTask);
+        boolean okClicked = mainApp.showTaskEditDialog(selectedTask, false);
+        if (okClicked) {
+            tasksTable.getColumns().get(0).setVisible(false);
+            tasksTable.getColumns().get(0).setVisible(true);
+            showTaskDetails(selectedTask);
+            String newTask = TaskIO.writeTask(selectedTask);
+            if (!oldTask.equals(newTask)) {
+                log.info("EDIT task: " + oldTask + " TO " + newTask);
+            }
+        }
+
     }
 
     /**

@@ -1,14 +1,11 @@
-package ua.sumdu.j2se.zaretsky.tasks.Controller;
+package ua.sumdu.j2se.zaretsky.tasks.controller;
 
 import javafx.collections.FXCollections;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
-import ua.sumdu.j2se.zaretsky.tasks.MainApp;
-import ua.sumdu.j2se.zaretsky.tasks.Model.Task;
-import ua.sumdu.j2se.zaretsky.tasks.Util.DateUtil;
+import ua.sumdu.j2se.zaretsky.tasks.model.Task;
+import ua.sumdu.j2se.zaretsky.tasks.util.DateUtil;
 
 import java.text.ParseException;
 import java.time.Instant;
@@ -20,7 +17,7 @@ import java.util.List;
 import java.util.Locale;
 
 /**
- * Created by Nikolion on 07.01.2017.
+ * Class controller for task edit window.
  */
 public class TaskEditDialogController {
 
@@ -50,44 +47,49 @@ public class TaskEditDialogController {
     private Task task;
     private boolean okClicked = false;
 
+    private static final List<String> HOURS = new ArrayList<>();
+    private static final List<String> MINUTES = new ArrayList<>();
 
     public Task getTask() {
         return task;
     }
 
-    static final List<String> hours = new ArrayList<>();
-    static final List<String> minutes = new ArrayList<>();
-
-
+    /**
+     * Initialization controller-class. This method call automatically after fxml file load.
+     * Set values of choiseBox.
+     */
     @FXML
     private void initialize() {
         Locale.setDefault(Locale.ENGLISH);
-        if (hours.isEmpty()) {
+        if (HOURS.isEmpty()) {
             for (int i = 0; i < 24; i++) {
                 if (i < 10) {
-                    hours.add("0" + i);
+                    HOURS.add("0" + i);
                 } else
-                    hours.add("" + i);
+                    HOURS.add("" + i);
             }
         }
-
-        if (minutes.isEmpty()) {
+        if (MINUTES.isEmpty()) {
             for (int i = 0; i < 60; i++) {
 
                 if (i < 10) {
-                    minutes.add("0" + i);
+                    MINUTES.add("0" + i);
                 } else
-                    minutes.add("" + i);
+                    MINUTES.add("" + i);
             }
         }
+        choiseBoxHoursStart.setItems(FXCollections.observableArrayList(HOURS));
+        choiseBoxMinutesStart.setItems(FXCollections.observableArrayList(MINUTES));
 
-        choiseBoxHoursStart.setItems(FXCollections.observableArrayList(hours));
-        choiseBoxMinutesStart.setItems(FXCollections.observableArrayList(minutes));
-
-        choiseBoxHoursEnd.setItems(FXCollections.observableArrayList(hours));
-        choiseBoxMinutesEnd.setItems(FXCollections.observableArrayList(minutes));
+        choiseBoxHoursEnd.setItems(FXCollections.observableArrayList(HOURS));
+        choiseBoxMinutesEnd.setItems(FXCollections.observableArrayList(MINUTES));
     }
 
+    /**
+     * Method set values of elements if it is edit task.
+     *
+     * @param task - task for edit
+     */
     public void setTask(Task task) {
         this.task = task;
 
@@ -111,7 +113,11 @@ public class TaskEditDialogController {
 
     }
 
-
+    /**
+     * Method set values of elements if it is create new task.
+     *
+     * @param task - created task
+     */
     public void setNewTask(Task task) {
         this.task = task;
 
@@ -128,7 +134,6 @@ public class TaskEditDialogController {
 
         repeatTime.setText("");
 
-
     }
 
     public void setDialogStage(Stage dialogStage) {
@@ -140,7 +145,8 @@ public class TaskEditDialogController {
     }
 
     /**
-     * Вызывается, когда пользователь кликнул по кнопке OK.
+     * Method gather all user input and apply it to task.
+     * Called on clicked Ok button.
      */
     @FXML
     private void handleOk() throws ParseException {
@@ -150,41 +156,40 @@ public class TaskEditDialogController {
             task.setActive(chkBoxActive.isSelected());
 
             //----------------------------------
-            LocalDate localDate1 = datePikedDateStart.getValue();
-            Instant instant1 = Instant.from(localDate1.atStartOfDay(ZoneId
+            LocalDate localDateStart = datePikedDateStart.getValue();
+            Instant instant1 = Instant.from(localDateStart.atStartOfDay(ZoneId
                     .systemDefault()));
-            Long d1 = Date.from(instant1).getTime();
+            Long dateStartLong = Date.from(instant1).getTime();
 
-            Integer h1 = Integer.parseInt(choiseBoxHoursStart.getValue()) *
+            Integer hoursStart = Integer.parseInt(choiseBoxHoursStart.getValue()) *
                     60 * 60 * 1000;
-            Integer m1 = Integer.parseInt(choiseBoxMinutesStart.getValue()) *
+            Integer minutesStart = Integer.parseInt(choiseBoxMinutesStart.getValue()) *
                     60 * 1000;
 
-            Date dateStart = new Date(d1 + h1 + m1);//Get start time
+            Date dateStart = new Date(dateStartLong + hoursStart + minutesStart);//Get start time
             //--------------------------------
 
 
             repeatInterval = DateUtil.parseInterval(repeatTime.getText());
             if (repeatInterval > 0) {
 
-                LocalDate localDate2 = datePikedDateEnd.getValue();
-                Instant instant2 = Instant.from(localDate2.atStartOfDay(ZoneId
+                LocalDate localDateEnd = datePikedDateEnd.getValue();
+                Instant instant2 = Instant.from(localDateEnd.atStartOfDay(ZoneId
                         .systemDefault()));
-                Long d2 = Date.from(instant2).getTime();
+                Long dateEndLong = Date.from(instant2).getTime();
 
-                Integer h2 = Integer.parseInt(choiseBoxHoursEnd.getValue()) *
+                Integer hoursEnd = Integer.parseInt(choiseBoxHoursEnd.getValue()) *
                         60 * 60 * 1000;
-                Integer m2 = Integer.parseInt(choiseBoxMinutesEnd.getValue()) *
+                Integer minutesEnd = Integer.parseInt(choiseBoxMinutesEnd.getValue()) *
                         60 * 1000;
 
-                Date dateEnd = new Date(d2 + h2 + m2);//Get  end time
+                Date dateEnd = new Date(dateEndLong + hoursEnd + minutesEnd);//Get  end time
                 //-------------------------------------
 
                 task.setTime(dateStart, dateEnd, repeatInterval);
             } else {
                 task.setTime(dateStart);
             }
-
 
             okClicked = true;
             dialogStage.close();
@@ -193,7 +198,8 @@ public class TaskEditDialogController {
     }
 
     /**
-     * Вызывается, когда пользователь кликнул по кнопке Cancel.
+     * Method closes the window without saving changes.
+     * Called on clicked Cancel button.
      */
     @FXML
     private void handleCancel() {
@@ -201,63 +207,55 @@ public class TaskEditDialogController {
     }
 
     /**
-     * Проверяет пользовательский ввод
+     * Method validates user input
      *
-     * @return true, если пользовательский ввод корректен
+     * @return true, if user input is correct
      */
     private boolean isInputValid() {
-        String errorMessage = "";
         int rTime = 0;
         LocalDate start = null;
 
-        try {
-            if (textFieldTitle.getText() == null || textFieldTitle.getText().isEmpty() ||
-                    textFieldTitle.getText().matches("\\s+")) {
-                throw new IllegalArgumentException("No valid title!");
-            }
-            if (datePikedDateStart.getValue() == null || datePikedDateStart
-                    .getValue().isBefore(DateUtil.dateToLaocalDate(Task.BEGIN))) {
-
-                throw new IllegalArgumentException("Incorrect start date! Maybe " +
-                        "you not choice date or date is less 1970.01.01");
-            } else {
-                start = datePikedDateStart.getValue();
-            }
-            try {
-                rTime = DateUtil.parseInterval(repeatTime.getText());
-
-            } catch (ParseException e) {
-                throw new IllegalArgumentException("Incorrect repeat time!");
-            } catch (IllegalArgumentException a) {
-                throw new IllegalArgumentException(a.getMessage());
-            }
-            if (rTime > 0) {
-                if (datePikedDateEnd.getValue() == null || datePikedDateEnd
-                        .getValue().isBefore(DateUtil.dateToLaocalDate(Task.BEGIN))) {
-
-                    throw new IllegalArgumentException("Incorrect end date! " +
-                            "Maybe " +
-                            "you not choice date or date is less 1970.01.01");
-                }
-                if (datePikedDateEnd.getValue().isBefore(start)) {
-                    throw new IllegalArgumentException("Incorrect end date! End date is less " +
-                            "then start date!");
-                }
-            }
-
-            return true;
-        } catch (IllegalArgumentException e) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.initOwner(dialogStage);
-            alert.setTitle("Invalid Fields");
-            alert.setHeaderText("Please correct invalid fields");
-            alert.setContentText(e.getMessage());
-
-            alert.showAndWait();
-
-            return false;
+        if (textFieldTitle.getText() == null || textFieldTitle.getText().isEmpty() ||
+                textFieldTitle.getText().matches("\\s+")) {
+            return showError("No valid title!");
         }
+        if (datePikedDateStart.getValue() == null || datePikedDateStart
+                .getValue().isBefore(DateUtil.dateToLaocalDate(Task.BEGIN))) {
+            return showError("Incorrect start date! Maybe you  not choice date or date is " +
+                    "less 1970.01.01");
+        } else {
+            start = datePikedDateStart.getValue();
+        }
+        try {
+            rTime = DateUtil.parseInterval(repeatTime.getText());
 
+        } catch (ParseException e) {
+            return showError("Incorrect repeat time!");
+        } catch (IllegalArgumentException a) {
+            return showError(a.getMessage());
+        }
+        if (rTime > 0) {
+            if (datePikedDateEnd.getValue() == null || datePikedDateEnd
+                    .getValue().isBefore(DateUtil.dateToLaocalDate(Task.BEGIN))) {
+                return showError("Incorrect end date! Maybe you not choice date or date is less " +
+                        "1970.01.01");
+            }
+            if (datePikedDateEnd.getValue().isBefore(start)) {
+                return showError("Incorrect end date! End date is less then start date!");
+            }
+        }
+        return true;
+    }
+
+    private boolean showError(String message) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.initOwner(dialogStage);
+        alert.setTitle("Invalid Fields");
+        alert.setHeaderText("Please correct invalid fields");
+        alert.setContentText(message);
+
+        alert.showAndWait();
+        return false;
     }
 
 }

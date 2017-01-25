@@ -1,10 +1,10 @@
-package ua.sumdu.j2se.zaretsky.tasks.Controller;
+package ua.sumdu.j2se.zaretsky.tasks.controller;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
-import ua.sumdu.j2se.zaretsky.tasks.Model.Task;
+import ua.sumdu.j2se.zaretsky.tasks.model.Task;
 
 /**
  * Created by Nikolion on 12.01.2017.

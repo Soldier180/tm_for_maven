@@ -7,7 +7,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox depthTest="ENABLE" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ua.sumdu.j2se.zaretsky.tasks.Controller.TasksOverviewController">
+<VBox depthTest="ENABLE" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ua.sumdu.j2se.zaretsky.tasks.controller.TasksOverviewController">
    <children>
       <AnchorPane>
          <children>

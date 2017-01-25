@@ -1,10 +1,6 @@
-package ua.sumdu.j2se.zaretsky.tasks.Model;
+package ua.sumdu.j2se.zaretsky.tasks.model;
 
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.io.Serializable;
-import java.util.Date;
 
 /**
  * Class for creating and editing TaskList
@@ -52,34 +48,12 @@ abstract public class TaskList implements Iterable<Task>, Cloneable, Serializabl
     }
 
 
-/*
-    TaskList incoming(Date from, Date to) throws IllegalArgumentException {
-        if (from.compareTo(Task.BEGIN)!=-1 || to.compareTo(Task.BEGIN)!=-1 ||
-                from.compareTo(to)!=1) {
-
-            TaskList list = new ArrayTaskList();
-            for (int i = 0; i < this.size(); i++) {
-                if (from.compareTo(getTask(i).nextTimeAfter(from))!=-1
-                        &&
-                to.compareTo(getTask(i)
-                        .nextTimeAfter(from))==-1) {
-                    list.add(getTask(i));
-                }
-            }
-
-            return list;
-        } else {
-            throw new IllegalArgumentException("Incorrect param from or int");
-        }
-    }
-*/
-
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || !(o instanceof TaskList)) return false;
+    public boolean equals(Object otherObject) {
+        if (this == otherObject) return true;
+        if (!(otherObject instanceof TaskList)) return false;
 
-        TaskList that = (TaskList) o;
+        TaskList that = (TaskList) otherObject;
 
         if (size() != that.size()) return false;
         for (int i = 0; i < size(); i++) {
@@ -91,38 +65,6 @@ abstract public class TaskList implements Iterable<Task>, Cloneable, Serializabl
         return true;
     }
 
-
-   /* public boolean equals(Object obj) {
-        if (obj == null)
-            return false;
-        int index = 0;
-        boolean res = true;
-        if(this == obj)
-            return true;
-        if (obj.getClass().getName() == this.getClass().getName()) {
-            TaskList second = (TaskList)obj;
-            if (this.size() == second.size()) {
-                for ( Task i : this) {
-                    if (!i.equals(second.getTask(index)))
-                        res = false;
-                    index++;
-                }
-            }
-        } else
-            return false;
-        return res;
-    }*/
- /*  @Override
-    public boolean equals(Object o) {
-        if (o == null) return false;
-        if (this == o) return true;
-        if (!(o instanceof TaskList)) return false;
-
-        TaskList taskList = (TaskList) o;
-
-        return taskList.size() == this.size() &&
-                (this.toString().equals(taskList.toString()));
-    }*/
 
     @Override
     public int hashCode() {

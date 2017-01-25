@@ -1,6 +1,4 @@
-package ua.sumdu.j2se.zaretsky.tasks;/**
- * Created by Nikolion on 06.01.2017.
- */
+package ua.sumdu.j2se.zaretsky.tasks;
 
 import javafx.application.Application;
 import javafx.collections.FXCollections;
@@ -15,23 +13,24 @@ import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import ua.sumdu.j2se.zaretsky.tasks.Controller.AllTasksInPeriodController;
-import ua.sumdu.j2se.zaretsky.tasks.Controller.TaskEditDialogController;
-import ua.sumdu.j2se.zaretsky.tasks.Controller.TasksOverviewController;
-import ua.sumdu.j2se.zaretsky.tasks.Model.*;
-import ua.sumdu.j2se.zaretsky.tasks.Model.Task;
+import ua.sumdu.j2se.zaretsky.tasks.controller.AllTasksInPeriodController;
+import ua.sumdu.j2se.zaretsky.tasks.controller.TaskEditDialogController;
+import ua.sumdu.j2se.zaretsky.tasks.controller.TasksOverviewController;
+import ua.sumdu.j2se.zaretsky.tasks.model.*;
 import java.io.File;
 import java.io.IOException;
 import java.util.Date;
 
+/**
+ * Main Application class.
+ */
 
 public class MainApp extends Application {
     private final Logger log = LogManager.getLogger(MainApp.class.getSimpleName());
     private static TaskList tasks = new LinkedTaskList();
-    public static final File FILE = new File(MainApp.class.getResource("/Data/tasks.bin")
+    public static final File FILE = new File(MainApp.class.getResource("/data/tasks.bin")
             .getFile());
     // public static final File FILE = new File("src/main/resources/tasks");
-    private Detector detector;
     private ObservableList<Task> tasksData = FXCollections
             .observableArrayList();
 
@@ -60,13 +59,14 @@ public class MainApp extends Application {
         initRootLayout();
         log.info("Open program");
 
-        detector = new Detector(tasks, 600000, this);
+        Detector detector = new Detector(tasks, 600000, this);
         detector.start();
         this.primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
-            public void handle(WindowEvent we) {
+            public void handle(WindowEvent windowEvent) {
                 writeInFile();
                 log.traceExit();
                 LogManager.shutdown();
+                System.exit(0);
 
             }
         });
@@ -78,8 +78,8 @@ public class MainApp extends Application {
 
             tasksData.clear();
             //add tasks in ObservableList
-            for (Task t : tasks) {
-                tasksData.add(t);
+            for (Task task : tasks) {
+                tasksData.add(task);
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -98,7 +98,7 @@ public class MainApp extends Application {
     public void initRootLayout() {
         try {
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(MainApp.class.getResource("/View/TasksOverview.fxml"));
+            loader.setLocation(MainApp.class.getResource("/view/TasksOverview.fxml"));
             rootLayout = loader.load();
 
 
@@ -128,7 +128,7 @@ public class MainApp extends Application {
     public boolean showTaskEditDialog(Task task, boolean newTask) {
         try {
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(MainApp.class.getResource("/View/TaskEditDialog.fxml"));
+            loader.setLocation(MainApp.class.getResource("/view/TaskEditDialog.fxml"));
             GridPane page = (GridPane) loader.load();
 
             Stage dialogStage = new Stage();
@@ -167,15 +167,15 @@ public class MainApp extends Application {
 
     public void refreshTasks() {
         tasksData.clear();
-        for (Task t : tasks) {
-            tasksData.add(t);
+        for (Task task : tasks) {
+            tasksData.add(task);
         }
     }
 
     public void showAllTasksInPeriod(Date startPeriod, Date endPeriod) {
         try {
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(MainApp.class.getResource("/View/AllTasksInPeriod.fxml"));
+            loader.setLocation(MainApp.class.getResource("/view/AllTasksInPeriod.fxml"));
             HBox page = (HBox) loader.load();
 
             Stage dialogStage = new Stage();
@@ -190,7 +190,7 @@ public class MainApp extends Application {
 
             AllTasksInPeriodController controller = loader.getController();
             controller.setDialogStage(dialogStage);
-            controller.setDates(startPeriod, endPeriod);
+            controller.fillTableView(startPeriod, endPeriod);
 
             dialogStage.showAndWait();
 

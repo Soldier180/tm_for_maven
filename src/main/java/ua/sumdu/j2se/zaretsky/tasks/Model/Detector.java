@@ -1,15 +1,9 @@
-package ua.sumdu.j2se.zaretsky.tasks.Model;
+package ua.sumdu.j2se.zaretsky.tasks.model;
 
-import javafx.application.Application;
-import javafx.scene.control.Alert;
-import javafx.stage.Stage;
 import ua.sumdu.j2se.zaretsky.tasks.MainApp;
-import ua.sumdu.j2se.zaretsky.tasks.Util.DateUtil;
+import ua.sumdu.j2se.zaretsky.tasks.util.DateUtil;
 
-import java.time.LocalDate;
 import java.util.Date;
-import java.util.Timer;
-import java.util.TimerTask;
 
 /**
  * Created by Nikolion on 10.01.2017.

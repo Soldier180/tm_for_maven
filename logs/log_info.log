@@ -3,7 +3,7 @@ java.io.FileNotFoundException: resources\tasks (Системе не удаетс
 	at java.io.FileInputStream.open0(Native Method) ~[?:1.8.0_102]
 	at java.io.FileInputStream.open(FileInputStream.java:195) ~[?:1.8.0_102]
 	at java.io.FileInputStream.<init>(FileInputStream.java:138) ~[?:1.8.0_102]
-	at ua.sumdu.j2se.zaretsky.tasks.Model.TaskIO.readBinary(TaskIO.java:89) ~[classes/:?]
+	at ua.sumdu.j2se.zaretsky.tasks.model.TaskIO.readBinary(TaskIO.java:89) ~[classes/:?]
 	at ua.sumdu.j2se.zaretsky.tasks.MainApp.<init>(MainApp.java:93) ~[classes/:?]
 	at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method) ~[?:1.8.0_102]
 	at sun.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62) ~[?:1.8.0_102]
@@ -24,7 +24,7 @@ java.io.FileNotFoundException: tasks (Не удается найти указа�
 	at java.io.FileInputStream.open0(Native Method) ~[?:1.8.0_102]
 	at java.io.FileInputStream.open(FileInputStream.java:195) ~[?:1.8.0_102]
 	at java.io.FileInputStream.<init>(FileInputStream.java:138) ~[?:1.8.0_102]
-	at ua.sumdu.j2se.zaretsky.tasks.Model.TaskIO.readBinary(TaskIO.java:89) ~[classes/:?]
+	at ua.sumdu.j2se.zaretsky.tasks.model.TaskIO.readBinary(TaskIO.java:89) ~[classes/:?]
 	at ua.sumdu.j2se.zaretsky.tasks.MainApp.<init>(MainApp.java:93) ~[classes/:?]
 	at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method) ~[?:1.8.0_102]
 	at sun.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62) ~[?:1.8.0_102]
@@ -45,7 +45,7 @@ java.io.FileNotFoundException: tasks (Не удается найти указа�
 	at java.io.FileInputStream.open0(Native Method) ~[?:1.8.0_102]
 	at java.io.FileInputStream.open(FileInputStream.java:195) ~[?:1.8.0_102]
 	at java.io.FileInputStream.<init>(FileInputStream.java:138) ~[?:1.8.0_102]
-	at ua.sumdu.j2se.zaretsky.tasks.Model.TaskIO.readBinary(TaskIO.java:89) ~[classes/:?]
+	at ua.sumdu.j2se.zaretsky.tasks.model.TaskIO.readBinary(TaskIO.java:89) ~[classes/:?]
 	at ua.sumdu.j2se.zaretsky.tasks.MainApp.<init>(MainApp.java:93) ~[classes/:?]
 	at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method) ~[?:1.8.0_102]
 	at sun.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62) ~[?:1.8.0_102]
@@ -66,7 +66,7 @@ java.io.FileNotFoundException: ..\resources\tasks (Системе не удае�
 	at java.io.FileInputStream.open0(Native Method) ~[?:1.8.0_102]
 	at java.io.FileInputStream.open(FileInputStream.java:195) ~[?:1.8.0_102]
 	at java.io.FileInputStream.<init>(FileInputStream.java:138) ~[?:1.8.0_102]
-	at ua.sumdu.j2se.zaretsky.tasks.Model.TaskIO.readBinary(TaskIO.java:89) ~[classes/:?]
+	at ua.sumdu.j2se.zaretsky.tasks.model.TaskIO.readBinary(TaskIO.java:89) ~[classes/:?]
 	at ua.sumdu.j2se.zaretsky.tasks.MainApp.<init>(MainApp.java:93) ~[classes/:?]
 	at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method) ~[?:1.8.0_102]
 	at sun.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62) ~[?:1.8.0_102]
@@ -86,7 +86,7 @@ java.io.FileNotFoundException: ..\resources\tasks (Системе не удае�
 	at java.io.FileInputStream.open0(Native Method) ~[?:1.8.0_102]
 	at java.io.FileInputStream.open(FileInputStream.java:195) ~[?:1.8.0_102]
 	at java.io.FileInputStream.<init>(FileInputStream.java:138) ~[?:1.8.0_102]
-	at ua.sumdu.j2se.zaretsky.tasks.Model.TaskIO.readBinary(TaskIO.java:89) ~[classes/:?]
+	at ua.sumdu.j2se.zaretsky.tasks.model.TaskIO.readBinary(TaskIO.java:89) ~[classes/:?]
 	at ua.sumdu.j2se.zaretsky.tasks.MainApp.<init>(MainApp.java:93) ~[classes/:?]
 	at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method) ~[?:1.8.0_102]
 	at sun.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62) ~[?:1.8.0_102]
@@ -237,7 +237,7 @@ java.io.FileNotFoundException: resources\tasks (Системе не удаетс
 	at java.io.FileInputStream.open0(Native Method) ~[?:1.8.0_102]
 	at java.io.FileInputStream.open(FileInputStream.java:195) ~[?:1.8.0_102]
 	at java.io.FileInputStream.<init>(FileInputStream.java:138) ~[?:1.8.0_102]
-	at ua.sumdu.j2se.zaretsky.tasks.Model.TaskIO.readBinary(TaskIO.java:89) ~[classes/:?]
+	at ua.sumdu.j2se.zaretsky.tasks.model.TaskIO.readBinary(TaskIO.java:89) ~[classes/:?]
 	at ua.sumdu.j2se.zaretsky.tasks.MainApp.<init>(MainApp.java:93) ~[classes/:?]
 	at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method) ~[?:1.8.0_102]
 	at sun.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62) ~[?:1.8.0_102]
@@ -317,7 +317,7 @@ java.io.FileNotFoundException: E:\SumDU\VI%20%d0%ba%d1%83%d1%80%d1%81\JAVA\task_
 	at java.io.FileInputStream.open0(Native Method) ~[?:1.8.0_102]
 	at java.io.FileInputStream.open(FileInputStream.java:195) ~[?:1.8.0_102]
 	at java.io.FileInputStream.<init>(FileInputStream.java:138) ~[?:1.8.0_102]
-	at ua.sumdu.j2se.zaretsky.tasks.Model.TaskIO.readBinary(TaskIO.java:89) ~[classes/:?]
+	at ua.sumdu.j2se.zaretsky.tasks.model.TaskIO.readBinary(TaskIO.java:89) ~[classes/:?]
 	at ua.sumdu.j2se.zaretsky.tasks.MainApp.<init>(MainApp.java:95) ~[classes/:?]
 	at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method) ~[?:1.8.0_102]
 	at sun.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62) ~[?:1.8.0_102]
@@ -363,7 +363,7 @@ java.io.FileNotFoundException: E:\SumDU\VI%20%d0%ba%d1%83%d1%80%d1%81\JAVA\task_
 	at java.io.FileInputStream.open0(Native Method) ~[?:1.8.0_102]
 	at java.io.FileInputStream.open(FileInputStream.java:195) ~[?:1.8.0_102]
 	at java.io.FileInputStream.<init>(FileInputStream.java:138) ~[?:1.8.0_102]
-	at ua.sumdu.j2se.zaretsky.tasks.Model.TaskIO.readBinary(TaskIO.java:89) ~[classes/:?]
+	at ua.sumdu.j2se.zaretsky.tasks.model.TaskIO.readBinary(TaskIO.java:89) ~[classes/:?]
 	at ua.sumdu.j2se.zaretsky.tasks.MainApp.<init>(MainApp.java:94) ~[classes/:?]
 	at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method) ~[?:1.8.0_102]
 	at sun.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62) ~[?:1.8.0_102]
@@ -385,7 +385,7 @@ java.io.FileNotFoundException: E:\SumDU\VI%20%d0%ba%d1%83%d1%80%d1%81\JAVA\task_
 	at java.io.FileOutputStream.open(FileOutputStream.java:270) ~[?:1.8.0_102]
 	at java.io.FileOutputStream.<init>(FileOutputStream.java:213) ~[?:1.8.0_102]
 	at java.io.FileOutputStream.<init>(FileOutputStream.java:162) ~[?:1.8.0_102]
-	at ua.sumdu.j2se.zaretsky.tasks.Model.TaskIO.writeBinary(TaskIO.java:77) ~[classes/:?]
+	at ua.sumdu.j2se.zaretsky.tasks.model.TaskIO.writeBinary(TaskIO.java:77) ~[classes/:?]
 	at ua.sumdu.j2se.zaretsky.tasks.MainApp.writeInFile(MainApp.java:232) ~[classes/:?]
 	at ua.sumdu.j2se.zaretsky.tasks.MainApp.access$000(MainApp.java:39) ~[classes/:?]
 	at ua.sumdu.j2se.zaretsky.tasks.MainApp$1.handle(MainApp.java:83) ~[classes/:?]
@@ -474,7 +474,7 @@ java.io.FileNotFoundException: E:\SumDU\VI%20%d0%ba%d1%83%d1%80%d1%81\JAVA\task_
 2017-01-22 15:49:05 INFO  MainApp - Open program
 2017-01-22 15:57:13 TRACE MainApp - Exit
 2017-01-22 15:57:40 INFO  MainApp - Open program
-2017-01-22 15:57:49 INFO  TasksOverviewController - EDIT task: "������ 2" from [2017-01-13 17:11:00.000] to [2017-01-15 20:00:00.000] every [10 minutes] is inactive TO "������ 2" from [2017-01-13 17:11:00.000] to [2017-01-15 20:00:00.000] every [10 minutes]
+2017-01-22 15:57:49 INFO  TasksOverviewController - EDIT task: "������ 2" from [2017-01-13 17:11:00.000] to [2017-01-15 20:00:00.000] every [10 minutes] is inactive TO "������ 2" from [2017-01-13 17:11:00.000] to [2017-01-15 20:00:00.000] every [10 minutes]
 2017-01-22 15:57:52 TRACE MainApp - Exit
 2017-01-22 16:08:19 INFO  MainApp - Open program
 2017-01-22 16:08:26 INFO  TasksOverviewController - EDIT task: "Task for every day" from [2017-01-16 15:00:00.000] to [2017-01-20 19:00:00.000] every [1 day] TO "Task for every day" from [2017-01-16 15:15:00.000] to [2017-01-20 19:00:00.000] every [1 day]
@@ -510,3 +510,49 @@ java.io.FileNotFoundException: E:\SumDU\VI%20%d0%ba%d1%83%d1%80%d1%81\JAVA\task_
 2017-01-24 12:51:36 TRACE MainApp - Exit
 2017-01-24 13:09:16 INFO  MainApp - Open program
 2017-01-24 13:09:21 INFO  TasksOverviewController - DELETE task: "Meet with friends" from [2017-01-13 20:20:00.000] to [2017-02-11 00:00:00.000] every [2 days]
+2017-01-25 00:04:15 INFO  MainApp - Open program
+2017-01-25 00:04:24 TRACE MainApp - Exit
+2017-01-25 00:06:14 INFO  MainApp - Open program
+2017-01-25 00:06:21 TRACE MainApp - Exit
+2017-01-25 00:06:53 INFO  MainApp - Open program
+2017-01-25 00:06:59 TRACE MainApp - Exit
+2017-01-25 00:33:18 INFO  MainApp - Open program
+2017-01-25 00:34:34 INFO  TasksOverviewController - EDIT task: "Задача" from [2017-01-11 15:17:00.000] to [2017-01-14 17:00:00.000] every [5 minutes] TO "Learn English" from [2017-01-11 15:10:00.000] to [2017-02-11 17:00:00.000] every [1 day]
+2017-01-25 00:35:15 INFO  TasksOverviewController - EDIT task: "New Task" from [2017-01-16 15:00:00.000] to [2017-01-26 00:00:00.000] every [5 minutes] TO "Do homework" from [2017-01-16 15:00:00.000] to [2017-02-11 00:00:00.000] every [12 hours]
+2017-01-25 00:35:39 INFO  TasksOverviewController - EDIT task: "Meat with friends in ""\ncafe""" from [2017-01-13 15:20:00.000] to [2017-01-26 00:00:00.000] every [2 days] TO "Meet with friends in cafe" from [2017-01-13 15:20:00.000] to [2017-01-26 00:00:00.000] every [2 days]
+2017-01-25 00:35:42 TRACE MainApp - Exit
+2017-01-25 00:35:49 INFO  MainApp - Open program
+2017-01-25 00:36:37 INFO  TasksOverviewController - EDIT task: "Задача 2" from [2017-01-13 17:11:00.000] to [2017-01-15 20:00:00.000] every [10 minutes] is inactive TO "Some repeated task" from [2017-01-13 17:10:00.000] to [2017-02-11 20:00:00.000] every [15 minutes]
+2017-01-25 00:36:50 INFO  TasksOverviewController - EDIT task: "Some repeated task" from [2017-01-13 17:10:00.000] to [2017-02-11 20:00:00.000] every [15 minutes] TO "Some repeated task" from [2017-01-13 17:10:00.000] to [2017-02-11 20:00:00.000] every [10 minutes]
+2017-01-25 00:37:28 INFO  TasksOverviewController - EDIT task: "Some repeated task" from [2017-01-13 17:10:00.000] to [2017-02-11 20:00:00.000] every [10 minutes] TO "Some repeated task" from [2017-01-13 17:10:00.000] to [2017-02-11 20:00:00.000] every [1 hour]
+2017-01-25 00:37:53 TRACE MainApp - Exit
+2017-01-25 00:37:59 INFO  MainApp - Open program
+2017-01-25 00:38:02 TRACE MainApp - Exit
+2017-01-25 20:40:45 INFO  MainApp - Open program
+2017-01-25 20:41:42 INFO  TasksOverviewController - EDIT task: "New Task" from [2017-01-16 15:00:00.000] to [2017-01-26 00:00:00.000] every [5 minutes] TO "New Task 123" from [2017-01-16 15:00:00.000] to [2017-01-26 00:00:00.000] every [5 minutes]
+2017-01-25 20:41:43 TRACE MainApp - Exit
+2017-01-25 20:42:09 INFO  MainApp - Open program
+2017-01-25 20:42:17 TRACE MainApp - Exit
+2017-01-25 21:04:11 INFO  MainApp - Open program
+2017-01-25 21:04:46 INFO  TasksOverviewController - EDIT task: "Task for every day" from [2017-01-16 15:00:00.000] to [2017-01-20 19:00:00.000] every [1 day] TO "Task f2222" from [2017-01-16 15:00:00.000] to [2017-01-20 19:00:00.000] every [1 day]
+2017-01-25 21:04:58 TRACE MainApp - Exit
+2017-01-25 21:05:44 INFO  MainApp - Open program
+2017-01-25 21:05:50 TRACE MainApp - Exit
+2017-01-25 21:07:43 INFO  MainApp - Open program
+2017-01-25 21:07:55 TRACE MainApp - Exit
+2017-01-25 21:09:06 INFO  MainApp - Open program
+2017-01-25 21:09:16 INFO  TasksOverviewController - EDIT task: "Task for every day" from [2017-01-16 15:00:00.000] to [2017-01-20 19:00:00.000] every [1 day] TO "Task for 77777" from [2017-01-16 15:00:00.000] to [2017-01-20 19:00:00.000] every [1 day]
+2017-01-25 21:09:31 TRACE MainApp - Exit
+2017-01-25 21:11:32 INFO  MainApp - Open program
+2017-01-25 21:12:19 TRACE MainApp - Exit
+2017-01-25 22:18:06 INFO  MainApp - Open program
+2017-01-25 22:18:36 TRACE MainApp - Exit
+2017-01-25 22:19:13 INFO  MainApp - Open program
+2017-01-25 22:19:37 TRACE MainApp - Exit
+2017-01-25 22:25:48 INFO  MainApp - Open program
+2017-01-25 22:25:55 INFO  TasksOverviewController - EDIT task: "New Task" from [2017-01-16 15:00:00.000] to [2017-01-26 00:00:00.000] every [5 minutes] TO "New Task" at [2017-01-16 15:00:00.000]
+2017-01-25 22:48:19 TRACE MainApp - Exit
+2017-01-25 22:48:32 INFO  MainApp - Open program
+2017-01-25 22:48:59 TRACE MainApp - Exit
+2017-01-26 00:00:35 INFO  MainApp - Open program
+2017-01-26 00:00:41 TRACE MainApp - Exit

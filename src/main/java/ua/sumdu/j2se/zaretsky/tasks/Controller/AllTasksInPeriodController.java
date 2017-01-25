@@ -1,4 +1,4 @@
-package ua.sumdu.j2se.zaretsky.tasks.Controller;
+package ua.sumdu.j2se.zaretsky.tasks.controller;
 
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
@@ -10,8 +10,9 @@ import javafx.scene.control.TableView;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 import ua.sumdu.j2se.zaretsky.tasks.MainApp;
-import ua.sumdu.j2se.zaretsky.tasks.Model.Task;
-import ua.sumdu.j2se.zaretsky.tasks.Model.Tasks;
+import ua.sumdu.j2se.zaretsky.tasks.model.Task;
+import ua.sumdu.j2se.zaretsky.tasks.model.Tasks;
+
 import java.util.*;
 
 /**
@@ -33,7 +34,13 @@ public class AllTasksInPeriodController {
         this.dialogStage = dialogStage;
     }
 
-    public void setDates(Date startPeriod, Date endPeriod) {
+    /**
+     * Method fill table with active task in some period.
+     *
+     * @param startPeriod
+     * @param endPeriod   - is bigger than startPeriod
+     */
+    public void fillTableView(Date startPeriod, Date endPeriod) {
         SortedMap<Date, Set<Task>> tasks = Tasks.calendar(MainApp.getTasks(),
                 startPeriod, endPeriod);
 
@@ -41,10 +48,11 @@ public class AllTasksInPeriodController {
                 .CellDataFeatures<Map.Entry<Date, Set<Task>>, String>, ObservableValue<String>>() {
 
             @Override
-            public ObservableValue<String> call(TableColumn.CellDataFeatures<Map.Entry<Date, Set<Task>>, String> p) {
+            public ObservableValue<String> call(TableColumn.CellDataFeatures<Map.Entry<Date,
+                    Set<Task>>, String> property) {
                 // this callback returns property for just one cell, you can't use a loop here
                 // for first column we use key
-                return new SimpleStringProperty(p.getValue().getKey().toString());
+                return new SimpleStringProperty(property.getValue().getKey().toString());
             }
         });
 
@@ -52,11 +60,11 @@ public class AllTasksInPeriodController {
         taskTitleColumn.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Map.Entry<Date, Set<Task>>, String>, ObservableValue<String>>() {
 
             @Override
-            public ObservableValue<String> call(TableColumn.CellDataFeatures<Map.Entry<Date, Set<Task>>, String> p) {
-                Iterator a = p.getValue().getValue().iterator();
+            public ObservableValue<String> call(TableColumn.CellDataFeatures<Map.Entry<Date, Set<Task>>, String> property) {
+                Iterator iterator = property.getValue().getValue().iterator();
                 String result = "";
-                while (a.hasNext()) {
-                    result += ((Task) a.next()).getTitle() + "\n";
+                while (iterator.hasNext()) {
+                    result += ((Task) iterator.next()).getTitle() + "\n";
                 }
                 // for second column we use value
                 return new SimpleStringProperty(result);
@@ -71,7 +79,6 @@ public class AllTasksInPeriodController {
         allTasksInPeriodTable.getColumns().setAll(dateColumn, taskTitleColumn);
 
     }
-
 
 }
 
