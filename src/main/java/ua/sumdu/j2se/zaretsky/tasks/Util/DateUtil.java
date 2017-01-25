@@ -1,28 +1,25 @@
-package ua.sumdu.j2se.zaretsky.tasks.Util;
-
-/**
- * Created by Nikolion on 07.01.2017.
- */
+package ua.sumdu.j2se.zaretsky.tasks.util;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
-import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.Date;
 
 /**
- * Вспомогательные функции для работы с датами.
- *
- * @author Marco Jakob
+ * Class with helper functions for working with dates.
  */
 public class DateUtil {
 
-    public static final String TIME_PATTERN = "yyyy-MM-dd HH:mm:ss";
-    public static final SimpleDateFormat DATE_F = new SimpleDateFormat(TIME_PATTERN);
+    private static final String TIME_PATTERN = "yyyy-MM-dd HH:mm:ss";
+    private static final SimpleDateFormat DATE_F = new SimpleDateFormat(TIME_PATTERN);
+    private static final String DAY = "day";
+    private static final String HOUR = "hour";
+    private static final String MINUTE = "minute";
+    private static final String SECOND = "second";
+
 
 
     public static String format(Date date) {
@@ -45,16 +42,21 @@ public class DateUtil {
     }
 
     /**
-     * Проверяет, является ли строка корректной датой.
+     * Validate string is correct date
      *
-     * @param dateString
-     * @return true, если строка является корректной датой
+     * @param dateString - input string
+     * @return true, if string is correct date
      */
     public static boolean validDate(String dateString) {
-        // Пытаемся разобрать строку.
         return DateUtil.parse(dateString) != null;
     }
 
+    /**
+     * Convert time from seconds in a readable string format
+     *
+     * @param t - time into seconds
+     * @return String, time in a readable format.
+     */
     public static String secondsToStringTime(int t) {
         String result = "";
         int days = t / (60 * 60 * 24);
@@ -86,6 +88,12 @@ public class DateUtil {
         }
     }
 
+    /**
+     * Convert time from string in (integer) seconds
+     *
+     * @param intervalString - time into string
+     * @return int, time into seconds.
+     */
     public static int parseInterval(String intervalString) throws
             ParseException, IllegalArgumentException {
         if (intervalString == null || intervalString.isEmpty()) {
@@ -95,25 +103,32 @@ public class DateUtil {
         int hour = 0;
         int minute = 0;
         int second = 0;
+        if(!(intervalString.contains(DAY) || intervalString.contains(HOUR) || intervalString
+                .contains(MINUTE) || intervalString.contains(SECOND))){
+            throw new IllegalArgumentException("Interval does not contain the keywords: day, " +
+                    "hour, minute or second");
+        }
         String[] parts = intervalString.split(" ");
+
+
         if (parts.length < 2) {
             throw new IllegalArgumentException("Interval must contains of " +
                     "number and word");
         }
         for (int i = 0; i < parts.length; i = i + 2) {
-            if (parts[i + 1].contains("day")) {
+            if (parts[i + 1].contains(DAY)) {
                 day = Integer.parseInt(parts[i]);
                 continue;
             }
-            if (parts[i + 1].contains("hour")) {
+            if (parts[i + 1].contains(HOUR)) {
                 hour = Integer.parseInt(parts[i]);
                 continue;
             }
-            if (parts[i + 1].contains("minute")) {
+            if (parts[i + 1].contains(MINUTE)) {
                 minute = Integer.parseInt(parts[i]);
                 continue;
             }
-            if (parts[i + 1].contains("second")) {
+            if (parts[i + 1].contains(SECOND)) {
                 second = Integer.parseInt(parts[i]);
             }
         }
@@ -134,23 +149,26 @@ public class DateUtil {
         }
     }
 
+    /**
+     * Convert date from type Date into LocalDate.
+     *
+     * @param date - date in type Date
+     * @return LocalDate
+     */
     public static LocalDate dateToLaocalDate(Date date) {
         LocalDate result;
         result = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
         return result;
     }
 
-    public static Date localDateToDate(LocalDate localDate) {
-        Instant instant = Instant.from(localDate.atStartOfDay(ZoneId
-                .systemDefault()));
-        Date result = Date.from(instant);
-        return result;
-    }
-
-
+    /**
+     * Convert date from type LocalDate into Date.
+     *
+     * @param localDate - date in type Date
+     * @return Date
+     */
     public static Date localDateToDate(LocalDateTime localDate) {
-        Date out = Date.from(localDate.atZone(ZoneId.systemDefault()).toInstant());
-        return out;
+        return Date.from(localDate.atZone(ZoneId.systemDefault()).toInstant());
     }
 
 }

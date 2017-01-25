@@ -1,19 +1,31 @@
 package ua.sumdu.j2se.zaretsky.tasks.model;
 
 import java.io.*;
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 
 /**
  * Created by Nikolion on 27.11.2016.
  */
 public class TaskIO {
-    public static final String TIME_PATTERN = "[yyyy-MM-dd HH:mm:ss.sss]";
-    public static final SimpleDateFormat DATE_F = new SimpleDateFormat(TIME_PATTERN);
-    public static final String TO = " to ";
-    public static final String FROM = " from ";
-    public static final String AT = " at ";
+    private static final String TIME_PATTERN = "[yyyy-MM-dd HH:mm:ss.sss]";
+    //private static final SimpleDateFormat DATE_F = new SimpleDateFormat(TIME_PATTERN);
+
+    private static final ThreadLocal<DateFormat> DATE_F
+            = new ThreadLocal<DateFormat>(){
+        @Override
+        protected DateFormat initialValue() {
+            return new SimpleDateFormat(TIME_PATTERN, Locale.ENGLISH);
+        }
+    };
+
+    private static final String TO = " to ";
+    private static final String FROM = " from ";
+    private static final String AT = " at ";
+
 
     public static void write(TaskList tasks, OutputStream out) throws IOException {
         ObjectOutputStream oos = null;
@@ -100,24 +112,24 @@ public class TaskIO {
             for (Task t:tasks) {
                 out.write(getTitleModif(t.getTitle()));
                 if (!t.isActive() && !t.isRepeated()) {
-                    out.write(" at " + DATE_F.format
+                    out.write(" at " + DATE_F.get().format
                             (t.getStartTime()) + " is inactive");
 
                 } else if (!t.isActive() && t.isRepeated()) {
-                    out.write(" from " + DATE_F.format
+                    out.write(" from " + DATE_F.get().format
                             (t.getStartTime())
-                            + " to " + DATE_F.format(t.getEndTime())
+                            + " to " + DATE_F.get().format(t.getEndTime())
                             + " every " + secondsToStringTime(t.getRepeatInterval
                             ()) + " is " +
                             "inactive");
                 } else if (t.isActive() && t.isRepeated()) {
-                    out.write(" from " + DATE_F.format
+                    out.write(" from " + DATE_F.get().format
                             (t.getStartTime())
-                            + " to " + DATE_F.format(t.getEndTime())
+                            + " to " + DATE_F.get().format(t.getEndTime())
                             + " every " + secondsToStringTime(t.getRepeatInterval
                             ()));
                 } else if (t.isActive() && !t.isRepeated()) {
-                    out.write(" at " + DATE_F.format
+                    out.write(" at " + DATE_F.get().format
                             (t.getStartTime()));
                 }
                 if (numLine < tasks.count) {
@@ -234,7 +246,7 @@ public class TaskIO {
 
         int timePosition = s.lastIndexOf(AT) + AT.length();
         String timeString = s.substring(timePosition, timePosition + TIME_PATTERN.length());
-        time = DATE_F.parse(timeString);
+        time = DATE_F.get().parse(timeString);
 
         task = new Task(title, time);
 
@@ -257,11 +269,11 @@ public class TaskIO {
 
         int startTimePosition = s.lastIndexOf(FROM) + FROM.length();
         String startTimeString = s.substring(startTimePosition, startTimePosition + TIME_PATTERN.length());
-        startTime = DATE_F.parse(startTimeString);
+        startTime = DATE_F.get().parse(startTimeString);
 
         int endTimePos = s.lastIndexOf(TO) + TO.length();
         String endTimeString = s.substring(endTimePos, endTimePos + TIME_PATTERN.length());
-        endTime = DATE_F.parse(endTimeString);
+        endTime = DATE_F.get().parse(endTimeString);
 
         String intervalString = s.substring(s.lastIndexOf("[") + 1, s
                 .lastIndexOf("]"));
@@ -317,24 +329,24 @@ public class TaskIO {
 
         result= result.concat(getTitleModif(t.getTitle()));
         if (!t.isActive() && !t.isRepeated()) {
-           result= result.concat(" at " + DATE_F.format
+           result= result.concat(" at " + DATE_F.get().format
                     (t.getStartTime()) + " is inactive");
 
         } else if (!t.isActive() && t.isRepeated()) {
-            result=result.concat(" from " + DATE_F.format
+            result=result.concat(" from " + DATE_F.get().format
                     (t.getStartTime())
-                    + " to " + DATE_F.format(t.getEndTime())
+                    + " to " + DATE_F.get().format(t.getEndTime())
                     + " every " + secondsToStringTime(t.getRepeatInterval
                     ()) + " is " +
                     "inactive");
         } else if (t.isActive() && t.isRepeated()) {
-            result=result.concat(" from " + DATE_F.format
+            result=result.concat(" from " + DATE_F.get().format
                     (t.getStartTime())
-                    + " to " + DATE_F.format(t.getEndTime())
+                    + " to " + DATE_F.get().format(t.getEndTime())
                     + " every " + secondsToStringTime(t.getRepeatInterval
                     ()));
         } else if (t.isActive() && !t.isRepeated()) {
-            result=result.concat(" at " + DATE_F.format
+            result=result.concat(" at " + DATE_F.get().format
                     (t.getStartTime()));
         }
 

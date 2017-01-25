@@ -2,7 +2,6 @@ package ua.sumdu.j2se.zaretsky.tasks.model;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.lang.*;
 
 /**
  * Class for creating and editing tasks
@@ -67,7 +66,7 @@ public class Task implements Cloneable, Serializable {
      *
      * @return title
      */
-    public synchronized String getTitle() {
+    public final String getTitle() {
         return title;
     }
 
@@ -76,7 +75,7 @@ public class Task implements Cloneable, Serializable {
      *
      * @param title Title of task
      */
-    public void setTitle(String title) throws IllegalArgumentException {
+    public final void setTitle(String title) throws IllegalArgumentException {
 
         if (title == null || title.isEmpty() || title.matches("\\s+"))
             throw new IllegalArgumentException("Invalid value title");
@@ -99,7 +98,7 @@ public class Task implements Cloneable, Serializable {
      *
      * @param active Set the task active or inactive
      */
-    public void setActive(boolean active) {
+    public final void setActive(boolean active) {
         this.active = active;
     }
 
@@ -120,7 +119,7 @@ public class Task implements Cloneable, Serializable {
      * @param end      End time task
      * @param interval Repeat time task
      */
-    public void setTime(Date start, Date end, int interval) throws
+    public final void setTime(Date start, Date end, int interval) throws
             IllegalArgumentException {
 
 
@@ -141,17 +140,15 @@ public class Task implements Cloneable, Serializable {
      *
      * @param time Task time
      */
-    public void setTime(Date time) throws IllegalArgumentException {
-
-
-        if (time.compareTo(BEGIN) != -1) {
-            this.start = new Dates(time.getTime());
-            this.end = new Dates(time.getTime());
-            this.repeat = 0;
-
-        } else {
+    public final void setTime(Date time) throws IllegalArgumentException {
+        if (time.compareTo(BEGIN) == -1) {
             throw new IllegalArgumentException("Illegal argument time. Time not change");
         }
+
+        this.start = new Dates(time.getTime());
+        this.end = new Dates(time.getTime());
+        this.repeat = 0;
+
 
     }
 
@@ -169,6 +166,7 @@ public class Task implements Cloneable, Serializable {
 
         return dateFormat.format(start);
     }*/
+
     /**
      * Method to getting end time task
      *
@@ -252,23 +250,21 @@ public class Task implements Cloneable, Serializable {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || !(o instanceof Task)) return false;
+    public boolean equals(Object otherObj) {
+        if (this == otherObj) return true;
+        if (!(otherObj instanceof Task)) return false;
 
-        Task task = (Task) o;
+        Task task = (Task) otherObj;
 
-        if (active != task.active) return false;
-        if (start.compareTo(task.start) != 0) return false;
-        if (end.compareTo(task.end) != 0) return false;
-        if (repeat != task.repeat) return false;
-        return title != null ? title.equals(task.title) : task.title == null;
+        return repeat == task.repeat && active == task.active &&
+                title.equals(task.title) && start.equals(task.start) &&
+                end.equals(task.end);
 
     }
 
     @Override
     public int hashCode() {
-        int result = title != null ? title.hashCode() : 0;
+        int result = title.hashCode();
         result = 31 * result + (active ? 1 : 0);
         result = 31 * result + start.hashCode();
         result = 31 * result + end.hashCode();
@@ -280,7 +276,7 @@ public class Task implements Cloneable, Serializable {
     public final Task clone() throws CloneNotSupportedException {
         Task cloneOfTask = (Task) super.clone();
         cloneOfTask.setTime(new Date(this.getStartTime().getTime()), new Date(this
-                .getEndTime().getTime()),this.repeat);
+                .getEndTime().getTime()), this.repeat);
 
         return cloneOfTask;
     }

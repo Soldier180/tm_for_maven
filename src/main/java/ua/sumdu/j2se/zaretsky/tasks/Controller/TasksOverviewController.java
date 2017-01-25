@@ -94,27 +94,27 @@ public class TasksOverviewController {
      * @param task — task type Task or null
      */
     private void showTaskDetails(Task task) {
-        if (task != null) {
-            titleLabel.setText(task.getTitle());
-            startTimeLabel.setText(DateUtil.format(task.getStartTime()));
-            repeatLabel.setText(DateUtil.secondsToStringTime(task.getRepeatInterval()));
-            if (task.getRepeatInterval() != 0) {
-                endTimeLabel.setText(DateUtil.format(task.getEndTime()));
-            } else {
-                endTimeLabel.setText("");
-            }
 
-            activityLabel.setText(Boolean.toString(task.isActive()));
-
-
-        } else {
-            // If task = null, remove all text.
+        if (task == null) {// If task = null, remove all text.
             titleLabel.setText("");
             startTimeLabel.setText("");
             endTimeLabel.setText("");
             repeatLabel.setText("");
             activityLabel.setText("");
+        } else {
+            titleLabel.setText(task.getTitle());
+            startTimeLabel.setText(DateUtil.format(task.getStartTime()));
+            repeatLabel.setText(DateUtil.secondsToStringTime(task.getRepeatInterval()));
+
+            if (task.getRepeatInterval() == 0) {
+                endTimeLabel.setText("");
+            } else {
+                endTimeLabel.setText(DateUtil.format(task.getEndTime()));
+            }
+
+            activityLabel.setText(Boolean.toString(task.isActive()));
         }
+
     }
 
     /**
