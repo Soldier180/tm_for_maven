@@ -11,6 +11,12 @@ import java.util.Locale;
  * Created by Nikolion on 27.11.2016.
  */
 public class TaskIO {
+
+    private static final String TO = " to ";
+    private static final String FROM = " from ";
+    private static final String AT = " at ";
+    private static final String EVERY = " every ";
+
     private static final String TIME_PATTERN = "[yyyy-MM-dd HH:mm:ss.sss]";
     //private static final SimpleDateFormat DATE_F = new SimpleDateFormat(TIME_PATTERN);
 
@@ -21,10 +27,6 @@ public class TaskIO {
             return new SimpleDateFormat(TIME_PATTERN, Locale.ENGLISH);
         }
     };
-
-    private static final String TO = " to ";
-    private static final String FROM = " from ";
-    private static final String AT = " at ";
 
 
     public static void write(TaskList tasks, OutputStream out) throws IOException {
@@ -112,24 +114,24 @@ public class TaskIO {
             for (Task t:tasks) {
                 out.write(getTitleModif(t.getTitle()));
                 if (!t.isActive() && !t.isRepeated()) {
-                    out.write(" at " + DATE_F.get().format
+                    out.write(AT + DATE_F.get().format
                             (t.getStartTime()) + " is inactive");
 
                 } else if (!t.isActive() && t.isRepeated()) {
-                    out.write(" from " + DATE_F.get().format
+                    out.write(FROM + DATE_F.get().format
                             (t.getStartTime())
-                            + " to " + DATE_F.get().format(t.getEndTime())
-                            + " every " + secondsToStringTime(t.getRepeatInterval
+                            + TO + DATE_F.get().format(t.getEndTime())
+                            + EVERY + secondsToStringTime(t.getRepeatInterval
                             ()) + " is " +
                             "inactive");
                 } else if (t.isActive() && t.isRepeated()) {
-                    out.write(" from " + DATE_F.get().format
+                    out.write(FROM + DATE_F.get().format
                             (t.getStartTime())
-                            + " to " + DATE_F.get().format(t.getEndTime())
-                            + " every " + secondsToStringTime(t.getRepeatInterval
+                            + TO + DATE_F.get().format(t.getEndTime())
+                            + EVERY + secondsToStringTime(t.getRepeatInterval
                             ()));
                 } else if (t.isActive() && !t.isRepeated()) {
-                    out.write(" at " + DATE_F.get().format
+                    out.write(AT + DATE_F.get().format
                             (t.getStartTime()));
                 }
                 if (numLine < tasks.count) {
@@ -153,10 +155,10 @@ public class TaskIO {
 
         try {
             bufferedReader = new BufferedReader(in);
-            String s;
+            String taskString;
 
-            while ((s = bufferedReader.readLine()) != null) {
-                Task task = parseTask(s);
+            while ((taskString = bufferedReader.readLine()) != null) {
+                Task task = parseTask(taskString);
                 tasks.add(task);
             }
         } finally {
@@ -190,12 +192,12 @@ public class TaskIO {
     }
 
 
-    public static String secondsToStringTime(int t) {
+    public static String secondsToStringTime(int timeSeconds) {
         String result = "";
-        int days = t / (60 * 60 * 24);
-        int hours = (t - days * 60 * 60 * 24) / (60 * 60);
-        int minutes = (t - (days * 60 * 60 * 24) - (hours * 60 * 60)) / 60;
-        int seconds = t - (days * 60 * 60 * 24) - (hours * 60 * 60) - (minutes * 60);
+        int days = timeSeconds / (60 * 60 * 24);
+        int hours = (timeSeconds - days * 60 * 60 * 24) / (60 * 60);
+        int minutes = (timeSeconds - (days * 60 * 60 * 24) - (hours * 60 * 60)) / 60;
+        int seconds = timeSeconds - (days * 60 * 60 * 24) - (hours * 60 * 60) - (minutes * 60);
 
         if (days > 0) {
             result = result + days + ending(days, " day");
@@ -213,75 +215,75 @@ public class TaskIO {
         return "[" + result + "]";
     }
 
-    private static String ending(int time, String s) {
+    private static String ending(int time, String wordWithEnding) {
         if (time < 2) {
-            return s;
+            return wordWithEnding;
         } else {
-            return s + "s";
+            return wordWithEnding + "s";
         }
     }
 
-    private static String getTitleModif(String s) {
-        return "\"" + s.replaceAll("\"", "\"\"") + "\"";
+    private static String getTitleModif(String title) {
+        return "\"" + title.replaceAll("\"", "\"\"") + "\"";
     }
 
-    private static Task parseTask(String s) throws ParseException {
+    private static Task parseTask(String stringWithTask) throws ParseException {
         Task task;
-        if (s.contains("] every [")) {
-            task = parseRepeatedTask(s);
+        if (stringWithTask.contains("] every [")) {
+            task = parseRepeatedTask(stringWithTask);
         } else {
-            task = parseNotRepeatedTask(s);
+            task = parseNotRepeatedTask(stringWithTask);
         }
         return task;
     }
 
 
-    private static Task parseNotRepeatedTask(String s) throws ParseException {
+    private static Task parseNotRepeatedTask(String stringWithTask) throws ParseException {
         Task task;
         String title;
         Date time;
 
-        title = s.substring(1, s.lastIndexOf(AT) - 1);
+        title = stringWithTask.substring(1, stringWithTask.lastIndexOf(AT) - 1);
         title = parseQuotes(title);
 
-        int timePosition = s.lastIndexOf(AT) + AT.length();
-        String timeString = s.substring(timePosition, timePosition + TIME_PATTERN.length());
+        int timePosition = stringWithTask.lastIndexOf(AT) + AT.length();
+        String timeString = stringWithTask.substring(timePosition, timePosition + TIME_PATTERN.length());
         time = DATE_F.get().parse(timeString);
 
         task = new Task(title, time);
 
-        if (!s.contains("inactive")) {
+        if (!stringWithTask.contains("inactive")) {
             task.setActive(true);
         }
 
         return task;
     }
 
-    private static Task parseRepeatedTask(String s) throws ParseException {
+    private static Task parseRepeatedTask(String stringWithTask) throws ParseException {
         Task task;
         String title;
         Date startTime;
         Date endTime;
         int interval;
 
-        title = s.substring(1, s.lastIndexOf(FROM) - 1);
+        title = stringWithTask.substring(1, stringWithTask.lastIndexOf(FROM) - 1);
         title = parseQuotes(title);
 
-        int startTimePosition = s.lastIndexOf(FROM) + FROM.length();
-        String startTimeString = s.substring(startTimePosition, startTimePosition + TIME_PATTERN.length());
+        int startTimePosition = stringWithTask.lastIndexOf(FROM) + FROM.length();
+        String startTimeString = stringWithTask.substring(startTimePosition, startTimePosition + TIME_PATTERN.length());
         startTime = DATE_F.get().parse(startTimeString);
 
-        int endTimePos = s.lastIndexOf(TO) + TO.length();
-        String endTimeString = s.substring(endTimePos, endTimePos + TIME_PATTERN.length());
+        int endTimePos = stringWithTask.lastIndexOf(TO) + TO.length();
+        String endTimeString = stringWithTask.substring(endTimePos, endTimePos + TIME_PATTERN.length());
         endTime = DATE_F.get().parse(endTimeString);
 
-        String intervalString = s.substring(s.lastIndexOf("[") + 1, s
-                .lastIndexOf("]"));
+        String intervalString = stringWithTask.substring(stringWithTask.lastIndexOf('[') + 1,
+                stringWithTask.lastIndexOf(']'));
         interval = parseInterval(intervalString);
 
         task = new Task(title, startTime, endTime, interval);
 
-        if (!s.contains("inactive;")) {
+        if (!stringWithTask.contains("inactive;")) {
             task.setActive(true);
         }
 
@@ -324,30 +326,30 @@ public class TaskIO {
         return ((day * 60 * 60 * 24) + (hour * 60 * 60) + (minute * 60) + second);
     }
 
-    public static String writeTask(Task t){
+    public static String writeTask(Task task){
         String result = "";
 
-        result= result.concat(getTitleModif(t.getTitle()));
-        if (!t.isActive() && !t.isRepeated()) {
-           result= result.concat(" at " + DATE_F.get().format
-                    (t.getStartTime()) + " is inactive");
+        result= result.concat(getTitleModif(task.getTitle()));
+        if (!task.isActive() && !task.isRepeated()) {
+           result= result.concat(AT + DATE_F.get().format
+                    (task.getStartTime()) + " is inactive");
 
-        } else if (!t.isActive() && t.isRepeated()) {
-            result=result.concat(" from " + DATE_F.get().format
-                    (t.getStartTime())
-                    + " to " + DATE_F.get().format(t.getEndTime())
-                    + " every " + secondsToStringTime(t.getRepeatInterval
+        } else if (!task.isActive() && task.isRepeated()) {
+            result=result.concat(FROM + DATE_F.get().format
+                    (task.getStartTime())
+                    + TO + DATE_F.get().format(task.getEndTime())
+                    + EVERY + secondsToStringTime(task.getRepeatInterval
                     ()) + " is " +
                     "inactive");
-        } else if (t.isActive() && t.isRepeated()) {
-            result=result.concat(" from " + DATE_F.get().format
-                    (t.getStartTime())
-                    + " to " + DATE_F.get().format(t.getEndTime())
-                    + " every " + secondsToStringTime(t.getRepeatInterval
+        } else if (task.isActive() && task.isRepeated()) {
+            result=result.concat(FROM + DATE_F.get().format
+                    (task.getStartTime())
+                    + TO + DATE_F.get().format(task.getEndTime())
+                    + EVERY + secondsToStringTime(task.getRepeatInterval
                     ()));
-        } else if (t.isActive() && !t.isRepeated()) {
-            result=result.concat(" at " + DATE_F.get().format
-                    (t.getStartTime()));
+        } else if (task.isActive() && !task.isRepeated()) {
+            result=result.concat(AT + DATE_F.get().format
+                    (task.getStartTime()));
         }
 
         return result;

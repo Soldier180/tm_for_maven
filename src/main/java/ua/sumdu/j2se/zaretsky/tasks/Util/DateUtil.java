@@ -1,5 +1,6 @@
 package ua.sumdu.j2se.zaretsky.tasks.util;
 
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -7,6 +8,7 @@ import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeParseException;
 import java.util.Date;
+import java.util.Locale;
 
 /**
  * Class with helper functions for working with dates.
@@ -14,11 +16,18 @@ import java.util.Date;
 public class DateUtil {
 
     private static final String TIME_PATTERN = "yyyy-MM-dd HH:mm:ss";
-    private static final SimpleDateFormat DATE_F = new SimpleDateFormat(TIME_PATTERN);
     private static final String DAY = "day";
     private static final String HOUR = "hour";
     private static final String MINUTE = "minute";
     private static final String SECOND = "second";
+
+    private static final ThreadLocal<DateFormat> DATE_F
+            = new ThreadLocal<DateFormat>(){
+        @Override
+        protected DateFormat initialValue() {
+            return new SimpleDateFormat(TIME_PATTERN, Locale.ENGLISH);
+        }
+    };
 
 
 
@@ -26,13 +35,13 @@ public class DateUtil {
         if (date == null) {
             return null;
         }
-        return DATE_F.format(date);
+        return DATE_F.get().format(date);
     }
 
 
     public static Date parse(String dateString) {
         try {
-            return DATE_F.parse(dateString);
+            return DATE_F.get().parse(dateString);
         } catch (DateTimeParseException e) {
             return null;
         } catch (ParseException e) {

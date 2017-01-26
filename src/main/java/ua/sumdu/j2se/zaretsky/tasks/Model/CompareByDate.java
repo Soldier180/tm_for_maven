@@ -8,15 +8,15 @@ import java.util.*;
  */
 public class CompareByDate implements Comparator<Date> {
     @Override
-    public int compare(Date e1, Date e2) {
-        if (e1.compareTo(e2) == 1) {
+    public int compare(Date date1, Date date2) {
+        if (date1.compareTo(date2) == 1) {
             return -1;
         }
-        if (e1.compareTo(e2) == -1) {
+        if (date1.compareTo(date2) == -1) {
             return 1;
         } else {
             return 0;
         }
-//        return  e1.compareTo(e2);
+//        return  date1.compareTo(date2);
     }
 }
