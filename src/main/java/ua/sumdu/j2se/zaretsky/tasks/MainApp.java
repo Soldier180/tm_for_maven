@@ -26,9 +26,9 @@ import java.util.Date;
 public class MainApp extends Application {
     private final Logger log = LogManager.getLogger(MainApp.class.getSimpleName());
     private static TaskList tasks = new LinkedTaskList();
-    public static final File FILE = new File(MainApp.class.getResource("/data/tasks.bin")
+    private static final File FILE = new File(MainApp.class.getResource("/data/tasks.bin")
             .getFile());
-    // public static final File FILE = new File("src/main/resources/tasks");
+
     private final ObservableList<Task> tasksData = FXCollections
             .observableArrayList();
 
@@ -43,7 +43,6 @@ public class MainApp extends Application {
 
 
     private Stage primaryStage;
-    private VBox rootLayout;
 
     @Override
     public void start(Stage primaryStage) {
@@ -91,7 +90,7 @@ public class MainApp extends Application {
         try {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(MainApp.class.getResource("/view/TasksOverview.fxml"));
-            rootLayout = loader.load();
+            VBox rootLayout = loader.load();
 
 
             TasksOverviewController controller = loader.getController();
@@ -120,7 +119,7 @@ public class MainApp extends Application {
         try {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(MainApp.class.getResource("/view/TaskEditDialog.fxml"));
-            GridPane page = (GridPane) loader.load();
+            GridPane page = loader.load();
 
             Stage dialogStage = new Stage();
             dialogStage.getIcons().add(new Image
@@ -167,7 +166,7 @@ public class MainApp extends Application {
         try {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(MainApp.class.getResource("/view/AllTasksInPeriod.fxml"));
-            HBox page = (HBox) loader.load();
+            HBox page = loader.load();
 
             Stage dialogStage = new Stage();
             dialogStage.getIcons().add(new Image
@@ -191,11 +190,7 @@ public class MainApp extends Application {
         }
     }
 
-    /**
-     * Возвращает главную сцену.
-     *
-     * @return
-     */
+
     public Stage getPrimaryStage() {
         return primaryStage;
     }
@@ -213,7 +208,6 @@ public class MainApp extends Application {
     public static void main(String[] args) {
 
         launch(args);
-
 
     }
 

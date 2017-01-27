@@ -614,3 +614,16 @@ java.io.FileNotFoundException: E:\SumDU\VI%20%d0%ba%d1%83%d1%80%d1%81\JAVA\task_
 2017-01-27 02:18:23 TRACE MainApp - Exit
 2017-01-27 02:18:30 INFO  MainApp - Open program
 2017-01-27 02:18:40 TRACE MainApp - Exit
+2017-01-27 02:29:05 INFO  MainApp - Open program
+2017-01-27 02:29:14 INFO  TasksOverviewController - EDIT task: "Задача 2" from [2017-01-13 17:11:00.000] to [2017-01-15 20:00:00.000] every [10 minutes] is inactive TO "Задача 2" from [2017-01-13 17:11:00.000] to [2017-01-15 20:00:00.000] every [10 minutes]
+2017-01-27 02:29:19 INFO  TasksOverviewController - EDIT task: "Task for every day" from [2017-01-16 15:00:00.000] to [2017-01-20 19:00:00.000] every [1 day] TO "Task for every day" from [2017-01-16 14:00:00.000] to [2017-01-20 19:00:00.000] every [1 day]
+2017-01-27 02:29:24 TRACE MainApp - Exit
+2017-01-27 02:30:37 INFO  MainApp - Open program
+2017-01-27 02:30:44 INFO  TasksOverviewController - EDIT task: "Task for every day" from [2017-01-16 14:00:00.000] to [2017-01-20 19:00:00.000] every [1 day] TO "Task for every day" from [2017-01-19 14:00:00.000] to [2017-01-20 19:00:00.000] every [1 day]
+2017-01-27 02:30:57 INFO  TasksOverviewController - EDIT task: "New Task" from [2017-01-16 15:00:00.000] to [2017-01-26 00:00:00.000] every [5 minutes] TO "New Task" from [2017-01-16 15:00:00.000] to [2017-01-28 00:00:00.000] every [5 minutes]
+2017-01-27 02:31:01 TRACE MainApp - Exit
+2017-01-27 02:32:22 INFO  MainApp - Open program
+2017-01-27 02:32:33 INFO  TasksOverviewController - EDIT task: "Task for every day" from [2017-01-19 14:00:00.000] to [2017-01-20 19:00:00.000] every [1 day] TO "Task for every day" from [2017-01-19 10:00:00.000] to [2017-01-20 10:00:00.000] every [1 day]
+2017-01-27 02:32:36 TRACE MainApp - Exit
+2017-01-27 02:32:42 INFO  MainApp - Open program
+2017-01-27 02:32:47 TRACE MainApp - Exit
