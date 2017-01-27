@@ -49,7 +49,7 @@ public class MainApp extends Application {
         this.primaryStage = primaryStage;
         primaryStage.getIcons().add(new Image
                 ("file:" + MainApp.class.getResource("/image/task_manager1.png").getFile()));
-        this.primaryStage.setMinWidth(730);
+        this.primaryStage.setMinWidth(735);
         this.primaryStage.setMinHeight(500);
         this.primaryStage.setTitle("TASK MANAGER");
 
@@ -86,17 +86,15 @@ public class MainApp extends Application {
     /**
      * Инициализирует корневой макет.
      */
-    public void initRootLayout() {
+    private void initRootLayout() {
         try {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(MainApp.class.getResource("/view/TasksOverview.fxml"));
             VBox rootLayout = loader.load();
 
-
             TasksOverviewController controller = loader.getController();
             controller.setMainApp(this);
 
-            // Отображаем сцену, содержащую корневой макет.
             Scene scene = new Scene(rootLayout);
             primaryStage.setScene(scene);
             primaryStage.show();
