@@ -9,7 +9,7 @@ import java.util.Iterator;
  * @author Nikolay Zaretsky
  * @version 1.0 25 Oct 2016
  */
-public class LinkedTaskList extends TaskList implements Serializable {
+public class LinkedTaskList extends TaskList implements Serializable, Cloneable {
 
     private Node first = null;
     private Node last = null;
@@ -24,7 +24,7 @@ public class LinkedTaskList extends TaskList implements Serializable {
 
         private Node(Task task) {
             if (task == null) {
-                throw new NullPointerException("Task is null");
+                throw new IllegalArgumentException("Task is null");
             }
             this.taskNode = task;
         }

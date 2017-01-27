@@ -11,8 +11,8 @@ import java.util.Date;
 public class Detector extends Thread {
 
     MainApp mainApp;
-    private TaskList tasks;
-    private long notifyPeriodInMillis; //period when find tasks 10 minutes
+    private final TaskList tasks;
+    private final long notifyPeriodInMillis; //period when find tasks 10 minutes
     public static final int PAUSE = 300000;//5 minutes
 
     public Detector(TaskList tasks, long notifyPeriodInMillis, MainApp mainApp) {
@@ -31,9 +31,9 @@ public class Detector extends Thread {
                     Date(currentTime.getTime() + notifyPeriodInMillis));
             if (incomingTasks.count != 0) {
                 System.out.println("Nearest tasks");
-                for (Task t : incomingTasks) {
-                    System.out.print("Time: " + DateUtil.format(t.nextTimeAfter(currentTime)));
-                    System.out.println(" " + t.getTitle());
+                for (Task task : incomingTasks) {
+                    System.out.print("Time: " + DateUtil.format(task.nextTimeAfter(currentTime)));
+                    System.out.println(" " + task.getTitle());
                 }
             }
             try {

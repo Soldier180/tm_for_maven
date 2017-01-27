@@ -42,22 +42,20 @@ public class ArrayTaskList extends TaskList implements Cloneable, Serializable {
      * @return true  if this task was in ArrayTaskList
      */
     public boolean remove(Task task) {
-        if (task != null) {
-            for (int i = 0; i < count; i++) {
-                if (task.equals(arrayList[i])) {
-                    for (int a = i; a < count - 1; a++) {
-                        arrayList[a] = arrayList[a + 1];
-                    }
-                    arrayList[count - 1] = null;
-                    count--;
-                    return true;
-
-                }
-            }
-            return false;
-        } else {
+        if (task == null) {
             throw new IllegalArgumentException("Incorrect task");
         }
+        for (int i = 0; i < count; i++) {
+            if (task.equals(arrayList[i])) {
+                System.arraycopy(arrayList, i + 1, arrayList, i, count - 1 - i);
+                arrayList[count - 1] = null;
+                count--;
+                return true;
+
+            }
+        }
+        return false;
+
     }
 
     /**

@@ -3,14 +3,12 @@ package ua.sumdu.j2se.zaretsky.tasks;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.layout.*;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import javafx.stage.WindowEvent;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import ua.sumdu.j2se.zaretsky.tasks.controller.AllTasksInPeriodController;
@@ -31,7 +29,7 @@ public class MainApp extends Application {
     public static final File FILE = new File(MainApp.class.getResource("/data/tasks.bin")
             .getFile());
     // public static final File FILE = new File("src/main/resources/tasks");
-    private ObservableList<Task> tasksData = FXCollections
+    private final ObservableList<Task> tasksData = FXCollections
             .observableArrayList();
 
 
@@ -61,30 +59,24 @@ public class MainApp extends Application {
 
         Detector detector = new Detector(tasks, 600000, this);
         detector.start();
-        this.primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
-            public void handle(WindowEvent windowEvent) {
-                writeInFile();
-                log.traceExit();
-                LogManager.shutdown();
-                System.exit(0);
+        this.primaryStage.setOnCloseRequest(windowEvent -> {
+            writeInFile();
+            log.traceExit();
+            LogManager.shutdown();
+            System.exit(0);
 
-            }
         });
     }
 
     public MainApp() {
         try {
             TaskIO.readBinary(tasks, FILE);
-
             tasksData.clear();
             //add tasks in ObservableList
             for (Task task : tasks) {
                 tasksData.add(task);
             }
-        } catch (IOException e) {
-            e.printStackTrace();
-            log.catching(e);
-        } catch (ClassNotFoundException e) {
+        } catch (ClassNotFoundException | IOException  e) {
             e.printStackTrace();
             log.catching(e);
         }
@@ -118,12 +110,11 @@ public class MainApp extends Application {
 
 
     /**
-     * Открывает диалоговое окно для изменения деталей задачи.
-     * Если пользователь кликнул OK, то изменения сохраняются в предоставленном
-     * объекте и возвращается значение true.
+     * It opens a dialog to change the task details. If the user clicks OK, the changes are
+     * stored in the supplied object and returns true.
      *
-     * @param task - объект адресата, который надо изменить
-     * @return true, если пользователь кликнул OK, в противном случае false.
+     * @param task - task, which need to change
+     * @return true, if push Ok button, else - false.
      */
     public boolean showTaskEditDialog(Task task, boolean newTask) {
         try {

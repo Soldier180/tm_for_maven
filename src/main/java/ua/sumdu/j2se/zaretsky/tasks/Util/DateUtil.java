@@ -22,13 +22,12 @@ public class DateUtil {
     private static final String SECOND = "second";
 
     private static final ThreadLocal<DateFormat> DATE_F
-            = new ThreadLocal<DateFormat>(){
+            = new ThreadLocal<DateFormat>() {
         @Override
         protected DateFormat initialValue() {
             return new SimpleDateFormat(TIME_PATTERN, Locale.ENGLISH);
         }
     };
-
 
 
     public static String format(Date date) {
@@ -63,15 +62,15 @@ public class DateUtil {
     /**
      * Convert time from seconds in a readable string format
      *
-     * @param t - time into seconds
+     * @param time - time into seconds
      * @return String, time in a readable format.
      */
-    public static String secondsToStringTime(int t) {
+    public static String secondsToStringTime(int time) {
         String result = "";
-        int days = t / (60 * 60 * 24);
-        int hours = (t - days * 60 * 60 * 24) / (60 * 60);
-        int minutes = (t - (days * 60 * 60 * 24) - (hours * 60 * 60)) / 60;
-        int seconds = t - (days * 60 * 60 * 24) - (hours * 60 * 60) - (minutes * 60);
+        int days = time / (60 * 60 * 24);
+        int hours = (time - days * 60 * 60 * 24) / (60 * 60);
+        int minutes = (time - (days * 60 * 60 * 24) - (hours * 60 * 60)) / 60;
+        int seconds = time - (days * 60 * 60 * 24) - (hours * 60 * 60) - (minutes * 60);
 
         if (days > 0) {
             result = result + days + ending(days, " day");
@@ -89,11 +88,11 @@ public class DateUtil {
         return result;
     }
 
-    private static String ending(int time, String s) {
+    private static String ending(int time, String word) {
         if (time < 2) {
-            return s;
+            return word;
         } else {
-            return s + "s";
+            return word + "s";
         }
     }
 
@@ -112,8 +111,7 @@ public class DateUtil {
         int hour = 0;
         int minute = 0;
         int second = 0;
-        if(!(intervalString.contains(DAY) || intervalString.contains(HOUR) || intervalString
-                .contains(MINUTE) || intervalString.contains(SECOND))){
+        if (!validateTitle(intervalString)) {
             throw new IllegalArgumentException("Interval does not contain the keywords: day, " +
                     "hour, minute or second");
         }
@@ -147,13 +145,18 @@ public class DateUtil {
         return ((day * 60 * 60 * 24) + (hour * 60 * 60) + (minute * 60) + second);
     }
 
-    public static String choiceBoxTime(int t) {
+    private static boolean validateTitle(String intervalString) {
+        return intervalString.contains(DAY) || intervalString.contains(HOUR) || intervalString
+                .contains(MINUTE) || intervalString.contains(SECOND);
+    }
+
+    public static String choiceBoxTime(int timeString) {
         String time = "";
-        if (t >= 0 && t < 10) {
-            time = "0" + Integer.toString(t);
+        if (timeString >= 0 && timeString < 10) {
+            time = "0" + Integer.toString(timeString);
             return time;
         } else {
-            time = Integer.toString(t);
+            time = Integer.toString(timeString);
             return time;
         }
     }

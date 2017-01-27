@@ -55,29 +55,36 @@ public class TaskEditDialogController {
     }
 
     /**
+     * Static block use to fill
+     */
+    static {
+        if (HOURS.isEmpty()) {
+            for (int i = 0; i < 24; i++) {
+                if (i < 10) {
+                    HOURS.add("0" + i);
+                } else
+                    HOURS.add(String.valueOf(i));
+            }
+        }
+        if (MINUTES.isEmpty()) {
+            for (int j = 0; j < 60; j++) {
+
+                if (j < 10) {
+                    MINUTES.add("0" + j);
+                } else
+                    MINUTES.add(String.valueOf(j));
+            }
+        }
+    }
+
+    /**
      * Initialization controller-class. This method call automatically after fxml file load.
      * Set values of choiseBox.
      */
     @FXML
     private void initialize() {
         Locale.setDefault(Locale.ENGLISH);
-        if (HOURS.isEmpty()) {
-            for (int i = 0; i < 24; i++) {
-                if (i < 10) {
-                    HOURS.add("0" + i);
-                } else
-                    HOURS.add("" + i);
-            }
-        }
-        if (MINUTES.isEmpty()) {
-            for (int i = 0; i < 60; i++) {
 
-                if (i < 10) {
-                    MINUTES.add("0" + i);
-                } else
-                    MINUTES.add("" + i);
-            }
-        }
         choiseBoxHoursStart.setItems(FXCollections.observableArrayList(HOURS));
         choiseBoxMinutesStart.setItems(FXCollections.observableArrayList(MINUTES));
 
@@ -215,12 +222,10 @@ public class TaskEditDialogController {
         int rTime = 0;
         LocalDate start = null;
 
-        if (textFieldTitle.getText() == null || textFieldTitle.getText().isEmpty() ||
-                textFieldTitle.getText().matches("\\s+")) {
+        if (titleNoValid()) {
             return showError("No valid title!");
         }
-        if (datePikedDateStart.getValue() == null || datePikedDateStart
-                .getValue().isBefore(DateUtil.dateToLaocalDate(Task.BEGIN))) {
+        if (startTimeNoValid()) {
             return showError("Incorrect start date! Maybe you  not choice date or date is " +
                     "less 1970.01.01");
         } else {
@@ -235,8 +240,7 @@ public class TaskEditDialogController {
             return showError(a.getMessage());
         }
         if (rTime > 0) {
-            if (datePikedDateEnd.getValue() == null || datePikedDateEnd
-                    .getValue().isBefore(DateUtil.dateToLaocalDate(Task.BEGIN))) {
+            if (endTimeNoValid()) {
                 return showError("Incorrect end date! Maybe you not choice date or date is less " +
                         "1970.01.01");
             }
@@ -245,6 +249,21 @@ public class TaskEditDialogController {
             }
         }
         return true;
+    }
+
+    private boolean titleNoValid() {
+        return textFieldTitle.getText() == null || textFieldTitle.getText().isEmpty() ||
+                textFieldTitle.getText().matches("\\s+");
+    }
+
+    private boolean startTimeNoValid(){
+        return datePikedDateStart.getValue() == null || datePikedDateStart
+                .getValue().isBefore(DateUtil.dateToLaocalDate(Task.BEGIN));
+    }
+
+    private boolean endTimeNoValid(){
+        return datePikedDateEnd.getValue() == null || datePikedDateEnd
+                .getValue().isBefore(DateUtil.dateToLaocalDate(Task.BEGIN));
     }
 
     private boolean showError(String message) {

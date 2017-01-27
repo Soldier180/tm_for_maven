@@ -135,7 +135,7 @@ public class TasksOverviewController {
             Optional<ButtonType> result = alert.showAndWait();
             if (result.get() == ButtonType.OK) {
                 Task tempTask = tasksTable.getItems().get(selectedIndex);
-                String msg = TaskIO.writeTask(tempTask);
+                String msg = TaskIO.taskToString(tempTask);
                 MainApp.getTasks().remove(tempTask);
                 tasksTable.getItems().remove(selectedIndex);
                 log.info("DELETE task: " + msg);
@@ -166,7 +166,7 @@ public class TasksOverviewController {
             mainApp.getTasksData().add(tempTask);
             MainApp.getTasks().add(tempTask);
             showTaskDetails(tempTask);
-            log.info("CREATE task: " + TaskIO.writeTask(tempTask));
+            log.info("CREATE task: " + TaskIO.taskToString(tempTask));
         }
     }
 
@@ -187,13 +187,13 @@ public class TasksOverviewController {
             alert.showAndWait();
         }
 
-        String oldTask = TaskIO.writeTask(selectedTask);
+        String oldTask = TaskIO.taskToString(selectedTask);
         boolean okClicked = mainApp.showTaskEditDialog(selectedTask, false);
         if (okClicked) {
             tasksTable.getColumns().get(0).setVisible(false);
             tasksTable.getColumns().get(0).setVisible(true);
             showTaskDetails(selectedTask);
-            String newTask = TaskIO.writeTask(selectedTask);
+            String newTask = TaskIO.taskToString(selectedTask);
             if (!oldTask.equals(newTask)) {
                 log.info("EDIT task: " + oldTask + " TO " + newTask);
             }

@@ -1,6 +1,7 @@
 package ua.sumdu.j2se.zaretsky.tasks.model;
 
 import java.util.*;
+
 import static ua.sumdu.j2se.zaretsky.tasks.model.Task.BEGIN;
 
 
@@ -13,9 +14,10 @@ public class Tasks {
     /**
      * Method to receive all the tasks what will be executed at least once in some period
      *
-     * @param startDate
-     * @param endDate
-     * @return ArrayTaskList with tasks
+     * @param tasks     - list with tasks
+     * @param startDate - start date for period
+     * @param endDate   - end date for period
+     * @return ArrayTaskList with tasks in some period
      */
     public static Iterable<Task> incoming(Iterable<Task> tasks, Date startDate,
                                           Date endDate) throws IllegalArgumentException {
@@ -40,7 +42,7 @@ public class Tasks {
      *
      * @param tasks - list with tasks
      * @param start - start date of period
-     * @param end - end date of period
+     * @param end   - end date of period
      * @return SortedMap with key date and value set of tasks
      */
     public static SortedMap<Date, Set<Task>> calendar(Iterable<Task> tasks, Date
@@ -69,7 +71,7 @@ public class Tasks {
         Date nextStartTime = task.getStartTime();
         if (task.isRepeated()) {
             while (nextStartTime.compareTo(end) != 1 && nextStartTime
-                    .compareTo(task.getEndTime())!=1) {
+                    .compareTo(task.getEndTime()) != 1) {
                 if (nextStartTime.compareTo(start) != -1) {
                     result.put(nextStartTime, task);
                 }

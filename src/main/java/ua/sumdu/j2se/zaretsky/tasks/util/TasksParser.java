@@ -17,10 +17,10 @@ public class TasksParser {
         String title;
         Date time;
 
-        title = stringWithTask.substring(1, stringWithTask.lastIndexOf(AT) - 1);
+        title = stringWithTask.substring(1, stringWithTask.lastIndexOf(WORD_AT) - 1);
         title = parseQuotes(title);
 
-        int timePosition = stringWithTask.lastIndexOf(AT) + AT.length();
+        int timePosition = stringWithTask.lastIndexOf(WORD_AT) + WORD_AT.length();
         String timeString = stringWithTask.substring(timePosition, timePosition + TIME_PATTERN.length());
         time = DATE_F.get().parse(timeString);
 
@@ -40,14 +40,14 @@ public class TasksParser {
         Date endTime;
         int interval;
 
-        title = stringWithTask.substring(1, stringWithTask.lastIndexOf(FROM) - 1);
+        title = stringWithTask.substring(1, stringWithTask.lastIndexOf(WORD_FROM) - 1);
         title = parseQuotes(title);
 
-        int startTimePosition = stringWithTask.lastIndexOf(FROM) + FROM.length();
+        int startTimePosition = stringWithTask.lastIndexOf(WORD_FROM) + WORD_FROM.length();
         String startTimeString = stringWithTask.substring(startTimePosition, startTimePosition + TIME_PATTERN.length());
         startTime = DATE_F.get().parse(startTimeString);
 
-        int endTimePos = stringWithTask.lastIndexOf(TO) + TO.length();
+        int endTimePos = stringWithTask.lastIndexOf(WORD_TO) + WORD_TO.length();
         String endTimeString = stringWithTask.substring(endTimePos, endTimePos + TIME_PATTERN.length());
         endTime = DATE_F.get().parse(endTimeString);
 
