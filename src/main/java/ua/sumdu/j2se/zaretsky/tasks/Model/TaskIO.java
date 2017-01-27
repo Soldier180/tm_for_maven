@@ -21,10 +21,8 @@ public class TaskIO {
     public static final String WORD_EVERY = " every ";
 
     public static final String TIME_PATTERN = "[yyyy-MM-dd HH:mm:ss.sss]";
-    //private static final SimpleDateFormat DATE_F = new SimpleDateFormat(TIME_PATTERN);
 
-    public static final ThreadLocal<DateFormat> DATE_F
-            = new ThreadLocal<DateFormat>() {
+    public static final ThreadLocal<DateFormat> DATE_F = new ThreadLocal<DateFormat>() {
         @Override
         protected DateFormat initialValue() {
             return new SimpleDateFormat(TIME_PATTERN, Locale.ENGLISH);
