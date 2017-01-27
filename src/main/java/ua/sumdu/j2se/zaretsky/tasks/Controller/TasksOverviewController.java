@@ -1,9 +1,12 @@
 package ua.sumdu.j2se.zaretsky.tasks.controller;
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
 import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import ua.sumdu.j2se.zaretsky.tasks.MainApp;
@@ -42,8 +45,6 @@ public class TasksOverviewController {
     private Label repeatLabel;
     @FXML
     private Label activityLabel;
-    @FXML
-    private Label titleTask;
 
     @FXML
     Button showBtn;
@@ -54,6 +55,8 @@ public class TasksOverviewController {
 
     private MainApp mainApp;
     private final Logger log = LogManager.getLogger(TasksOverviewController.class.getSimpleName());
+    public static final int PAUSE = 300000;//5 minutes
+    public static final long NOTIFY_PERIOD = 600000;
 
     /**
      * Initialization controller-class. This method call automatically after fxml file load.
@@ -83,9 +86,53 @@ public class TasksOverviewController {
      *
      * @param mainApp
      */
-    public void setMainApp(MainApp mainApp) {
+    public void setParameters(MainApp mainApp) {
         this.mainApp = mainApp;
         tasksTable.setItems(mainApp.getTasksData());
+        runDetector();
+    }
+
+    private void runDetector() {
+        javafx.concurrent.Task task = new javafx.concurrent.Task<Void>() {
+            @Override
+            public Void call() throws Exception {
+                //noinspection InfiniteLoopStatement
+                while (true) {
+                    Platform.runLater(new Runnable() {
+                        @Override
+                        public void run() {
+
+                            Date currentTime = new Date();
+                            TaskList incomingTasks = (TaskList) Tasks.incoming(MainApp.getTasks(),
+                                    currentTime, new
+                                            Date(currentTime.getTime() + NOTIFY_PERIOD));
+                            if (incomingTasks.count != 0) {
+
+                                String messageText = "";
+                                for (Task task : incomingTasks) {
+                                    messageText += "Time: " + DateUtil.format(task.nextTimeAfter
+                                            (currentTime));
+                                    messageText += (" " + task.getTitle() + "\n");
+                                }
+
+                                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                                alert.setTitle("Attention");
+                                alert.setHeaderText("Nearest tasks:");
+                                alert.setContentText(messageText);
+                                Stage stage = (Stage) alert.getDialogPane().getScene().getWindow();
+                                stage.getIcons().add(new Image(this.getClass().getResource("/image/task_manager1.png").toString()));
+
+                                alert.showAndWait();
+                            }
+                        }
+                    });
+                    Thread.sleep(PAUSE);
+                }
+            }
+        };
+        Thread th = new Thread(task);
+        th.setDaemon(true);
+        th.start();
     }
 
     /**

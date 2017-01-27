@@ -15,6 +15,7 @@ import ua.sumdu.j2se.zaretsky.tasks.controller.AllTasksInPeriodController;
 import ua.sumdu.j2se.zaretsky.tasks.controller.TaskEditDialogController;
 import ua.sumdu.j2se.zaretsky.tasks.controller.TasksOverviewController;
 import ua.sumdu.j2se.zaretsky.tasks.model.*;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.Date;
@@ -56,8 +57,6 @@ public class MainApp extends Application {
         initRootLayout();
         log.info("Open program");
 
-        Detector detector = new Detector(tasks, 600000, this);
-        detector.start();
         this.primaryStage.setOnCloseRequest(windowEvent -> {
             writeInFile();
             log.traceExit();
@@ -93,7 +92,7 @@ public class MainApp extends Application {
             VBox rootLayout = loader.load();
 
             TasksOverviewController controller = loader.getController();
-            controller.setMainApp(this);
+            controller.setParameters(this);
 
             Scene scene = new Scene(rootLayout);
             primaryStage.setScene(scene);

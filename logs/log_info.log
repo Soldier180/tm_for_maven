@@ -636,3 +636,36 @@ java.io.FileNotFoundException: E:\SumDU\VI%20%d0%ba%d1%83%d1%80%d1%81\JAVA\task_
 2017-01-27 12:53:13 INFO  MainApp - Open program
 2017-01-27 12:53:24 INFO  TasksOverviewController - EDIT task: "New Task" from [2017-01-16 15:00:00.000] to [2017-01-26 00:00:00.000] every [5 minutes] TO "New Task" from [2017-01-16 15:00:00.000] to [2017-01-28 00:00:00.000] every [5 minutes]
 2017-01-27 12:53:30 TRACE MainApp - Exit
+2017-01-27 14:40:07 INFO  MainApp - Open program
+2017-01-27 14:40:58 TRACE MainApp - Exit
+2017-01-27 14:45:29 INFO  MainApp - Open program
+2017-01-27 14:45:35 TRACE MainApp - Exit
+2017-01-27 14:50:21 INFO  MainApp - Open program
+2017-01-27 15:57:21 INFO  MainApp - Open program
+2017-01-27 15:57:34 INFO  TasksOverviewController - EDIT task: "New Task" from [2017-01-16 15:00:00.000] to [2017-01-26 00:00:00.000] every [5 minutes] TO "New Task" from [2017-01-16 15:00:00.000] to [2017-01-28 00:00:00.000] every [5 minutes]
+2017-01-27 15:58:23 INFO  MainApp - Open program
+2017-01-27 15:58:32 INFO  TasksOverviewController - EDIT task: "New Task" from [2017-01-16 15:00:00.000] to [2017-01-26 00:00:00.000] every [5 minutes] TO "New Task" from [2017-01-16 15:00:00.000] to [2017-01-28 00:00:00.000] every [5 minutes]
+2017-01-27 15:58:54 TRACE MainApp - Exit
+2017-01-27 16:00:31 INFO  MainApp - Open program
+2017-01-27 16:00:52 INFO  TasksOverviewController - EDIT task: "New Task" from [2017-01-16 15:00:00.000] to [2017-01-28 00:00:00.000] every [5 minutes] TO "New Task" from [2017-01-16 15:00:00.000] to [2017-01-28 00:00:00.000] every [5 minutes] is inactive
+2017-01-27 16:01:07 INFO  TasksOverviewController - EDIT task: "New Task" from [2017-01-16 15:00:00.000] to [2017-01-28 00:00:00.000] every [5 minutes] is inactive TO "New Task" from [2017-01-16 15:00:00.000] to [2017-01-28 00:00:00.000] every [5 minutes]
+2017-01-27 16:01:35 TRACE MainApp - Exit
+2017-01-27 16:02:24 INFO  MainApp - Open program
+2017-01-27 16:02:40 INFO  TasksOverviewController - EDIT task: "Задача 2" from [2017-01-13 17:11:00.000] to [2017-01-15 20:00:00.000] every [10 minutes] is inactive TO "Задача 2" from [2017-01-13 17:11:00.000] to [2017-01-28 20:00:00.000] every [10 minutes]
+2017-01-27 16:02:42 TRACE MainApp - Exit
+2017-01-27 16:02:47 INFO  MainApp - Open program
+2017-01-27 16:02:59 TRACE MainApp - Exit
+2017-01-27 16:28:37 INFO  MainApp - Open program
+2017-01-27 16:28:54 INFO  TasksOverviewController - EDIT task: "New Task" from [2017-01-16 15:00:00.000] to [2017-01-26 00:00:00.000] every [5 minutes] TO "New Task" from [2017-01-16 15:00:00.000] to [2017-01-28 00:00:00.000] every [5 minutes]
+2017-01-27 16:28:57 TRACE MainApp - Exit
+2017-01-27 16:29:05 INFO  MainApp - Open program
+2017-01-27 16:29:16 TRACE MainApp - Exit
+2017-01-27 16:38:56 INFO  MainApp - Open program
+2017-01-27 16:39:11 TRACE MainApp - Exit
+2017-01-27 17:01:28 INFO  MainApp - Open program
+2017-01-27 17:01:44 TRACE MainApp - Exit
+2017-01-27 17:04:19 INFO  MainApp - Open program
+2017-01-27 17:04:54 INFO  TasksOverviewController - EDIT task: "New Task" from [2017-01-16 15:00:00.000] to [2017-01-28 00:00:00.000] every [5 minutes] TO "New Task" from [2017-01-16 15:00:00.000] to [2017-01-28 00:00:00.000] every [10 minutes]
+2017-01-27 17:04:58 TRACE MainApp - Exit
+2017-01-27 17:05:04 INFO  MainApp - Open program
+2017-01-27 17:05:18 TRACE MainApp - Exit

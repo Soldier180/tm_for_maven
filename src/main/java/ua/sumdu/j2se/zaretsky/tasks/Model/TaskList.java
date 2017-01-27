@@ -9,7 +9,7 @@ import java.io.Serializable;
  * @version 1.0 25 Oct 2016
  */
 abstract public class TaskList implements Iterable<Task>, Cloneable, Serializable {
-    protected int count = 0; //Count of task in TaskList
+    public int count = 0; //Count of task in TaskList
 
     public TaskList getTaskList() {
         return this;
