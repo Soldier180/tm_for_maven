@@ -18,6 +18,7 @@ import ua.sumdu.j2se.zaretsky.tasks.model.*;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.Date;
 
 /**
@@ -27,9 +28,7 @@ import java.util.Date;
 public class MainApp extends Application {
     private final Logger log = LogManager.getLogger(MainApp.class.getSimpleName());
     private static TaskList tasks = new LinkedTaskList();
-    private static final File FILE = new File(MainApp.class.getResource("/data/tasks.bin")
-            .getFile());
-
+    private static final File FILE = new File(MainApp.class.getResource("/data/tasks.bin").getFile());
     private final ObservableList<Task> tasksData = FXCollections
             .observableArrayList();
 
@@ -48,8 +47,7 @@ public class MainApp extends Application {
     @Override
     public void start(Stage primaryStage) {
         this.primaryStage = primaryStage;
-        primaryStage.getIcons().add(new Image
-                ("file:" + MainApp.class.getResource("/image/task_manager1.png").getFile()));
+        primaryStage.getIcons().add(new Image(MainApp.class.getResourceAsStream("/image/task_manager1.png")));
         this.primaryStage.setMinWidth(735);
         this.primaryStage.setMinHeight(500);
         this.primaryStage.setTitle("TASK MANAGER");
@@ -119,8 +117,7 @@ public class MainApp extends Application {
             GridPane page = loader.load();
 
             Stage dialogStage = new Stage();
-            dialogStage.getIcons().add(new Image
-                    ("file:" + MainApp.class.getResource("/image/task_manager1.png").getFile()));
+            dialogStage.getIcons().add(new Image(MainApp.class.getResourceAsStream("/image/task_manager1.png")));
             if (newTask) {
                 dialogStage.setTitle("Create Task");
             } else {
@@ -166,8 +163,7 @@ public class MainApp extends Application {
             HBox page = loader.load();
 
             Stage dialogStage = new Stage();
-            dialogStage.getIcons().add(new Image
-                    ("file:" + MainApp.class.getResource("/image/task_manager1.png").getFile()));
+            dialogStage.getIcons().add(new Image(MainApp.class.getResourceAsStream("/image/task_manager1.png")));
 
             dialogStage.setTitle("All task in period");
             dialogStage.initOwner(primaryStage);
@@ -195,7 +191,7 @@ public class MainApp extends Application {
 
     private void writeInFile() {
         try {
-            TaskIO.writeBinary(tasks, FILE);
+           TaskIO.writeBinary(tasks, FILE);
         } catch (IOException e) {
             e.printStackTrace();
             log.catching(e);
