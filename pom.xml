@@ -52,29 +52,6 @@
                 </configuration>
             </plugin>
 
-            <!-- Activate PMD for java code checking -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-pmd-plugin</artifactId>
-                <version>${pmd.version}</version>
-                <configuration>
-                    <rulesets>
-                        <ruleset>java-code-rules.xml</ruleset>
-                    </rulesets>
-                    <targetJdk>${java.version}</targetJdk>
-                    <includeTests>true</includeTests>
-                    <outputEncoding>UTF-8</outputEncoding>
-                    <verbose>true</verbose>
-                </configuration>
-                <executions>
-                    <execution>
-                        <phase>validate</phase>
-                        <goals>
-                            <goal>check</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
 
 
             <plugin>
