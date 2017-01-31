@@ -27,7 +27,7 @@ import java.util.Date;
 public class MainApp extends Application {
     private final Logger log = LogManager.getLogger(MainApp.class.getSimpleName());
     private static TaskList tasks = new LinkedTaskList();
-    private static final File FILE = new File(MainApp.class.getResource("/_data/tasks.bin")
+    private static final File FILE = new File(MainApp.class.getResource("/data/tasks.bin")
             .getFile());
 
     private final ObservableList<Task> tasksData = FXCollections
@@ -88,7 +88,7 @@ public class MainApp extends Application {
     private void initRootLayout() {
         try {
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(MainApp.class.getResource("/_view/TasksOverview.fxml"));
+            loader.setLocation(MainApp.class.getResource("/view/TasksOverview.fxml"));
             VBox rootLayout = loader.load();
 
             TasksOverviewController controller = loader.getController();
@@ -115,7 +115,7 @@ public class MainApp extends Application {
     public boolean showTaskEditDialog(Task task, boolean newTask) {
         try {
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(MainApp.class.getResource("/_view/TaskEditDialog.fxml"));
+            loader.setLocation(MainApp.class.getResource("/view/TaskEditDialog.fxml"));
             GridPane page = loader.load();
 
             Stage dialogStage = new Stage();
@@ -162,7 +162,7 @@ public class MainApp extends Application {
     public void showAllTasksInPeriod(Date startPeriod, Date endPeriod) {
         try {
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(MainApp.class.getResource("/_view/AllTasksInPeriod.fxml"));
+            loader.setLocation(MainApp.class.getResource("/view/AllTasksInPeriod.fxml"));
             HBox page = loader.load();
 
             Stage dialogStage = new Stage();
