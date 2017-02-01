@@ -16,9 +16,9 @@ import ua.sumdu.j2se.zaretsky.tasks.controller.TaskEditDialogController;
 import ua.sumdu.j2se.zaretsky.tasks.controller.TasksOverviewController;
 import ua.sumdu.j2se.zaretsky.tasks.model.*;
 
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
+import java.net.URL;
+import java.net.URLDecoder;
 import java.util.Date;
 
 /**
@@ -28,7 +28,7 @@ import java.util.Date;
 public class MainApp extends Application {
     private final Logger log = LogManager.getLogger(MainApp.class.getSimpleName());
     private static TaskList tasks = new LinkedTaskList();
-    private static final File FILE = new File(MainApp.class.getResource("/data/tasks.bin").getFile());
+    private static File fileWithTasks = null;
     private final ObservableList<Task> tasksData = FXCollections
             .observableArrayList();
 
@@ -66,19 +66,60 @@ public class MainApp extends Application {
 
     public MainApp() {
         try {
-            TaskIO.readBinary(tasks, FILE);
+            String path = getPathOfProgram();
+            String fileSeparator = System.getProperty("file.separator");
+            String file = path + fileSeparator + "data" + fileSeparator + "tasks.bin";
+
+            fileWithTasks = new File(file);
+            if (!fileWithTasks.exists()) {
+                createDirWithData();
+            }
+        } catch (UnsupportedEncodingException e) {
+            //e.printStackTrace();
+            log.catching(e);
+        }
+
+
+        try {
+            TaskIO.readBinary(tasks, fileWithTasks);
             tasksData.clear();
             //add tasks in ObservableList
             for (Task task : tasks) {
                 tasksData.add(task);
             }
-        } catch (ClassNotFoundException | IOException  e) {
-            e.printStackTrace();
+        } catch (ClassNotFoundException | IOException e) {
+            //e.printStackTrace();
             log.catching(e);
         }
 
     }
 
+    private static void createDirWithData() {
+
+        try {
+            String path = getPathOfProgram();
+
+            String fileSeparator = System.getProperty("file.separator");
+            String newDir = path + fileSeparator + "data" + fileSeparator;
+
+            File file = new File(newDir);
+            file.mkdir();
+            fileWithTasks = new File(newDir + fileSeparator + "tasks.bin");
+            TaskList tempList = new LinkedTaskList();
+            tempList.add(new Task("First task", new Date(), new Date(new Date().getTime() +
+                    86400000), 600));
+            TaskIO.writeBinary(tempList, fileWithTasks);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private static String getPathOfProgram() throws UnsupportedEncodingException {
+        URL url = MainApp.class.getProtectionDomain().getCodeSource().getLocation();
+        String jarPath = URLDecoder.decode(url.getFile(), "UTF-8");
+
+        return new File(jarPath).getParentFile().getPath();
+    }
 
     /**
      * Инициализирует корневой макет.
@@ -191,7 +232,7 @@ public class MainApp extends Application {
 
     private void writeInFile() {
         try {
-           TaskIO.writeBinary(tasks, FILE);
+            TaskIO.writeBinary(tasks, fileWithTasks);
         } catch (IOException e) {
             e.printStackTrace();
             log.catching(e);

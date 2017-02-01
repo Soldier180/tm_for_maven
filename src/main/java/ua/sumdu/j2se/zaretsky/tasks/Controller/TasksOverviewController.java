@@ -130,9 +130,9 @@ public class TasksOverviewController {
                 }
             }
         };
-        Thread th = new Thread(task);
-        th.setDaemon(true);
-        th.start();
+        Thread thread = new Thread(task);
+        thread.setDaemon(true);
+        thread.start();
     }
 
     /**
@@ -337,6 +337,8 @@ public class TasksOverviewController {
         alert.initOwner(mainApp.getPrimaryStage());
         alert.setTitle("Error");
         alert.setHeaderText("Attention - some error with load from file");
+        Stage stage = (Stage) alert.getDialogPane().getScene().getWindow();
+        stage.getIcons().add(new Image(this.getClass().getResource("/image/task_manager1.png").toString()));
         alert.showAndWait();
     }
 
@@ -351,6 +353,9 @@ public class TasksOverviewController {
 
         alert.setHeaderText("About: simple task manager");
         alert.setContentText("\tAuthor: Nikolay Zaretsky");
+
+        Stage stage = (Stage) alert.getDialogPane().getScene().getWindow();
+        stage.getIcons().add(new Image(this.getClass().getResource("/image/task_manager1.png").toString()));
 
         alert.showAndWait();
     }
