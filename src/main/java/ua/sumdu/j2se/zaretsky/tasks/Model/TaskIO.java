@@ -1,7 +1,7 @@
 package ua.sumdu.j2se.zaretsky.tasks.model;
 
-import ua.sumdu.j2se.zaretsky.tasks.util.DateUtil;
-import ua.sumdu.j2se.zaretsky.tasks.util.TasksParser;
+import ua.sumdu.j2se.zaretsky.tasks._util.DateUtil;
+import ua.sumdu.j2se.zaretsky.tasks._util.TasksParser;
 
 import java.io.*;
 import java.text.DateFormat;

@@ -1,4 +1,4 @@
-package ua.sumdu.j2se.zaretsky.tasks.util;
+package ua.sumdu.j2se.zaretsky.tasks._util;
 
 import ua.sumdu.j2se.zaretsky.tasks.model.Task;
 

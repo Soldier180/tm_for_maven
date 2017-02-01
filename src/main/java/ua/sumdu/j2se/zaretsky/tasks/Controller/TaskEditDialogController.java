@@ -5,7 +5,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 import ua.sumdu.j2se.zaretsky.tasks.model.Task;
-import ua.sumdu.j2se.zaretsky.tasks.util.DateUtil;
+import ua.sumdu.j2se.zaretsky.tasks._util.DateUtil;
 
 import java.text.ParseException;
 import java.time.Instant;
