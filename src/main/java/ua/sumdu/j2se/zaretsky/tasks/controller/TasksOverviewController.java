@@ -1,4 +1,4 @@
-package ua.sumdu.j2se.zaretsky.tasks._controller;
+package ua.sumdu.j2se.zaretsky.tasks.controller;
 
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -10,8 +10,8 @@ import javafx.stage.Stage;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import ua.sumdu.j2se.zaretsky.tasks.MainApp;
-import ua.sumdu.j2se.zaretsky.tasks._model.*;
-import ua.sumdu.j2se.zaretsky.tasks._util.DateUtil;
+import ua.sumdu.j2se.zaretsky.tasks.model.*;
+import ua.sumdu.j2se.zaretsky.tasks.util.DateUtil;
 
 import java.io.File;
 import java.io.IOException;
@@ -22,7 +22,7 @@ import java.util.Locale;
 import java.util.Optional;
 
 /**
- * Class _controller for main window.
+ * Class controller for main window.
  */
 
 public class TasksOverviewController {
@@ -59,7 +59,7 @@ public class TasksOverviewController {
     public static final long NOTIFY_PERIOD = 600000;
 
     /**
-     * Initialization _controller-class. This method call automatically after fxml file load.
+     * Initialization controller-class. This method call automatically after fxml file load.
      * Set values of start and end period to view all tasks in it.
      */
     @FXML

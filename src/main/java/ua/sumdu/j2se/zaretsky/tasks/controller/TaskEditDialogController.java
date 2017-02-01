@@ -1,11 +1,11 @@
-package ua.sumdu.j2se.zaretsky.tasks._controller;
+package ua.sumdu.j2se.zaretsky.tasks.controller;
 
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
-import ua.sumdu.j2se.zaretsky.tasks._model.Task;
-import ua.sumdu.j2se.zaretsky.tasks._util.DateUtil;
+import ua.sumdu.j2se.zaretsky.tasks.model.Task;
+import ua.sumdu.j2se.zaretsky.tasks.util.DateUtil;
 
 import java.text.ParseException;
 import java.time.Instant;
@@ -17,7 +17,7 @@ import java.util.List;
 import java.util.Locale;
 
 /**
- * Class _controller for task edit window.
+ * Class controller for task edit window.
  */
 public class TaskEditDialogController {
 
@@ -78,7 +78,7 @@ public class TaskEditDialogController {
     }
 
     /**
-     * Initialization _controller-class. This method call automatically after fxml file load.
+     * Initialization controller-class. This method call automatically after fxml file load.
      * Set values of choiseBox.
      */
     @FXML

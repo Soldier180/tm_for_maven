@@ -11,10 +11,10 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import ua.sumdu.j2se.zaretsky.tasks._controller.AllTasksInPeriodController;
-import ua.sumdu.j2se.zaretsky.tasks._controller.TaskEditDialogController;
-import ua.sumdu.j2se.zaretsky.tasks._controller.TasksOverviewController;
-import ua.sumdu.j2se.zaretsky.tasks._model.*;
+import ua.sumdu.j2se.zaretsky.tasks.controller.AllTasksInPeriodController;
+import ua.sumdu.j2se.zaretsky.tasks.controller.TaskEditDialogController;
+import ua.sumdu.j2se.zaretsky.tasks.controller.TasksOverviewController;
+import ua.sumdu.j2se.zaretsky.tasks.model.*;
 
 import java.io.*;
 import java.net.URL;

@@ -1,4 +1,4 @@
-package ua.sumdu.j2se.zaretsky.tasks._model;
+package ua.sumdu.j2se.zaretsky.tasks.model;
 
 import java.io.Serializable;
 
