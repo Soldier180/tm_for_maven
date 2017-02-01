@@ -1,4 +1,4 @@
-package ua.sumdu.j2se.zaretsky.tasks.controller;
+package ua.sumdu.j2se.zaretsky.tasks._controller;
 
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
@@ -10,13 +10,13 @@ import javafx.scene.control.TableView;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 import ua.sumdu.j2se.zaretsky.tasks.MainApp;
-import ua.sumdu.j2se.zaretsky.tasks.model.Task;
-import ua.sumdu.j2se.zaretsky.tasks.model.Tasks;
+import ua.sumdu.j2se.zaretsky.tasks._model.Task;
+import ua.sumdu.j2se.zaretsky.tasks._model.Tasks;
 
 import java.util.*;
 
 /**
- * Class controller for All task in period window.
+ * Class _controller for All task in period window.
  */
 public class AllTasksInPeriodController {
 

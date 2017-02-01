@@ -1,4 +1,4 @@
-package ua.sumdu.j2se.zaretsky.tasks.model;
+package ua.sumdu.j2se.zaretsky.tasks._model;
 
 import ua.sumdu.j2se.zaretsky.tasks._util.DateUtil;
 import ua.sumdu.j2se.zaretsky.tasks._util.TasksParser;

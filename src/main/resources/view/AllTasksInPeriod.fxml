@@ -5,7 +5,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<HBox xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ua.sumdu.j2se.zaretsky.tasks.controller.AllTasksInPeriodController">
+<HBox xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ua.sumdu.j2se.zaretsky.tasks._controller.AllTasksInPeriodController">
    <children>
       <AnchorPane HBox.hgrow="ALWAYS">
          <children>

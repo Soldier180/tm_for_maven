@@ -1,8 +1,8 @@
-package ua.sumdu.j2se.zaretsky.tasks.model;
+package ua.sumdu.j2se.zaretsky.tasks._model;
 
 import java.util.*;
 
-import static ua.sumdu.j2se.zaretsky.tasks.model.Task.BEGIN;
+import static ua.sumdu.j2se.zaretsky.tasks._model.Task.BEGIN;
 
 
 /**

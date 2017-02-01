@@ -1,11 +1,11 @@
 package ua.sumdu.j2se.zaretsky.tasks._util;
 
-import ua.sumdu.j2se.zaretsky.tasks.model.Task;
+import ua.sumdu.j2se.zaretsky.tasks._model.Task;
 
 import java.text.ParseException;
 import java.util.Date;
 
-import static ua.sumdu.j2se.zaretsky.tasks.model.TaskIO.*;
+import static ua.sumdu.j2se.zaretsky.tasks._model.TaskIO.*;
 
 /**
  * Created by Nikolion on 26.01.2017.
