@@ -44,31 +44,21 @@ public class AllTasksInPeriodController {
         SortedMap<Date, Set<Task>> tasks = Tasks.calendar(MainApp.getTasks(),
                 startPeriod, endPeriod);
 
-        dateColumn.setCellValueFactory(new Callback<TableColumn
-                .CellDataFeatures<Map.Entry<Date, Set<Task>>, String>, ObservableValue<String>>() {
-
-            @Override
-            public ObservableValue<String> call(TableColumn.CellDataFeatures<Map.Entry<Date,
-                    Set<Task>>, String> property) {
-                // this callback returns property for just one cell, you can't use a loop here
-                // for first column we use key
-                return new SimpleStringProperty(property.getValue().getKey().toString());
-            }
+        dateColumn.setCellValueFactory(property -> {
+            // this callback returns property for just one cell, you can't use a loop here
+            // for first column we use key
+            return new SimpleStringProperty(property.getValue().getKey().toString());
         });
 
 
-        taskTitleColumn.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Map.Entry<Date, Set<Task>>, String>, ObservableValue<String>>() {
-
-            @Override
-            public ObservableValue<String> call(TableColumn.CellDataFeatures<Map.Entry<Date, Set<Task>>, String> property) {
-                Iterator iterator = property.getValue().getValue().iterator();
-                String result = "";
-                while (iterator.hasNext()) {
-                    result += ((Task) iterator.next()).getTitle() + "\n";
-                }
-                // for second column we use value
-                return new SimpleStringProperty(result);
+        taskTitleColumn.setCellValueFactory(property -> {
+            Iterator iterator = property.getValue().getValue().iterator();
+            String result = "";
+            while (iterator.hasNext()) {
+                result += ((Task) iterator.next()).getTitle() + "\n";
             }
+            // for second column we use value
+            return new SimpleStringProperty(result);
         });
 
 
