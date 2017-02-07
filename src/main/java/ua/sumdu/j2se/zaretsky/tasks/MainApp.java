@@ -9,24 +9,24 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.*;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import ua.sumdu.j2se.zaretsky.tasks.controller.AllTasksInPeriodController;
 import ua.sumdu.j2se.zaretsky.tasks.controller.TaskEditDialogController;
 import ua.sumdu.j2se.zaretsky.tasks.controller.TasksOverviewController;
 import ua.sumdu.j2se.zaretsky.tasks.model.*;
-
 import java.io.*;
 import java.net.URL;
 import java.net.URLDecoder;
 import java.util.Date;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Main Application class.
  */
 
 public class MainApp extends Application {
-    private final Logger log = LogManager.getLogger(MainApp.class.getSimpleName());
+    private final Logger log = LoggerFactory.getLogger(MainApp.class.getSimpleName());
     private static TaskList tasks = new LinkedTaskList();
     private static File fileWithTasks = null;
     private final ObservableList<Task> tasksData = FXCollections
@@ -57,9 +57,7 @@ public class MainApp extends Application {
 
         this.primaryStage.setOnCloseRequest(windowEvent -> {
             writeInFile();
-            log.traceExit();
-            LogManager.shutdown();
-            System.exit(0);
+            log.info("Exit");
 
         });
     }
@@ -75,8 +73,7 @@ public class MainApp extends Application {
                 createDirWithData();
             }
         } catch (UnsupportedEncodingException e) {
-            //e.printStackTrace();
-            log.catching(e);
+            log.error("Error:",e);
         }
 
 
@@ -88,8 +85,7 @@ public class MainApp extends Application {
                 tasksData.add(task);
             }
         } catch (ClassNotFoundException | IOException e) {
-            //e.printStackTrace();
-            log.catching(e);
+            log.error("Error:",e);
         }
 
     }
@@ -138,7 +134,7 @@ public class MainApp extends Application {
             primaryStage.show();
         } catch (IOException e) {
             e.printStackTrace();
-            log.catching(e);
+            log.error("Error:",e);
         }
 
     }
@@ -184,8 +180,8 @@ public class MainApp extends Application {
 
             return controller.isOkClicked();
         } catch (IOException e) {
-            e.printStackTrace();
-            log.catching(e);
+           // e.printStackTrace();
+            log.error("Error:",e);
             return false;
         }
     }
@@ -213,13 +209,13 @@ public class MainApp extends Application {
 
 
             AllTasksInPeriodController controller = loader.getController();
-            controller.setDialogStage(dialogStage);
             controller.fillTableView(startPeriod, endPeriod);
 
             dialogStage.showAndWait();
 
         } catch (IOException e) {
-            e.printStackTrace();
+            //e.printStackTrace();
+            log.error("Error:",e);
 
         }
     }
@@ -235,7 +231,7 @@ public class MainApp extends Application {
             TaskIO.writeBinary(tasks, fileWithTasks);
         } catch (IOException e) {
             e.printStackTrace();
-            log.catching(e);
+            log.error("Error:",e);
         }
     }
 

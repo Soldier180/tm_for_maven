@@ -1,14 +1,11 @@
 package ua.sumdu.j2se.zaretsky.tasks.controller;
 
 import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.stage.Stage;
-import javafx.util.Callback;
 import ua.sumdu.j2se.zaretsky.tasks.MainApp;
 import ua.sumdu.j2se.zaretsky.tasks.model.Task;
 import ua.sumdu.j2se.zaretsky.tasks.model.Tasks;
@@ -27,12 +24,6 @@ public class AllTasksInPeriodController {
     @FXML
     TableColumn<Map.Entry<Date, Set<Task>>, String> taskTitleColumn;
 
-    private Stage dialogStage;
-
-
-    public void setDialogStage(Stage dialogStage) {
-        this.dialogStage = dialogStage;
-    }
 
     /**
      * Method fill table with active task in some period.

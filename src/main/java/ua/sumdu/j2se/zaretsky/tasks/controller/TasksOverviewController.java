@@ -7,12 +7,9 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import ua.sumdu.j2se.zaretsky.tasks.MainApp;
 import ua.sumdu.j2se.zaretsky.tasks.model.*;
 import ua.sumdu.j2se.zaretsky.tasks.util.DateUtil;
-
 import java.io.File;
 import java.io.IOException;
 import java.text.ParseException;
@@ -20,6 +17,9 @@ import java.time.LocalDate;
 import java.util.Date;
 import java.util.Locale;
 import java.util.Optional;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Class controller for main window.
@@ -54,7 +54,7 @@ public class TasksOverviewController {
     DatePicker allTaskEndDatePiker;
 
     private MainApp mainApp;
-    private final Logger log = LogManager.getLogger(TasksOverviewController.class.getSimpleName());
+    private final Logger log = LoggerFactory.getLogger(TasksOverviewController.class.getSimpleName());
     public static final int PAUSE = 300000;//5 minutes
     public static final long NOTIFY_PERIOD = 600000;
 
@@ -292,7 +292,7 @@ public class TasksOverviewController {
             try {
                 TaskIO.writeText(MainApp.getTasks(), file);
             } catch (IOException e) {
-                log.catching(e);
+                log.error("Error:",e);
                 showError();
             }
         }
@@ -318,10 +318,10 @@ public class TasksOverviewController {
                 TaskIO.readText(MainApp.getTasks(), file);
                 mainApp.refreshTasks();
             } catch (IOException e) {
-                log.catching(e);
+                log.error("Error:",e);
                 showError();
             } catch (ParseException e) {
-                log.catching(e);
+                log.error("Error:",e);
                 showError();
             }
 
