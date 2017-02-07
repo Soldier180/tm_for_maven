@@ -55,8 +55,8 @@ public class TasksOverviewController {
 
     private MainApp mainApp;
     private final Logger log = LoggerFactory.getLogger(TasksOverviewController.class.getSimpleName());
-    public static final int PAUSE = 300000;//5 minutes
-    public static final long NOTIFY_PERIOD = 600000;
+    public static final int PAUSE = 1000;//1 second
+    public static final long NOTIFY_PERIOD = 1000;//1 second
 
     /**
      * Initialization controller-class. This method call automatically after fxml file load.
@@ -117,7 +117,7 @@ public class TasksOverviewController {
 
                                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                                 alert.setTitle("Attention");
-                                alert.setHeaderText("Nearest tasks:");
+                                alert.setHeaderText("Task time has come:");
                                 alert.setContentText(messageText);
                                 Stage stage = (Stage) alert.getDialogPane().getScene().getWindow();
                                 stage.getIcons().add(new Image(this.getClass().getResource("/image/task_manager1.png").toString()));

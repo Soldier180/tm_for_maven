@@ -102,8 +102,10 @@ public class MainApp extends Application {
             file.mkdir();
             fileWithTasks = new File(newDir + fileSeparator + "tasks.bin");
             TaskList tempList = new LinkedTaskList();
-            tempList.add(new Task("First task", new Date(), new Date(new Date().getTime() +
-                    86400000), 600));
+            Task tempTask = new Task("First task", new Date(), new Date(new Date().getTime() +
+                    1800000), 60);
+            tempTask.setActive(true);
+            tempList.add(tempTask);
             TaskIO.writeBinary(tempList, fileWithTasks);
         } catch (IOException e) {
             e.printStackTrace();
