@@ -28,9 +28,10 @@ import org.slf4j.LoggerFactory;
 public class MainApp extends Application {
     private final Logger log = LoggerFactory.getLogger(MainApp.class.getSimpleName());
     private static TaskList tasks = new LinkedTaskList();
-    private static File fileWithTasks = null;
+    private  File fileWithTasks = null;
     private final ObservableList<Task> tasksData = FXCollections
             .observableArrayList();
+    private static final String ERROR = "Error:";
 
 
     public static TaskList getTasks() {
@@ -73,7 +74,7 @@ public class MainApp extends Application {
                 createDirWithData();
             }
         } catch (UnsupportedEncodingException e) {
-            log.error("Error:",e);
+            log.error(ERROR,e);
         }
 
 
@@ -85,12 +86,12 @@ public class MainApp extends Application {
                 tasksData.add(task);
             }
         } catch (ClassNotFoundException | IOException e) {
-            log.error("Error:",e);
+            log.error(ERROR,e);
         }
 
     }
 
-    private static void createDirWithData() {
+    private  void createDirWithData() {
 
         try {
             String path = getPathOfProgram();
@@ -136,7 +137,7 @@ public class MainApp extends Application {
             primaryStage.show();
         } catch (IOException e) {
             e.printStackTrace();
-            log.error("Error:",e);
+            log.error(ERROR,e);
         }
 
     }
@@ -183,7 +184,7 @@ public class MainApp extends Application {
             return controller.isOkClicked();
         } catch (IOException e) {
            // e.printStackTrace();
-            log.error("Error:",e);
+            log.error(ERROR,e);
             return false;
         }
     }
@@ -217,7 +218,7 @@ public class MainApp extends Application {
 
         } catch (IOException e) {
             //e.printStackTrace();
-            log.error("Error:",e);
+            log.error(ERROR,e);
 
         }
     }
@@ -233,7 +234,7 @@ public class MainApp extends Application {
             TaskIO.writeBinary(tasks, fileWithTasks);
         } catch (IOException e) {
             e.printStackTrace();
-            log.error("Error:",e);
+            log.error(ERROR,e);
         }
     }
 

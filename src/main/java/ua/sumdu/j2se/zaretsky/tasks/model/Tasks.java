@@ -49,7 +49,7 @@ public class Tasks {
             start, Date end) {
         SortedMap<Date, Set<Task>> dateSetSortedMap = new TreeMap<>(new
                 CompareByDate().reversed());
-        TreeMap<Date, Task> tempResult;
+        Map<Date, Task> tempResult;
         for (Task task : tasks) {
             tempResult = allTasksInInterval(task, start, end);
             for (Map.Entry<Date, Task> taskIter : tempResult.entrySet()) {
@@ -65,7 +65,7 @@ public class Tasks {
         return dateSetSortedMap;
     }
 
-    private static TreeMap<Date, Task> allTasksInInterval(Task task, Date
+    private static Map<Date, Task> allTasksInInterval(Task task, Date
             start, Date end) {
         TreeMap<Date, Task> result = new TreeMap<Date, Task>();
         Date nextStartTime = task.getStartTime();
