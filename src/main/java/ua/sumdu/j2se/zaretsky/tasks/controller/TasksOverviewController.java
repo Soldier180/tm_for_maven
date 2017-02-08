@@ -79,6 +79,7 @@ public class TasksOverviewController implements Initializable {
     private final Logger log = LoggerFactory.getLogger(TasksOverviewController.class.getSimpleName());
     private static final int PAUSE = 1000;//1 second
     private static final long NOTIFY_PERIOD = 1000;//1 second
+    public static final String ICON_PATH = "/image/task_manager1.png";
 
     /**
      * Initialization controller-class. This method call automatically after fxml file load.
@@ -157,7 +158,7 @@ public class TasksOverviewController implements Initializable {
                                 alert.setHeaderText("Task time has come:");
                                 alert.setContentText(messageText);
                                 Stage stage = (Stage) alert.getDialogPane().getScene().getWindow();
-                                stage.getIcons().add(new Image(this.getClass().getResource("/image/task_manager1.png").toString()));
+                                stage.getIcons().add(new Image(this.getClass().getResource(ICON_PATH).toString()));
 
                                 alert.showAndWait();
                             }
@@ -293,17 +294,26 @@ public class TasksOverviewController implements Initializable {
      */
     private void handleShowAllTasksInPeriod() {
 
-        Date startPeriod = DateUtil.localDateToDate(allTaskStartDatePiker
-                .getValue().atTime(0, 0, 0));
-        Date endPeriod = DateUtil.localDateToDate(allTaskEndDatePiker
-                .getValue().atTime(23, 59, 59));
-        if (startPeriod != null && endPeriod != null && endPeriod.compareTo
-                (startPeriod) > 0) {
 
-
-            mainApp.showAllTasksInPeriod(startPeriod, endPeriod);
+        if(allTaskStartDatePiker.getValue()==null || allTaskEndDatePiker.getValue()==null){
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.initOwner(mainApp.getPrimaryStage());
+            alert.setTitle("Error");
+            alert.setHeaderText("You haven't chose start or end date ");
+            Stage stage = (Stage) alert.getDialogPane().getScene().getWindow();
+            stage.getIcons().add(new Image(this.getClass().getResource(ICON_PATH).toString()));
+            alert.showAndWait();
         }
-
+        else {
+            Date startPeriod = DateUtil.localDateToDate(allTaskStartDatePiker
+                    .getValue().atTime(0, 0, 0));
+            Date endPeriod = DateUtil.localDateToDate(allTaskEndDatePiker
+                    .getValue().atTime(23, 59, 59));
+            if (startPeriod != null && endPeriod != null && endPeriod.compareTo
+                    (startPeriod) > 0) {
+                mainApp.showAllTasksInPeriod(startPeriod, endPeriod);
+            }
+        }
     }
 
     /**
@@ -374,7 +384,7 @@ public class TasksOverviewController implements Initializable {
         alert.setTitle("Error");
         alert.setHeaderText("Attention - some error with load from file");
         Stage stage = (Stage) alert.getDialogPane().getScene().getWindow();
-        stage.getIcons().add(new Image(this.getClass().getResource("/image/task_manager1.png").toString()));
+        stage.getIcons().add(new Image(this.getClass().getResource(ICON_PATH).toString()));
         alert.showAndWait();
     }
 
@@ -390,7 +400,7 @@ public class TasksOverviewController implements Initializable {
         alert.setContentText("\tAuthor: Nikolay Zaretsky");
 
         Stage stage = (Stage) alert.getDialogPane().getScene().getWindow();
-        stage.getIcons().add(new Image(this.getClass().getResource("/image/task_manager1.png").toString()));
+        stage.getIcons().add(new Image(this.getClass().getResource(ICON_PATH).toString()));
 
         alert.showAndWait();
     }
