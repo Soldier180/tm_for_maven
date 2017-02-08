@@ -235,18 +235,18 @@ public class Task implements Cloneable, Serializable {
      */
     @Override
     public String toString() {
+        String result = "";
 
-        if (!isActive() && !isRepeated()) {
-            return ("Task \"" + getTitle() + "\" is inactive");
-        } else if (!isActive() && isRepeated()) {
-            return ("Task \"" + getTitle() + "\" from " + getStartTime() + " to " + getEndTime()
-                    + " every " + repeat + " seconds" + " is inactive");
-        } else if (isActive() && isRepeated()) {
-            return ("Task \"" + getTitle() + "\" from " + getStartTime() + " to " + getEndTime()
-                    + " every " + repeat + " seconds");
+        if (isActive()) {
+            result = result.concat("Task \"" + getTitle() + "\"" + (isRepeated() ? " from " +
+                    getStartTime() + " to " + getEndTime() + " every " + repeat + " seconds" : " at" +
+                    " " + getStartTime()));
         } else {
-            return ("Task \"" + getTitle() + "\" at " + getStartTime());
+            result = result.concat("Task \"" + getTitle() + "\"" + (isRepeated() ? " from " +
+                    getStartTime() + " to " + getEndTime() + " every " + repeat + " seconds " +
+                    "is inactive" : " is inactive"));
         }
+        return result;
     }
 
     @Override
