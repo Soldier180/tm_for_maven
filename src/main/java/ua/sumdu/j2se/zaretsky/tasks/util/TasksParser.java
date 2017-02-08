@@ -57,7 +57,9 @@ public class TasksParser {
 
         task = new Task(title, startTime, endTime, interval);
 
-        if (!stringWithTask.contains("inactive;")) {
+        if (stringWithTask.contains("inactive;") || stringWithTask.contains("inactive.")) {
+            task.setActive(false);
+        } else {
             task.setActive(true);
         }
 

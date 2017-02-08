@@ -66,7 +66,7 @@ public class TaskIO {
             for (int i = 0; i < tasksCount; i++) {
                 int lengthTitle = ois.readInt();
                 String title = (String) ois.readObject();
-                if (lengthTitle!=title.length()){
+                if (lengthTitle != title.length()) {
                     throw new IOException("Incorrect title");
                 }
                 boolean active = ois.readInt() == 1;
@@ -123,33 +123,7 @@ public class TaskIO {
             int numLine = 1;
 
             for (Task task : tasks) {
-                out.write(getTitleModification(task.getTitle()));
-                int choice = typeTask(task);
-                switch (choice) {
-                    case 0:
-                        out.write(WORD_AT + DATE_F.get().format
-                                (task.getStartTime()) + " is inactive");
-                        break;
-                    case 1:
-                        out.write(WORD_FROM + DATE_F.get().format(task.getStartTime())
-                                + WORD_TO + DATE_F.get().format(task.getEndTime())
-                                + WORD_EVERY + secondsToStringTime(task.getRepeatInterval
-                                ()) + " is inactive");
-                        break;
-                    case 2:
-                        out.write(WORD_FROM + DATE_F.get().format
-                                (task.getStartTime())
-                                + WORD_TO + DATE_F.get().format(task.getEndTime())
-                                + WORD_EVERY + secondsToStringTime(task.getRepeatInterval
-                                ()));
-                        break;
-                    case 3:
-                        out.write(WORD_AT + DATE_F.get().format
-                                (task.getStartTime()));
-                        break;
-                    default: break;
-                }
-
+                out.write(taskToString(task));
                 if (numLine < tasks.count) {
                     out.write(";");
                 } else {
@@ -165,18 +139,6 @@ public class TaskIO {
             out.close();
         }
 
-    }
-
-    private static int typeTask(Task task) {
-        if (!task.isActive() && !task.isRepeated()) {
-            return 0;
-        } else if (!task.isActive() && task.isRepeated()) {
-            return 1;
-        } else if (task.isActive() && task.isRepeated()) {
-            return 2;
-        } else {
-            return 3;
-        }
     }
 
     public static void read(AbstractTaskList tasks, Reader in) throws IOException, ParseException {
@@ -253,34 +215,18 @@ public class TaskIO {
     public static String taskToString(Task task) {
         String result = "";
         result = result.concat(getTitleModification(task.getTitle()));
-        int choice = typeTask(task);
-        switch (choice) {
-            case 0:
-                result = result.concat(WORD_AT + DATE_F.get().format
-                        (task.getStartTime()) + " is inactive");
-                break;
-            case 1:
-                result = result.concat(WORD_FROM + DATE_F.get().format
-                        (task.getStartTime())
-                        + WORD_TO + DATE_F.get().format(task.getEndTime())
-                        + WORD_EVERY + secondsToStringTime(task.getRepeatInterval
-                        ()) + " is " +
-                        "inactive");
-                break;
-            case 2:
-                result = result.concat(WORD_FROM + DATE_F.get().format
-                        (task.getStartTime())
-                        + WORD_TO + DATE_F.get().format(task.getEndTime())
-                        + WORD_EVERY + secondsToStringTime(task.getRepeatInterval
-                        ()));
-                break;
-            case 3:
-                result = result.concat(WORD_AT + DATE_F.get().format
-                        (task.getStartTime()));
-                break;
-            default: break;
-        }
 
+        if (task.isActive()) {
+            result = result.concat(task.isRepeated() ? WORD_FROM + DATE_F.get().format
+                    (task.getStartTime()) + WORD_TO + DATE_F.get().format(task.getEndTime())
+                    + WORD_EVERY + secondsToStringTime(task.getRepeatInterval()) : WORD_AT +
+                    DATE_F.get().format(task.getStartTime()));
+        } else {
+            result = result.concat(task.isRepeated() ? WORD_FROM + DATE_F.get().format
+                    (task.getStartTime()) + WORD_TO + DATE_F.get().format(task.getEndTime())
+                    + WORD_EVERY + secondsToStringTime(task.getRepeatInterval()) + " is " +
+                    "inactive" : WORD_AT + DATE_F.get().format(task.getStartTime()) + " is inactive");
+        }
         return result;
     }
 
