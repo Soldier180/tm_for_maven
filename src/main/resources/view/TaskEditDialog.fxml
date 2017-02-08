@@ -35,7 +35,7 @@
       <RowConstraints maxHeight="210.0" minHeight="10.0" prefHeight="11.0" vgrow="SOMETIMES" />
     </rowConstraints>
     <children>
-        <Button fx:id="btnNewTaskOk" mnemonicParsing="false" onAction="#handleOk" prefHeight="30.0" prefWidth="70.0" text="Ok" GridPane.columnIndex="2" GridPane.rowIndex="1">
+        <Button fx:id="btnNewTaskOk" mnemonicParsing="false" prefHeight="30.0" prefWidth="70.0" text="Ok" GridPane.columnIndex="2" GridPane.rowIndex="1">
             <font>
                 <Font size="14.0" />
             </font>
@@ -56,7 +56,7 @@
                 <Insets left="10.0" />
             </GridPane.margin>
         </Label>
-        <Button fx:id="btnNewTaskCancel" mnemonicParsing="false" onAction="#handleCancel" prefHeight="30.0" prefWidth="70.0" text="Cancel" GridPane.columnIndex="2" GridPane.rowIndex="3">
+        <Button fx:id="btnNewTaskCancel" mnemonicParsing="false" prefHeight="30.0" prefWidth="70.0" text="Cancel" GridPane.columnIndex="2" GridPane.rowIndex="3">
             <font>
                 <Font size="14.0" />
             </font>

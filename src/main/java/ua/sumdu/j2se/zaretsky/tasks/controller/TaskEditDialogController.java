@@ -2,24 +2,22 @@ package ua.sumdu.j2se.zaretsky.tasks.controller;
 
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 import ua.sumdu.j2se.zaretsky.tasks.model.Task;
 import ua.sumdu.j2se.zaretsky.tasks.util.DateUtil;
 
-import java.text.ParseException;
+import java.net.URL;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZoneId;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Locale;
+import java.util.*;
 
 /**
  * Class controller for task edit window.
  */
-public class TaskEditDialogController {
+public class TaskEditDialogController implements Initializable{
 
     @FXML
     TextField textFieldTitle;
@@ -42,6 +40,9 @@ public class TaskEditDialogController {
 
     @FXML
     Button btnNewTaskOk;
+    @FXML
+    Button btnNewTaskCancel;
+
 
     private Stage dialogStage;
     private Task task;
@@ -52,6 +53,23 @@ public class TaskEditDialogController {
 
     public Task getTask() {
         return task;
+    }
+
+    /**
+     * Initialization controller-class. This method call automatically after fxml file load.
+     * Set values of choiseBox.
+     */
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        Locale.setDefault(Locale.ENGLISH);
+
+        choiseBoxHoursStart.setItems(FXCollections.observableArrayList(HOURS));
+        choiseBoxMinutesStart.setItems(FXCollections.observableArrayList(MINUTES));
+
+        choiseBoxHoursEnd.setItems(FXCollections.observableArrayList(HOURS));
+        choiseBoxMinutesEnd.setItems(FXCollections.observableArrayList(MINUTES));
+        btnNewTaskOk.setOnAction(event -> handleOk());
+        btnNewTaskCancel.setOnAction(event -> handleCancel());
     }
 
     /**
@@ -75,21 +93,6 @@ public class TaskEditDialogController {
                     MINUTES.add(String.valueOf(j));
             }
         }
-    }
-
-    /**
-     * Initialization controller-class. This method call automatically after fxml file load.
-     * Set values of choiseBox.
-     */
-    @FXML
-    private void initialize() {
-        Locale.setDefault(Locale.ENGLISH);
-
-        choiseBoxHoursStart.setItems(FXCollections.observableArrayList(HOURS));
-        choiseBoxMinutesStart.setItems(FXCollections.observableArrayList(MINUTES));
-
-        choiseBoxHoursEnd.setItems(FXCollections.observableArrayList(HOURS));
-        choiseBoxMinutesEnd.setItems(FXCollections.observableArrayList(MINUTES));
     }
 
     /**
@@ -155,8 +158,7 @@ public class TaskEditDialogController {
      * Method gather all user input and apply it to task.
      * Called on clicked Ok button.
      */
-    @FXML
-    private void handleOk() throws ParseException {
+    private void handleOk() {
         if (isInputValid()) {
             int repeatInterval;
             task.setTitle(textFieldTitle.getText());
@@ -208,7 +210,6 @@ public class TaskEditDialogController {
      * Method closes the window without saving changes.
      * Called on clicked Cancel button.
      */
-    @FXML
     private void handleCancel() {
         dialogStage.close();
     }
@@ -234,9 +235,11 @@ public class TaskEditDialogController {
         try {
             rTime = DateUtil.parseInterval(repeatTime.getText());
 
-        } catch (ParseException e) {
-            return showError("Incorrect repeat time!");
-        } catch (IllegalArgumentException a) {
+        }
+       // catch (ParseException e) {
+       //     return showError("Incorrect repeat time!");
+       // }
+        catch (IllegalArgumentException a) {
             return showError(a.getMessage());
         }
         if (rTime > 0) {

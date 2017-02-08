@@ -271,20 +271,20 @@ public class TasksOverviewController implements Initializable {
             alert.setContentText("Please select a task in the table.");
 
             alert.showAndWait();
-        }
+        }else {
 
-        String oldTask = TaskIO.taskToString(selectedTask);
-        boolean okClicked = mainApp.showTaskEditDialog(selectedTask, false);
-        if (okClicked) {
-            tasksTable.getColumns().get(0).setVisible(false);
-            tasksTable.getColumns().get(0).setVisible(true);
-            showTaskDetails(selectedTask);
-            String newTask = TaskIO.taskToString(selectedTask);
-            if (!oldTask.equals(newTask)) {
-                log.info("EDIT task: " + oldTask + " TO " + newTask);
+            String oldTask = TaskIO.taskToString(selectedTask);
+            boolean okClicked = mainApp.showTaskEditDialog(selectedTask, false);
+            if (okClicked) {
+                tasksTable.getColumns().get(0).setVisible(false);
+                tasksTable.getColumns().get(0).setVisible(true);
+                showTaskDetails(selectedTask);
+                String newTask = TaskIO.taskToString(selectedTask);
+                if (!oldTask.equals(newTask)) {
+                    log.info("EDIT task: " + oldTask + " TO " + newTask);
+                }
             }
         }
-
     }
 
     /**

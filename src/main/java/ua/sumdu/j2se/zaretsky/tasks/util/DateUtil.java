@@ -102,8 +102,7 @@ public class DateUtil {
      * @param intervalString - time into string
      * @return int, time into seconds.
      */
-    public static int parseInterval(String intervalString) throws
-            ParseException, IllegalArgumentException {
+    public static int parseInterval(String intervalString) throws IllegalArgumentException {
         if (intervalString == null || intervalString.isEmpty()) {
             return 0;
         }
