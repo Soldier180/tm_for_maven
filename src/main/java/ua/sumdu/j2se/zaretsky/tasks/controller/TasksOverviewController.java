@@ -2,6 +2,7 @@ package ua.sumdu.j2se.zaretsky.tasks.controller;
 
 import javafx.application.Platform;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
@@ -10,13 +11,16 @@ import javafx.stage.Stage;
 import ua.sumdu.j2se.zaretsky.tasks.MainApp;
 import ua.sumdu.j2se.zaretsky.tasks.model.*;
 import ua.sumdu.j2se.zaretsky.tasks.util.DateUtil;
+
 import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 import java.text.ParseException;
 import java.time.LocalDate;
 import java.util.Date;
 import java.util.Locale;
 import java.util.Optional;
+import java.util.ResourceBundle;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,7 +29,7 @@ import org.slf4j.LoggerFactory;
  * Class controller for main window.
  */
 
-public class TasksOverviewController {
+public class TasksOverviewController implements Initializable {
     @FXML
     private TableView<Task> tasksTable;
     @FXML
@@ -49,21 +53,39 @@ public class TasksOverviewController {
     @FXML
     Button showBtn;
     @FXML
+    Button deleteBtn;
+    @FXML
+    Button editBtn;
+    @FXML
+    Button newBtn;
+    @FXML
     DatePicker allTaskStartDatePiker;
     @FXML
     DatePicker allTaskEndDatePiker;
+    @FXML
+    MenuItem newMItem;
+    @FXML
+    MenuItem  editMItem;
+    @FXML
+    MenuItem deleteMItem;
+    @FXML
+    MenuItem saveAsMItem;
+    @FXML
+    MenuItem loadMItem;
+    @FXML
+    MenuItem  aboutMItem;
 
     private MainApp mainApp;
     private final Logger log = LoggerFactory.getLogger(TasksOverviewController.class.getSimpleName());
-    public static final int PAUSE = 1000;//1 second
-    public static final long NOTIFY_PERIOD = 1000;//1 second
+    private static final int PAUSE = 1000;//1 second
+    private static final long NOTIFY_PERIOD = 1000;//1 second
 
     /**
      * Initialization controller-class. This method call automatically after fxml file load.
      * Set values of start and end period to view all tasks in it.
      */
-    @FXML
-    private void initialize() {
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
         Locale.setDefault(Locale.ENGLISH);
         allTaskStartDatePiker.setValue(LocalDate.now());
         allTaskEndDatePiker.setValue(allTaskStartDatePiker.getValue()
@@ -79,6 +101,21 @@ public class TasksOverviewController {
 
         tasksTable.getSelectionModel().selectedItemProperty().addListener(
                 (observable, oldValue, newValue) -> showTaskDetails(newValue));
+
+        deleteBtn.setOnAction(event -> deleteTask());
+        editBtn.setOnAction(event -> handleEditTask());
+        newBtn.setOnAction(event -> handleNewTask());
+        showBtn.setOnAction(event -> handleShowAllTasksInPeriod());
+
+        newMItem.setOnAction(event -> handleNewTask());
+        editMItem.setOnAction(event -> handleEditTask());
+        deleteMItem.setOnAction(event -> deleteTask());
+
+        saveAsMItem.setOnAction(event -> handleSaveAs());
+        loadMItem.setOnAction(event -> loadTasksFromTxtFile());
+
+        aboutMItem.setOnAction(event -> handleAbout());
+
     }
 
     /**
@@ -95,7 +132,7 @@ public class TasksOverviewController {
     private void runDetector() {
         javafx.concurrent.Task task = new javafx.concurrent.Task<Void>() {
             @Override
-            public Void call() throws Exception {
+            public Void call() {
                 //noinspection InfiniteLoopStatement
                 while (true) {
                     Platform.runLater(new Runnable() {
@@ -126,7 +163,11 @@ public class TasksOverviewController {
                             }
                         }
                     });
-                    Thread.sleep(PAUSE);
+                    try {
+                        Thread.sleep(PAUSE);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
                 }
             }
         };
@@ -164,12 +205,12 @@ public class TasksOverviewController {
 
     }
 
+
     /**
      * Method which delete selected task, with confirmation.
      * Called on clicked Delete button.
      */
-    @FXML
-    public void deleteTask() {
+    private void deleteTask() {
         int selectedIndex = tasksTable.getSelectionModel().getSelectedIndex();
         if (selectedIndex >= 0) {
 
@@ -205,7 +246,6 @@ public class TasksOverviewController {
      * Method which create new task and show task edit dialog
      * Called on clicked button New...
      */
-    @FXML
     private void handleNewTask() {
         Task tempTask = new Task("default", new Date());
         boolean okClicked = mainApp.showTaskEditDialog(tempTask, true);
@@ -221,7 +261,6 @@ public class TasksOverviewController {
      * Method which edit current task and show task edit dialog
      * Called on clicked button Edit...
      */
-    @FXML
     private void handleEditTask() {
         Task selectedTask = tasksTable.getSelectionModel().getSelectedItem();
         if (selectedTask == null) {
@@ -252,7 +291,6 @@ public class TasksOverviewController {
      * Method checks correctly dates and show all task in chosen period
      * Called on clicked button Show
      */
-    @FXML
     private void handleShowAllTasksInPeriod() {
 
         Date startPeriod = DateUtil.localDateToDate(allTaskStartDatePiker
@@ -272,7 +310,6 @@ public class TasksOverviewController {
      * Method which save current TaskList in text file.
      * Called on clicked menu Save as...
      */
-    @FXML
     private void handleSaveAs() {
         FileChooser fileChooser = new FileChooser();
 
@@ -292,7 +329,7 @@ public class TasksOverviewController {
             try {
                 TaskIO.writeText(MainApp.getTasks(), file);
             } catch (IOException e) {
-                log.error("Error:",e);
+                log.error("Error:", e);
                 showError();
             }
         }
@@ -302,7 +339,6 @@ public class TasksOverviewController {
      * Method which add tasks from text file to current TaskList.
      * Called on clicked menu Load from text...
      */
-    @FXML
     private void loadTasksFromTxtFile() {
         FileChooser fileChooser = new FileChooser();
 
@@ -318,10 +354,10 @@ public class TasksOverviewController {
                 TaskIO.readText(MainApp.getTasks(), file);
                 mainApp.refreshTasks();
             } catch (IOException e) {
-                log.error("Error:",e);
+                log.error("Error:", e);
                 showError();
             } catch (ParseException e) {
-                log.error("Error:",e);
+                log.error("Error:", e);
                 showError();
             }
 
@@ -346,7 +382,6 @@ public class TasksOverviewController {
      * Method show information about application.
      * Called on clicked menu About.
      */
-    @FXML
     private void handleAbout() {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("TASK MANAGER");
@@ -360,34 +395,3 @@ public class TasksOverviewController {
         alert.showAndWait();
     }
 }
-
-
- /*   Platform.runLater(new Runnable() {
-            @Override
-            public void run() {
-                for (int i = 0; i <1 ; i++) {
-
-                }{
-                    long currentTime = new Date().getTime();
-                    TaskList schedule = (ArrayTaskList) Tasks
-                            .incoming(mainApp.tasks, new Date
-                                    (currentTime), new Date
-                                    (currentTime + 300000));
-
-                    for (Task j:schedule) {
-                        titleTask.setText(j.getTitle());
-                        Alert t = new Alert(Alert.AlertType.INFORMATION);
-                        t.initOwner(mainApp.getPrimaryStage());
-                        t.setTitle(j.getTitle());
-                        t.show();
-                    }
-
-                    try {
-                        Thread.sleep(10000);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                }
-
-            }
-        });*/

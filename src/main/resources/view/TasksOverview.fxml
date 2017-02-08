@@ -15,20 +15,20 @@
               <menus>
                 <Menu mnemonicParsing="false" text="File">
                   <items>
-                        <MenuItem mnemonicParsing="false" onAction="#handleSaveAs" text="Save as..." />
-                        <MenuItem mnemonicParsing="false" onAction="#loadTasksFromTxtFile" text="Load from text..." />
+                        <MenuItem fx:id="saveAsMItem" mnemonicParsing="false" text="Save as..." />
+                        <MenuItem fx:id="loadMItem" mnemonicParsing="false" text="Load from text..." />
                   </items>
                 </Menu>
                 <Menu mnemonicParsing="false" text="Edit">
                   <items>
-                    <MenuItem mnemonicParsing="false" onAction="#handleNewTask" text="New..." />
-                        <MenuItem mnemonicParsing="false" onAction="#handleEditTask" text="Edit..." />
-                        <MenuItem mnemonicParsing="false" onAction="#deleteTask" text="Delete" />
+                    <MenuItem fx:id="newMItem" mnemonicParsing="false" text="New..." />
+                        <MenuItem fx:id="editMItem" mnemonicParsing="false" text="Edit..." />
+                        <MenuItem fx:id="deleteMItem" mnemonicParsing="false" text="Delete" />
                   </items>
                 </Menu>
                 <Menu mnemonicParsing="false" text="Help">
                   <items>
-                    <MenuItem mnemonicParsing="false" onAction="#handleAbout" text="About" />
+                    <MenuItem fx:id="aboutMItem" mnemonicParsing="false" text="About" />
                   </items>
                 </Menu>
               </menus>
@@ -132,7 +132,7 @@
                                           <Insets left="60.0" />
                                        </GridPane.margin>
                                     </DatePicker>
-                                    <Button fx:id="showBtn" mnemonicParsing="false" onAction="#handleShowAllTasksInPeriod" text="Show" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                                    <Button fx:id="showBtn" mnemonicParsing="false" text="Show" GridPane.columnIndex="1" GridPane.rowIndex="3">
                                        <GridPane.margin>
                                           <Insets left="190.0" />
                                        </GridPane.margin>
@@ -145,17 +145,17 @@
                            <children>
                               <HBox layoutX="84.0" layoutY="151.0" prefHeight="40.0" prefWidth="179.0" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="5.0">
                                  <children>
-                                    <Button layoutX="85.0" layoutY="359.0" mnemonicParsing="false" onAction="#handleNewTask" text="New...">
+                                    <Button fx:id="newBtn" layoutX="85.0" layoutY="359.0" mnemonicParsing="false" text="New...">
                                        <HBox.margin>
                                           <Insets bottom="10.0" left="5.0" right="5.0" top="5.0" />
                                        </HBox.margin>
                                     </Button>
-                                    <Button layoutX="149.0" layoutY="359.0" mnemonicParsing="false" onAction="#handleEditTask" text="Edit...">
+                                    <Button fx:id="editBtn" layoutX="149.0" layoutY="359.0" mnemonicParsing="false" text="Edit...">
                                        <HBox.margin>
                                           <Insets bottom="10.0" left="5.0" right="5.0" top="5.0" />
                                        </HBox.margin>
                                     </Button>
-                                    <Button layoutX="211.0" layoutY="359.0" mnemonicParsing="false" onAction="#deleteTask" text="Delete">
+                                    <Button fx:id="deleteBtn" layoutX="211.0" layoutY="359.0" mnemonicParsing="false" text="Delete">
                                        <HBox.margin>
                                           <Insets bottom="10.0" left="5.0" right="5.0" top="5.0" />
                                        </HBox.margin>
