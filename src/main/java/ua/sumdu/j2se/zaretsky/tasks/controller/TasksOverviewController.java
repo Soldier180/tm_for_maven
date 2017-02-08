@@ -90,12 +90,12 @@ public class TasksOverviewController implements Initializable {
         allTaskStartDatePiker.setValue(LocalDate.now());
         allTaskEndDatePiker.setValue(allTaskStartDatePiker.getValue()
                 .plusDays(7));
-        titleColumn.setCellValueFactory(new PropertyValueFactory<Task, String>
+        titleColumn.setCellValueFactory(new PropertyValueFactory<>
                 ("title"));
-        startTimeColumn.setCellValueFactory(new PropertyValueFactory<Task, LocalDate>
+        startTimeColumn.setCellValueFactory(new PropertyValueFactory<>
                 ("StartTime"));
 
-        endTimeColumn.setCellValueFactory(new PropertyValueFactory<Task, LocalDate>
+        endTimeColumn.setCellValueFactory(new PropertyValueFactory<>
                 ("EndTime"));
         showTaskDetails(null);
 
