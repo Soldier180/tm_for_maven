@@ -66,6 +66,9 @@ public class TaskIO {
             for (int i = 0; i < tasksCount; i++) {
                 int lengthTitle = ois.readInt();
                 String title = (String) ois.readObject();
+                if (lengthTitle!=title.length()){
+                    throw new IOException("Incorrect title");
+                }
                 boolean active = ois.readInt() == 1;
                 int repeat = ois.readInt();
                 if (repeat == 0) {
