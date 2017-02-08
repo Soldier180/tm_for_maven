@@ -12,7 +12,7 @@ import static ua.sumdu.j2se.zaretsky.tasks.model.TaskIO.*;
  */
 public class TasksParser {
 
-    public static Task parseNotRepeatedTask(String stringWithTask) throws ParseException {
+    private static Task parseNotRepeatedTask(String stringWithTask) throws ParseException {
         Task task;
         String title;
         Date time;
@@ -33,7 +33,7 @@ public class TasksParser {
         return task;
     }
 
-    public static Task parseRepeatedTask(String stringWithTask) throws ParseException {
+    private static Task parseRepeatedTask(String stringWithTask) throws ParseException {
         Task task;
         String title;
         Date startTime;
@@ -68,5 +68,15 @@ public class TasksParser {
 
     private static String parseQuotes(String title) {
         return title.replaceAll("\"\"", "\"");
+    }
+
+    public static Task parseTask(String stringWithTask) throws ParseException {
+        Task task;
+        if (stringWithTask.contains(']' + WORD_EVERY + '[')) {
+            task = parseRepeatedTask(stringWithTask);
+        } else {
+            task = parseNotRepeatedTask(stringWithTask);
+        }
+        return task;
     }
 }

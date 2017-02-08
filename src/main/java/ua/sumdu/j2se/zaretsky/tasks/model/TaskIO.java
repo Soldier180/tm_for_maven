@@ -149,7 +149,7 @@ public class TaskIO {
             String taskString;
 
             while ((taskString = bufferedReader.readLine()) != null) {
-                Task task = parseTask(taskString);
+                Task task = TasksParser.parseTask(taskString);
                 tasks.add(task);
             }
         } finally {
@@ -200,17 +200,6 @@ public class TaskIO {
     private static String getTitleModification(String title) {
         return "\"" + title.replaceAll("\"", "\"\"") + "\"";
     }
-
-    private static Task parseTask(String stringWithTask) throws ParseException {
-        Task task;
-        if (stringWithTask.contains(']' + WORD_EVERY + '[')) {
-            task = TasksParser.parseRepeatedTask(stringWithTask);
-        } else {
-            task = TasksParser.parseNotRepeatedTask(stringWithTask);
-        }
-        return task;
-    }
-
 
     public static String taskToString(Task task) {
         String result = "";
