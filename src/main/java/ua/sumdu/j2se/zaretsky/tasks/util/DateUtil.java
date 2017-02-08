@@ -1,12 +1,10 @@
 package ua.sumdu.j2se.zaretsky.tasks.util;
 
 import java.text.DateFormat;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
-import java.time.format.DateTimeParseException;
 import java.util.Date;
 import java.util.Locale;
 
@@ -35,28 +33,6 @@ public class DateUtil {
             return null;
         }
         return DATE_F.get().format(date);
-    }
-
-
-    public static Date parse(String dateString) {
-        try {
-            return DATE_F.get().parse(dateString);
-        } catch (DateTimeParseException e) {
-            return null;
-        } catch (ParseException e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
-
-    /**
-     * Validate string is correct date
-     *
-     * @param dateString - input string
-     * @return true, if string is correct date
-     */
-    public static boolean validDate(String dateString) {
-        return DateUtil.parse(dateString) != null;
     }
 
     /**
@@ -122,26 +98,28 @@ public class DateUtil {
                     "number and word");
         }
         for (int i = 0; i < parts.length; i = i + 2) {
-            if (parts[i + 1].contains(DAY)) {
-                day = Integer.parseInt(parts[i]);
-                continue;
-            }
-            if (parts[i + 1].contains(HOUR)) {
-                hour = Integer.parseInt(parts[i]);
-                continue;
-            }
-            if (parts[i + 1].contains(MINUTE)) {
-                minute = Integer.parseInt(parts[i]);
-                continue;
-            }
-            if (parts[i + 1].contains(SECOND)) {
-                second = Integer.parseInt(parts[i]);
-            }
+            String time = parts[i + 1];
+            int value = Integer.parseInt(parts[i]);
+
+            day = parseKeyWord(time, DAY, value);
+            hour = parseKeyWord(time, HOUR, value);
+            minute = parseKeyWord(time, MINUTE, value);
+            second = parseKeyWord(time, SECOND, value);
         }
-        if (day < 0 || hour < 0 || minute < 0 || second < 0) {
+        if (validateTime(day, hour, minute, second)) {
             throw new IllegalArgumentException("Incorrect time");
         }
         return ((day * 60 * 60 * 24) + (hour * 60 * 60) + (minute * 60) + second);
+    }
+
+    private static int parseKeyWord(String timeWord, String keyWord, int value) {
+        if (timeWord.contains(keyWord)) {
+            return value;
+        } else return 0;
+    }
+
+    private static boolean validateTime(int day, int hour, int minute, int second) {
+        return day < 0 || hour < 0 || minute < 0 || second < 0;
     }
 
     private static boolean validateTitle(String intervalString) {

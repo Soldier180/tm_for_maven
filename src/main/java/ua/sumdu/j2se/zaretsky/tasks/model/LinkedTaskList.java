@@ -22,7 +22,7 @@ public class LinkedTaskList extends AbstractTaskList implements Serializable, Cl
         Node previous = null;
         Task taskNode;
 
-        private Node(Task task) {
+        Node(Task task) {
             if (task == null) {
                 throw new IllegalArgumentException("Task is null");
             }
