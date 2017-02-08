@@ -9,7 +9,7 @@ import java.util.Iterator;
  * @author Nikolay Zaretsky
  * @version 1.0 25 Oct 2016
  */
-public class LinkedTaskList extends TaskList implements Serializable, Cloneable {
+public class LinkedTaskList extends AbstractTaskList implements Serializable, Cloneable {
 
     private Node first = null;
     private Node last = null;
@@ -39,7 +39,7 @@ public class LinkedTaskList extends TaskList implements Serializable, Cloneable 
     }
 
     /**
-     * Method to add task into TaskList
+     * Method to add task into AbstractTaskList
      *
      * @param task - current task for adding
      */
@@ -61,10 +61,10 @@ public class LinkedTaskList extends TaskList implements Serializable, Cloneable 
     }
 
     /**
-     * Method to remove task from TaskList
+     * Method to remove task from AbstractTaskList
      *
      * @param task - current task for removing
-     * @return true  if this task was in TaskList
+     * @return true  if this task was in AbstractTaskList
      * @throws IllegalArgumentException if task = null
      */
     public boolean remove(Task task) throws IllegalArgumentException {
@@ -106,9 +106,9 @@ public class LinkedTaskList extends TaskList implements Serializable, Cloneable 
     }
 
     /**
-     * Method to getting task from TaskList
+     * Method to getting task from AbstractTaskList
      *
-     * @param index - getting task with current index from TaskList
+     * @param index - getting task with current index from AbstractTaskList
      * @return Task
      */
     public Task getTask(int index) throws IllegalArgumentException {

@@ -26,7 +26,7 @@ public class Tasks {
             throw new IllegalArgumentException("Incorrect param from:" + startDate +
                     " or to:" + endDate);
         } else {
-            TaskList list = new ArrayTaskList();
+            AbstractTaskList list = new ArrayTaskList();
             for (Task task : tasks) {
 
                 if (task.nextTimeAfter(startDate) != null && task.nextTimeAfter(startDate).compareTo(endDate) != 1) {

@@ -9,7 +9,7 @@ import java.util.Iterator;
  * @author Nikolay Zaretsky
  * @version 1.0 15 Oct 2016
  */
-public class ArrayTaskList extends TaskList implements Cloneable, Serializable {
+public class ArrayTaskList extends AbstractTaskList implements Cloneable, Serializable {
 
     private Task[] arrayList = new Task[10];
 

@@ -3,45 +3,45 @@ package ua.sumdu.j2se.zaretsky.tasks.model;
 import java.io.Serializable;
 
 /**
- * Class for creating and editing TaskList
+ * Class for creating and editing AbstractTaskList
  *
  * @author Nikolay Zaretsky
  * @version 1.0 25 Oct 2016
  */
-abstract public class TaskList implements Iterable<Task>, Cloneable, Serializable {
-    public int count = 0; //Count of task in TaskList
+abstract public class AbstractTaskList implements Iterable<Task>, Cloneable, Serializable {
+    public int count = 0; //Count of task in AbstractTaskList
 
-    public TaskList getTaskList() {
+    public AbstractTaskList getTaskList() {
         return this;
     }
 
     /**
-     * Method to add task into TaskList
+     * Method to add task into AbstractTaskList
      *
      * @param task - current task for adding
      */
     public abstract void add(Task task);
 
     /**
-     * Method to remove task from TaskList
+     * Method to remove task from AbstractTaskList
      *
      * @param task - current task for removing
-     * @return true  if this task was in TaskList
+     * @return true  if this task was in AbstractTaskList
      */
     public abstract boolean remove(Task task);
 
     /**
-     * Method to getting task from TaskList
+     * Method to getting task from AbstractTaskList
      *
-     * @param index - getting task with current index from TaskList
+     * @param index - getting task with current index from AbstractTaskList
      * @return Task
      */
     public abstract Task getTask(int index);
 
     /**
-     * Method to get size TaskList
+     * Method to get size AbstractTaskList
      *
-     * @return size of TaskList(with tasks)
+     * @return size of AbstractTaskList(with tasks)
      */
     public int size() {
         return count;
@@ -51,9 +51,9 @@ abstract public class TaskList implements Iterable<Task>, Cloneable, Serializabl
     @Override
     public boolean equals(Object otherObject) {
         if (this == otherObject) return true;
-        if (!(otherObject instanceof TaskList)) return false;
+        if (!(otherObject instanceof AbstractTaskList)) return false;
 
-        TaskList that = (TaskList) otherObject;
+        AbstractTaskList that = (AbstractTaskList) otherObject;
 
         if (size() != that.size()) return false;
         for (int i = 0; i < size(); i++) {
@@ -79,8 +79,8 @@ abstract public class TaskList implements Iterable<Task>, Cloneable, Serializabl
     }
 
     /*@Override
-    public final TaskList clone() throws CloneNotSupportedException {
-        return (TaskList) super.clone();
+    public final AbstractTaskList clone() throws CloneNotSupportedException {
+        return (AbstractTaskList) super.clone();
     }*/
 
  /*   private void writeObject(ObjectOutputStream out) throws IOException {

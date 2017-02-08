@@ -30,7 +30,7 @@ public class TaskIO {
     };
 
 
-    public static void write(TaskList tasks, OutputStream out) throws IOException {
+    public static void write(AbstractTaskList tasks, OutputStream out) throws IOException {
         ObjectOutputStream oos = null;
         try {
             oos = new ObjectOutputStream(out);
@@ -58,7 +58,7 @@ public class TaskIO {
 
     }
 
-    public static void read(TaskList tasks, InputStream in) throws IOException, ClassNotFoundException {
+    public static void read(AbstractTaskList tasks, InputStream in) throws IOException, ClassNotFoundException {
         ObjectInputStream ois = null;
         try {
             ois = new ObjectInputStream(in);
@@ -94,7 +94,7 @@ public class TaskIO {
 
     }
 
-    public static void writeBinary(TaskList tasks, File file) throws
+    public static void writeBinary(AbstractTaskList tasks, File file) throws
             IOException {
         FileOutputStream fileOutputStr = new FileOutputStream(file);
         try {
@@ -107,7 +107,7 @@ public class TaskIO {
         }
     }
 
-    public static void readBinary(TaskList tasks, File file) throws IOException,
+    public static void readBinary(AbstractTaskList tasks, File file) throws IOException,
             ClassNotFoundException {
 
         FileInputStream fis = new FileInputStream(file);
@@ -118,7 +118,7 @@ public class TaskIO {
     }
 
 
-    public static void write(TaskList tasks, Writer out) throws IOException {
+    public static void write(AbstractTaskList tasks, Writer out) throws IOException {
         try {
             int numLine = 1;
 
@@ -179,7 +179,7 @@ public class TaskIO {
         }
     }
 
-    public static void read(TaskList tasks, Reader in) throws IOException, ParseException {
+    public static void read(AbstractTaskList tasks, Reader in) throws IOException, ParseException {
         BufferedReader bufferedReader = null;
 
         try {
@@ -199,7 +199,7 @@ public class TaskIO {
     }
 
 
-    public static void writeText(TaskList tasks, File file) throws
+    public static void writeText(AbstractTaskList tasks, File file) throws
             IOException {
         FileWriter writer = null;
         try {
@@ -214,7 +214,7 @@ public class TaskIO {
 
     }
 
-    public static void readText(TaskList tasks, File file) throws IOException, ParseException {
+    public static void readText(AbstractTaskList tasks, File file) throws IOException, ParseException {
         FileReader fileReader = null;
         try {
             fileReader = new FileReader(file);

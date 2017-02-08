@@ -119,7 +119,7 @@ public class TasksOverviewController implements Initializable {
     }
 
     /**
-     * Set reference for main application, and TaskList with tasks.
+     * Set reference for main application, and AbstractTaskList with tasks.
      *
      * @param mainApp
      */
@@ -140,7 +140,7 @@ public class TasksOverviewController implements Initializable {
                         public void run() {
 
                             Date currentTime = new Date();
-                            TaskList incomingTasks = (TaskList) Tasks.incoming(MainApp.getTasks(),
+                            AbstractTaskList incomingTasks = (AbstractTaskList) Tasks.incoming(MainApp.getTasks(),
                                     currentTime, new
                                             Date(currentTime.getTime() + NOTIFY_PERIOD));
                             if (incomingTasks.count != 0) {
@@ -307,7 +307,7 @@ public class TasksOverviewController implements Initializable {
     }
 
     /**
-     * Method which save current TaskList in text file.
+     * Method which save current AbstractTaskList in text file.
      * Called on clicked menu Save as...
      */
     private void handleSaveAs() {
@@ -336,7 +336,7 @@ public class TasksOverviewController implements Initializable {
     }
 
     /**
-     * Method which add tasks from text file to current TaskList.
+     * Method which add tasks from text file to current AbstractTaskList.
      * Called on clicked menu Load from text...
      */
     private void loadTasksFromTxtFile() {

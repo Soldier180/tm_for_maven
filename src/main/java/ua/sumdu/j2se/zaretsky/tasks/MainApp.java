@@ -27,14 +27,14 @@ import org.slf4j.LoggerFactory;
 
 public class MainApp extends Application {
     private final Logger log = LoggerFactory.getLogger(MainApp.class.getSimpleName());
-    private static TaskList tasks = new LinkedTaskList();
+    private static AbstractTaskList tasks = new LinkedTaskList();
     private  File fileWithTasks = null;
     private final ObservableList<Task> tasksData = FXCollections
             .observableArrayList();
     private static final String ERROR = "Error:";
 
 
-    public static TaskList getTasks() {
+    public static AbstractTaskList getTasks() {
         return tasks;
     }
 
@@ -102,7 +102,7 @@ public class MainApp extends Application {
             File file = new File(newDir);
             file.mkdir();
             fileWithTasks = new File(newDir + fileSeparator + "tasks.bin");
-            TaskList tempList = new LinkedTaskList();
+            AbstractTaskList tempList = new LinkedTaskList();
             Task tempTask = new Task("First task", new Date(), new Date(new Date().getTime() +
                     1800000), 60);
             tempTask.setActive(true);
