@@ -79,7 +79,7 @@ public class TasksOverviewController implements Initializable {
     private final Logger log = LoggerFactory.getLogger(TasksOverviewController.class.getSimpleName());
     private static final int PAUSE = 1000;//1 second
     private static final long NOTIFY_PERIOD = 1000;//1 second
-    public static final String ICON_PATH = "/image/task_manager1.png";
+    private static final String ICON_PATH = "/image/task_manager1.png";
 
     /**
      * Initialization controller-class. This method call automatically after fxml file load.
@@ -121,6 +121,7 @@ public class TasksOverviewController implements Initializable {
 
     /**
      * Set reference for main application, and AbstractTaskList with tasks.
+     * Run method runDetector()
      *
      * @param mainApp
      */
@@ -129,7 +130,9 @@ public class TasksOverviewController implements Initializable {
         tasksTable.setItems(mainApp.getTasksData());
         runDetector();
     }
-
+    /**
+     * Method run in new thread and notifies the user of occurring tasks.
+     */
     private void runDetector() {
         javafx.concurrent.Task task = new javafx.concurrent.Task<Void>() {
             @Override
