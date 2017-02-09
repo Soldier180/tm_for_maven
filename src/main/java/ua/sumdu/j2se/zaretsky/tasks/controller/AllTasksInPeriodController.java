@@ -28,8 +28,8 @@ public class AllTasksInPeriodController {
     /**
      * Method fill table with active task in some period.
      *
-     * @param startPeriod
-     * @param endPeriod   - is bigger than startPeriod
+     * @param startPeriod - start time for period
+     * @param endPeriod   - end time for period, is bigger than startPeriod
      */
     public void fillTableView(Date startPeriod, Date endPeriod) {
         SortedMap<Date, Set<Task>> tasks = Tasks.calendar(MainApp.getTasks(),
@@ -57,6 +57,7 @@ public class AllTasksInPeriodController {
                 .observableArrayList(tasks.entrySet());
         allTasksInPeriodTable.setItems(items);
 
+        //noinspection unchecked
         allTasksInPeriodTable.getColumns().setAll(dateColumn, taskTitleColumn);
 
     }
