@@ -8,10 +8,33 @@ import java.util.Date;
 import static ua.sumdu.j2se.zaretsky.tasks.model.TaskIO.*;
 
 /**
- * Created by Nikolion on 26.01.2017.
+ * Class for parse tasks from string
+ *
+ * @author Nikolay Zaretsky
+ * @version 1.0 26 Jan 2017
  */
 public class TasksParser {
-
+    /**
+     * Parse Task from string
+     *
+     * @param stringWithTask string with one task
+     * @return Task
+     */
+    public static Task parseTask(String stringWithTask) throws ParseException {
+        Task task;
+        if (stringWithTask.contains(']' + WORD_EVERY + '[')) {
+            task = parseRepeatedTask(stringWithTask);
+        } else {
+            task = parseNotRepeatedTask(stringWithTask);
+        }
+        return task;
+    }
+    /**
+     * Parse not repeated task from string
+     *
+     * @param stringWithTask string with one task
+     * @return Task
+     */
     private static Task parseNotRepeatedTask(String stringWithTask) throws ParseException {
         Task task;
         String title;
@@ -32,7 +55,12 @@ public class TasksParser {
 
         return task;
     }
-
+    /**
+     * Parse repeated task from string
+     *
+     * @param stringWithTask string with one task
+     * @return Task
+     */
     private static Task parseRepeatedTask(String stringWithTask) throws ParseException {
         Task task;
         String title;
@@ -65,18 +93,15 @@ public class TasksParser {
 
         return task;
     }
-
+    /**
+     * Remove double quotes from string
+     *
+     * @param title string with quotes
+     * @return title without quotes
+     */
     private static String parseQuotes(String title) {
         return title.replaceAll("\"\"", "\"");
     }
 
-    public static Task parseTask(String stringWithTask) throws ParseException {
-        Task task;
-        if (stringWithTask.contains(']' + WORD_EVERY + '[')) {
-            task = parseRepeatedTask(stringWithTask);
-        } else {
-            task = parseNotRepeatedTask(stringWithTask);
-        }
-        return task;
-    }
+
 }
