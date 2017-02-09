@@ -27,7 +27,12 @@ public class DateUtil {
         }
     };
 
-
+    /**
+     * Method for convert Date type to formatted string
+     *
+     * @param date Date variable
+     * @return formatted string
+     */
     public static String format(Date date) {
         if (date == null) {
             return null;
@@ -64,6 +69,13 @@ public class DateUtil {
         return result;
     }
 
+    /**
+     * Add the correct ending to word
+     *
+     * @param time time
+     * @param word word
+     * @return word with correct ending
+     */
     private static String ending(int time, String word) {
         if (time < 2) {
             return word;
@@ -107,26 +119,56 @@ public class DateUtil {
             second = parseKeyWord(time, SECOND, value);
         }
         if (validateTime(day, hour, minute, second)) {
-            throw new IllegalArgumentException("Incorrect time");
+            throw new IllegalArgumentException("Incorrect repeat time");
         }
         return ((day * 60 * 60 * 24) + (hour * 60 * 60) + (minute * 60) + second);
     }
-
+    /**
+     * Method determines how you need to assign values to variables
+     *
+     * @param timeWord string with keyword
+     * @param keyWord string with required keywords
+     * @param value variable value
+     * @return value if keyWord coincided, and 0 if not.
+     */
     private static int parseKeyWord(String timeWord, String keyWord, int value) {
         if (timeWord.contains(keyWord)) {
             return value;
         } else return 0;
     }
 
-    private static boolean validateTime(int day, int hour, int minute, int second) {
-        return day < 0 || hour < 0 || minute < 0 || second < 0;
+    /**
+     * Method validate int param, that it greater than zero or equal
+     *
+     * @param param variables for checking
+     * @return true or false
+     */
+    private static boolean validateTime(int...param) {
+        int counter = 0;
+        while (counter <param.length) {
+            if (param[counter]<0){
+                return true;
+            }
+            counter++;
+        }
+        return false;
     }
-
+    /**
+     * Method validate string, that is contain keyword
+     *
+     * @param intervalString string with interval
+     * @return true or false
+     */
     private static boolean validateTitle(String intervalString) {
         return intervalString.contains(DAY) || intervalString.contains(HOUR) || intervalString
                 .contains(MINUTE) || intervalString.contains(SECOND);
     }
-
+    /**
+     * Method validate string, that is contain keyword
+     *
+     * @param timeString string without leading zeros
+     * @return string with leading zeros
+     */
     public static String choiceBoxTime(int timeString) {
         String time = "";
         if (timeString >= 0 && timeString < 10) {
@@ -144,7 +186,7 @@ public class DateUtil {
      * @param date - date in type Date
      * @return LocalDate
      */
-    public static LocalDate dateToLaocalDate(Date date) {
+    public static LocalDate dateToLocalDate(Date date) {
         LocalDate result;
         result = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
         return result;

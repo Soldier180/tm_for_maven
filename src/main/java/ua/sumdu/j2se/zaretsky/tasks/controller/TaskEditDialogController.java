@@ -262,12 +262,12 @@ public class TaskEditDialogController implements Initializable{
 
     private boolean startTimeNoValid(){
         return datePikedDateStart.getValue() == null || datePikedDateStart
-                .getValue().isBefore(DateUtil.dateToLaocalDate(Task.BEGIN));
+                .getValue().isBefore(DateUtil.dateToLocalDate(Task.BEGIN));
     }
 
     private boolean endTimeNoValid(){
         return datePikedDateEnd.getValue() == null || datePikedDateEnd
-                .getValue().isBefore(DateUtil.dateToLaocalDate(Task.BEGIN));
+                .getValue().isBefore(DateUtil.dateToLocalDate(Task.BEGIN));
     }
 
     private boolean showError(String message) {
