@@ -3,7 +3,8 @@ package ua.sumdu.j2se.zaretsky.tasks.model;
 import java.util.Date;
 
 /**
- * Created by Nikolion on 22.11.2016.
+ * Class for working with date, but it unsupported method setTime
+ * stream.
  */
 public class Dates extends Date {
 
