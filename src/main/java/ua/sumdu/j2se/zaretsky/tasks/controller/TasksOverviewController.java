@@ -211,6 +211,7 @@ public class TasksOverviewController implements Initializable {
      * Method which delete selected task, with confirmation.
      * Called on clicked Delete button.
      */
+    @FXML
     private void deleteTask() {
         int selectedIndex = tasksTable.getSelectionModel().getSelectedIndex();
         if (selectedIndex >= 0) {
@@ -247,6 +248,7 @@ public class TasksOverviewController implements Initializable {
      * Method which create new task and show task edit dialog
      * Called on clicked button New...
      */
+    @FXML
     private void handleNewTask() {
         Task tempTask = new Task("default", new Date());
         boolean okClicked = mainApp.showTaskEditDialog(tempTask, true);
@@ -262,6 +264,7 @@ public class TasksOverviewController implements Initializable {
      * Method which edit current task and show task edit dialog
      * Called on clicked button Edit...
      */
+    @FXML
     private void handleEditTask() {
         Task selectedTask = tasksTable.getSelectionModel().getSelectedItem();
         if (selectedTask == null) {
@@ -293,7 +296,6 @@ public class TasksOverviewController implements Initializable {
      * Called on clicked button Show
      */
     private void handleShowAllTasksInPeriod() {
-
 
         if(allTaskStartDatePiker.getValue()==null || allTaskEndDatePiker.getValue()==null){
             Alert alert = new Alert(Alert.AlertType.WARNING);

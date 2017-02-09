@@ -73,7 +73,6 @@ public class LinkedTaskList extends AbstractTaskList implements Serializable, Cl
         }
         Node previous = null;
         Node current = first;
-
         while (current != null) {
             if (current.taskNode.equals(task)) {
                 if (previous != null) {                 // Node in the middle or at the end.

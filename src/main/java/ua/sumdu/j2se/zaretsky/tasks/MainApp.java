@@ -13,6 +13,7 @@ import ua.sumdu.j2se.zaretsky.tasks.controller.AllTasksInPeriodController;
 import ua.sumdu.j2se.zaretsky.tasks.controller.TaskEditDialogController;
 import ua.sumdu.j2se.zaretsky.tasks.controller.TasksOverviewController;
 import ua.sumdu.j2se.zaretsky.tasks.model.*;
+
 import java.io.*;
 import java.net.URL;
 import java.net.URLDecoder;
@@ -28,11 +29,10 @@ import org.slf4j.LoggerFactory;
 public class MainApp extends Application {
     private final Logger log = LoggerFactory.getLogger(MainApp.class.getSimpleName());
     private static AbstractTaskList tasks = new LinkedTaskList();
-    private  File fileWithTasks = null;
+    private File fileWithTasks = null;
     private final ObservableList<Task> tasksData = FXCollections
             .observableArrayList();
     private static final String ERROR = "Error:";
-
 
     public static AbstractTaskList getTasks() {
         return tasks;
@@ -63,6 +63,9 @@ public class MainApp extends Application {
         });
     }
 
+    /**
+     * Constructor for Main Application
+     */
     public MainApp() {
         try {
             String path = getPathOfProgram();
@@ -74,7 +77,7 @@ public class MainApp extends Application {
                 createDirWithData();
             }
         } catch (UnsupportedEncodingException e) {
-            log.error(ERROR,e);
+            log.error(ERROR, e);
         }
 
 
@@ -86,12 +89,15 @@ public class MainApp extends Application {
                 tasksData.add(task);
             }
         } catch (ClassNotFoundException | IOException e) {
-            log.error(ERROR,e);
+            log.error(ERROR, e);
         }
 
     }
 
-    private  void createDirWithData() {
+    /**
+     * Method create directory "data" with file "tasks.bin"
+     */
+    private void createDirWithData() {
 
         try {
             String path = getPathOfProgram();
@@ -113,6 +119,11 @@ public class MainApp extends Application {
         }
     }
 
+    /**
+     * Initialize root layout
+     *
+     * @return parent path directory with application
+     */
     private static String getPathOfProgram() throws UnsupportedEncodingException {
         URL url = MainApp.class.getProtectionDomain().getCodeSource().getLocation();
         String jarPath = URLDecoder.decode(url.getFile(), "UTF-8");
@@ -121,7 +132,7 @@ public class MainApp extends Application {
     }
 
     /**
-     * Инициализирует корневой макет.
+     * Initialize root layout
      */
     private void initRootLayout() {
         try {
@@ -137,7 +148,7 @@ public class MainApp extends Application {
             primaryStage.show();
         } catch (IOException e) {
             e.printStackTrace();
-            log.error(ERROR,e);
+            log.error(ERROR, e);
         }
 
     }
@@ -183,12 +194,15 @@ public class MainApp extends Application {
 
             return controller.isOkClicked();
         } catch (IOException e) {
-           // e.printStackTrace();
-            log.error(ERROR,e);
+            // e.printStackTrace();
+            log.error(ERROR, e);
             return false;
         }
     }
 
+    /**
+     * Method reload tasks from  AbstractTaskList in ObservableList<Task> tasksData
+     */
     public void refreshTasks() {
         tasksData.clear();
         for (Task task : tasks) {
@@ -196,6 +210,12 @@ public class MainApp extends Application {
         }
     }
 
+    /**
+     * Method initialize window "All tasks in period"
+     *
+     * @param startPeriod start date for period
+     * @param endPeriod   end date for period
+     */
     public void showAllTasksInPeriod(Date startPeriod, Date endPeriod) {
         try {
             FXMLLoader loader = new FXMLLoader();
@@ -205,7 +225,7 @@ public class MainApp extends Application {
             Stage dialogStage = new Stage();
             dialogStage.getIcons().add(new Image(MainApp.class.getResourceAsStream("/image/task_manager1.png")));
 
-            dialogStage.setTitle("All task in period");
+            dialogStage.setTitle("All tasks in period");
             dialogStage.initOwner(primaryStage);
             Scene scene = new Scene(page);
             dialogStage.setScene(scene);
@@ -218,7 +238,7 @@ public class MainApp extends Application {
 
         } catch (IOException e) {
             //e.printStackTrace();
-            log.error(ERROR,e);
+            log.error(ERROR, e);
 
         }
     }
@@ -228,13 +248,15 @@ public class MainApp extends Application {
         return primaryStage;
     }
 
-
+    /**
+     * Method write all tasks in binary format to file
+     */
     private void writeInFile() {
         try {
             TaskIO.writeBinary(tasks, fileWithTasks);
         } catch (IOException e) {
             e.printStackTrace();
-            log.error(ERROR,e);
+            log.error(ERROR, e);
         }
     }
 
