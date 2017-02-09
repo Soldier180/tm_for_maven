@@ -29,7 +29,12 @@ public class TaskIO {
         }
     };
 
-
+    /**
+     * Method write list with tasks in output stream of bytes.
+     *
+     * @param tasks - list with tasks
+     * @param out   - output stream for writing bytes
+     */
     public static void write(AbstractTaskList tasks, OutputStream out) throws IOException {
         ObjectOutputStream oos = null;
         try {
@@ -58,6 +63,12 @@ public class TaskIO {
 
     }
 
+    /**
+     * Method read stream of bytes in list with tasks.
+     *
+     * @param tasks - list with tasks
+     * @param in    - input stream for reading bytes
+     */
     public static void read(AbstractTaskList tasks, InputStream in) throws IOException, ClassNotFoundException {
         ObjectInputStream ois = null;
         try {
@@ -93,7 +104,12 @@ public class TaskIO {
 
 
     }
-
+    /**
+     * Method write list with tasks in byte format to file.
+     *
+     * @param tasks - list with tasks
+     * @param file   - file for writing bytes
+     */
     public static void writeBinary(AbstractTaskList tasks, File file) throws
             IOException {
         FileOutputStream fileOutputStr = new FileOutputStream(file);
@@ -106,7 +122,12 @@ public class TaskIO {
             fileOutputStr.close();
         }
     }
-
+    /**
+     * Method read tasks from binary file, and add to  AbstractTaskList.
+     *
+     * @param tasks - list with tasks
+     * @param file   - file for reading bytes
+     */
     public static void readBinary(AbstractTaskList tasks, File file) throws IOException,
             ClassNotFoundException {
 
@@ -117,7 +138,12 @@ public class TaskIO {
 
     }
 
-
+    /**
+     * Method write list with tasks in text format to character streams.
+     *
+     * @param tasks - list with tasks
+     * @param out   - character stream
+     */
     public static void write(AbstractTaskList tasks, Writer out) throws IOException {
         try {
             int numLine = 1;
@@ -140,7 +166,12 @@ public class TaskIO {
         }
 
     }
-
+    /**
+     * Method read tasks from character stream and add it to AbstractTaskList.
+     *
+     * @param tasks - list with tasks
+     * @param in   - character stream
+     */
     public static void read(AbstractTaskList tasks, Reader in) throws IOException, ParseException {
         BufferedReader bufferedReader = null;
 
@@ -160,7 +191,12 @@ public class TaskIO {
 
     }
 
-
+    /**
+     * Method write list with tasks in text format to file.
+     *
+     * @param tasks - list with tasks
+     * @param file   - file
+     */
     public static void writeText(AbstractTaskList tasks, File file) throws
             IOException {
         FileWriter writer = null;
@@ -175,7 +211,12 @@ public class TaskIO {
         }
 
     }
-
+    /**
+     * Method read tasks from text file and add it to AbstractTaskList.
+     *
+     * @param tasks - list with tasks
+     * @param file   - file with tasks
+     */
     public static void readText(AbstractTaskList tasks, File file) throws IOException, ParseException {
         FileReader fileReader = null;
         try {
@@ -188,7 +229,12 @@ public class TaskIO {
         }
     }
 
-
+    /**
+     * Method convert seconds in special text string
+     *
+     * @param timeSeconds - time in seconds
+     * @return result - string, time in special text format
+     */
     private static String secondsToStringTime(int timeSeconds) {
         String result;
         result = DateUtil.secondsToStringTime(timeSeconds);
@@ -196,11 +242,21 @@ public class TaskIO {
         return "[" + result + "]";
     }
 
-
+    /**
+     * Add double quotes if title have quotes
+     *
+     * @param title string without quotes
+     * @return title with double quotes if necessary
+     */
     private static String getTitleModification(String title) {
         return "\"" + title.replaceAll("\"", "\"\"") + "\"";
     }
-
+    /**
+     * This method convert task in special string format, for writing as text.
+     *
+     * @param task some task
+     * @return result - text string
+     */
     public static String taskToString(Task task) {
         String result = "";
         result = result.concat(getTitleModification(task.getTitle()));
