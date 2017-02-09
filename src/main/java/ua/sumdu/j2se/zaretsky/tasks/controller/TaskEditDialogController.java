@@ -74,7 +74,7 @@ public class TaskEditDialogController implements Initializable{
     }
 
     /**
-     * Static block use to fill
+     * Static block use to fill lists with value, which will be used in choiseBox for time
      */
     static {
         if (HOURS.isEmpty()) {
@@ -237,9 +237,6 @@ public class TaskEditDialogController implements Initializable{
             rTime = DateUtil.parseInterval(repeatTime.getText());
 
         }
-       // catch (ParseException e) {
-       //     return showError("Incorrect repeat time!");
-       // }
         catch (IllegalArgumentException a) {
             return showError(a.getMessage());
         }
