@@ -71,6 +71,46 @@ public class LinkedTaskList extends AbstractTaskList implements Serializable, Cl
         if (task == null) {
             throw new IllegalArgumentException("Incorrect task");
         }
+        for (Node node = first; node != null; node = node.next) {
+            if (task.equals(node.taskNode)) {
+                unlink(node);
+                return true;
+            }
+        }
+        return false;
+
+    }
+
+    private Task unlink(Node node) {
+        final Task element = node.taskNode;
+        final Node next = node.next;
+        final Node prev = node.previous;
+
+        if (prev == null) {
+            first = next;
+        } else {
+            prev.next = next;
+            node.previous = null;
+        }
+
+        if (next == null) {
+            last = prev;
+        } else {
+            next.previous = prev;
+            node.next = null;
+        }
+
+        node.taskNode = null;
+        count--;
+
+        return element;
+    }
+
+
+    /*public boolean remove(Task task) throws IllegalArgumentException {
+        if (task == null) {
+            throw new IllegalArgumentException("Incorrect task");
+        }
         Node previous = null;
         Node current = first;
         while (current != null) {
@@ -102,7 +142,8 @@ public class LinkedTaskList extends AbstractTaskList implements Serializable, Cl
 
         return false;
 
-    }
+    }*/
+
 
     /**
      * Method to getting task from AbstractTaskList
