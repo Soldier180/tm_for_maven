@@ -5,9 +5,6 @@ import java.util.*;
 import static ua.sumdu.j2se.zaretsky.tasks.model.Task.BEGIN;
 
 
-/**
- * Created by Nikolion on 22.11.2016.
- */
 public class Tasks {
 
 
@@ -64,7 +61,14 @@ public class Tasks {
         }
         return dateSetSortedMap;
     }
-
+    /**
+     * Method to find all task execution time for a predetermined period
+     *
+     * @param task - task
+     * @param start - start date of period
+     * @param end   - end date of period
+     * @return Map with key date and value task
+     */
     private static Map<Date, Task> allTasksInInterval(Task task, Date
             start, Date end) {
         TreeMap<Date, Task> result = new TreeMap<Date, Task>();
