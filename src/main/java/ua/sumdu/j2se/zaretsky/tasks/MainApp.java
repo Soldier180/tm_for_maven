@@ -27,12 +27,11 @@ import org.slf4j.LoggerFactory;
  */
 
 public class MainApp extends Application {
-    private final Logger log = LoggerFactory.getLogger(MainApp.class.getSimpleName());
+    private final Logger log = LoggerFactory.getLogger(MainApp.class);
     private static AbstractTaskList tasks = new LinkedTaskList();
     private File fileWithTasks = null;
     private final ObservableList<Task> tasksData = FXCollections
             .observableArrayList();
-    private static final String ERROR = "Error:";
 
     public static AbstractTaskList getTasks() {
         return tasks;
@@ -77,7 +76,7 @@ public class MainApp extends Application {
                 createDirWithData();
             }
         } catch (UnsupportedEncodingException e) {
-            log.error(ERROR, e);
+            log.error(e.getMessage(), e);
         }
 
 
@@ -89,7 +88,7 @@ public class MainApp extends Application {
                 tasksData.add(task);
             }
         } catch (ClassNotFoundException | IOException e) {
-            log.error(ERROR, e);
+            log.error(e.getMessage(), e);
         }
 
     }
@@ -115,7 +114,7 @@ public class MainApp extends Application {
             tempList.add(tempTask);
             TaskIO.writeBinary(tempList, fileWithTasks);
         } catch (IOException e) {
-            e.printStackTrace();
+            log.error(e.getMessage(), e);
         }
     }
 
@@ -147,8 +146,7 @@ public class MainApp extends Application {
             primaryStage.setScene(scene);
             primaryStage.show();
         } catch (IOException e) {
-            e.printStackTrace();
-            log.error(ERROR, e);
+            log.error(e.getMessage(), e);
         }
 
     }
@@ -194,8 +192,7 @@ public class MainApp extends Application {
 
             return controller.isOkClicked();
         } catch (IOException e) {
-            // e.printStackTrace();
-            log.error(ERROR, e);
+            log.error(e.getMessage(), e);
             return false;
         }
     }
@@ -237,8 +234,7 @@ public class MainApp extends Application {
             dialogStage.showAndWait();
 
         } catch (IOException e) {
-            //e.printStackTrace();
-            log.error(ERROR, e);
+            log.error(e.getMessage(), e);
 
         }
     }
@@ -255,8 +251,7 @@ public class MainApp extends Application {
         try {
             TaskIO.writeBinary(tasks, fileWithTasks);
         } catch (IOException e) {
-            e.printStackTrace();
-            log.error(ERROR, e);
+            log.error(e.getMessage(), e);
         }
     }
 

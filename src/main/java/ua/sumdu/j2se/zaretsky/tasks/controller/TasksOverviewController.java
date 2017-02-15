@@ -28,7 +28,7 @@ import org.slf4j.LoggerFactory;
 /**
  * Class controller for main window.
  */
-
+@SuppressWarnings({"PMD.TooManyMethods", "PMD.TooManyFields"})
 public class TasksOverviewController implements Initializable {
     @FXML
     private TableView<Task> tasksTable;
@@ -65,7 +65,7 @@ public class TasksOverviewController implements Initializable {
     @FXML
     MenuItem newMItem;
     @FXML
-    MenuItem  editMItem;
+    MenuItem editMItem;
     @FXML
     MenuItem deleteMItem;
     @FXML
@@ -73,10 +73,10 @@ public class TasksOverviewController implements Initializable {
     @FXML
     MenuItem loadMItem;
     @FXML
-    MenuItem  aboutMItem;
+    MenuItem aboutMItem;
 
+    private final Logger log = LoggerFactory.getLogger(TasksOverviewController.class);
     private MainApp mainApp;
-    private final Logger log = LoggerFactory.getLogger(TasksOverviewController.class.getSimpleName());
     private static final int PAUSE = 1000;//1 second
     private static final long NOTIFY_PERIOD = 1000;//1 second
     private static final String ICON_PATH = "/image/task_manager1.png";
@@ -130,6 +130,7 @@ public class TasksOverviewController implements Initializable {
         tasksTable.setItems(mainApp.getTasksData());
         runDetector();
     }
+
     /**
      * Method run in new thread and notifies the user of occurring tasks.
      */
@@ -170,7 +171,7 @@ public class TasksOverviewController implements Initializable {
                     try {
                         Thread.sleep(PAUSE);
                     } catch (InterruptedException e) {
-                        e.printStackTrace();
+                        log.error(e.getMessage(), e);
                     }
                 }
             }
@@ -278,7 +279,7 @@ public class TasksOverviewController implements Initializable {
             alert.setContentText("Please select a task in the table.");
 
             alert.showAndWait();
-        }else {
+        } else {
 
             String oldTask = TaskIO.taskToString(selectedTask);
             boolean okClicked = mainApp.showTaskEditDialog(selectedTask, false);
@@ -300,7 +301,7 @@ public class TasksOverviewController implements Initializable {
      */
     private void handleShowAllTasksInPeriod() {
 
-        if(allTaskStartDatePiker.getValue()==null || allTaskEndDatePiker.getValue()==null){
+        if (allTaskStartDatePiker.getValue() == null || allTaskEndDatePiker.getValue() == null) {
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.initOwner(mainApp.getPrimaryStage());
             alert.setTitle("Error");
@@ -308,8 +309,7 @@ public class TasksOverviewController implements Initializable {
             Stage stage = (Stage) alert.getDialogPane().getScene().getWindow();
             stage.getIcons().add(new Image(this.getClass().getResource(ICON_PATH).toString()));
             alert.showAndWait();
-        }
-        else {
+        } else {
             Date startPeriod = DateUtil.localDateToDate(allTaskStartDatePiker
                     .getValue().atTime(0, 0, 0));
             Date endPeriod = DateUtil.localDateToDate(allTaskEndDatePiker
@@ -344,7 +344,7 @@ public class TasksOverviewController implements Initializable {
             try {
                 TaskIO.writeText(MainApp.getTasks(), file);
             } catch (IOException e) {
-                log.error("Error:", e);
+                log.error(e.getMessage(), e);
                 showError();
             }
         }
@@ -368,11 +368,8 @@ public class TasksOverviewController implements Initializable {
             try {
                 TaskIO.readText(MainApp.getTasks(), file);
                 mainApp.refreshTasks();
-            } catch (IOException e) {
-                log.error("Error:", e);
-                showError();
-            } catch (ParseException e) {
-                log.error("Error:", e);
+            } catch (IOException | ParseException e) {
+                log.error(e.getMessage(), e);
                 showError();
             }
 

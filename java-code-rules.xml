@@ -111,6 +111,14 @@
         <priority>1</priority>
     </rule>
 
+    <rule ref="rulesets/java/logging-java.xml/MoreThanOneLogger">
+        <priority>5</priority>
+    </rule>
+
+    <rule ref="rulesets/java/logging-java.xml/AvoidPrintStackTrace">
+        <priority>5</priority>
+    </rule>
+
     <!-- unnecessary.xml -->
     <rule ref="rulesets/java/unnecessary.xml/UselessOperationOnImmutable">
         <priority>5</priority>
